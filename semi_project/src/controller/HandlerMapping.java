@@ -25,6 +25,8 @@ public class HandlerMapping {
 			c = new RandomSelectController();
 		} else if (command.equals("storeAllList")) {
 			c = new AllStoreListController();
+		} else if (command.equals("idCheck")) {
+			c = new CheckIdController();
 		}
 
 		return c;
