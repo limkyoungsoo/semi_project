@@ -60,6 +60,7 @@ create table msgMemberMenu(
 );
 
 insert into msgMember(mId,mPass,mNick)values('java',1234,'코스타');
+delete msgMember where mId='java'
 select * from msgMember;
 
 insert into store(storeName,storeLoc,storeTel,storePic,openHour)
@@ -70,6 +71,7 @@ values('소바니','유스페이스1동',03112345678,'/storeImg/so1.jpg','월요
 select * from store;
 
 select storePic from store
+
 
 insert into store(storeName,storeLoc,storeTel,storePic,openHour)
 values('소바니','유스페이스1동',031,'/storeImg/so1.jpg','월요일~금요일 10시~8시');

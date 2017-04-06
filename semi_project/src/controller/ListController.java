@@ -1,14 +1,36 @@
 package controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ListController implements Controller {
+import model.ListVO;
+import model.PagingBean;
+import model.StoreDAO;
+import model.StoreVO;
 
+public class ListController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String loc=request.getParameter("loc");
+		System.out.println("loc : "+ loc);
+		int totalCount=StoreDAO.getInstance().getTotalContentCount(loc);
+		System.out.println("totalCount "+totalCount);
+		String pno=request.getParameter("pageNo");
+		System.out.println("pageNo "+pno);
+		PagingBean pagingBean=null;
+		if(pno==null){
+			pagingBean=new PagingBean(totalCount);
+		}else{
+			pagingBean=new PagingBean(totalCount,Integer.parseInt(pno));
+		}
+		ArrayList<StoreVO> list=StoreDAO.getInstance().getStoreList(pagingBean, loc);
+		System.out.println(list);
+		ListVO listVO=new ListVO(list,pagingBean);
+		request.setAttribute("listVo", listVO);
+		request.setAttribute("loc", loc);
+		return "/board/list.jsp";
 	}
 
 }
