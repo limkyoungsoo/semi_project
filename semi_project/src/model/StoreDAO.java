@@ -47,8 +47,8 @@ public class StoreDAO {
 
 	// 강정호 제작
 	public StoreVO getStoreMenuList(String storeName) throws SQLException {
-		Connection con=null;
 		PreparedStatement pstmt=null;
+		Connection con = null;
 		ResultSet rs=null;
 		StoreVO storeVO=new StoreVO();
 		MenuVO menuVO=new MenuVO();

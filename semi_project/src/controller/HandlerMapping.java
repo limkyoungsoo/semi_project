@@ -19,8 +19,11 @@ public class HandlerMapping {
 			c=new DetailStoreController();
 		}else if(command.equals("storeList")){
 			c=new ListController();
+		}else if(command.equals("reviewList")){
+			c=new ReviewListController();
+		}else if(command.equals("starScore")){
+			c=new StarScoreController();
 		}
-
 		return c;
 	}
 }

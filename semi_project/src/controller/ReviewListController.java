@@ -1,20 +1,26 @@
 package controller;
 
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.ReviewDAO;
-import model.ReviewVO;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-public class ReviewListController implements Controller{
+import model.ReviewDAO;
+
+public class ReviewListController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ArrayList<ReviewVO> list = ReviewDAO.getInstance().getReviewList();
-		request.setAttribute("list", list);
-		return "board/review.jsp";
+		response.setContentType("text/html;charset=utf-8");
+		String storeName=request.getParameter("storeName");
+		PrintWriter out = response.getWriter();
+		JSONArray reviewJson = new JSONArray(ReviewDAO.getInstance().getReviewList(storeName));
+		out.println(reviewJson.toString());
+		System.out.println(reviewJson.toString());
+		out.close();
+		return "AjaxView";
 	}
-
 }
