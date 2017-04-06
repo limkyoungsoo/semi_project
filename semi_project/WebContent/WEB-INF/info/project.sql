@@ -105,5 +105,3 @@ WHERE ROWNUM <=1
 					
 					
 					
-					
-					

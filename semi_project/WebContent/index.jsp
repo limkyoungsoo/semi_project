@@ -17,7 +17,7 @@
 										"img",
 										function() {
 											location.href = "${pageContext.request.contextPath}/DispatcherServlet?command=detailStore&storeName="
-													+ $(this).attr('alt');
+													 + $(this).attr('alt') ;
 										});
 					});
 </script>

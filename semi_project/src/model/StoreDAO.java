@@ -45,7 +45,7 @@ public class StoreDAO {
 	}
 
 	public String getRandStore() throws SQLException {
-		String storeName="";
+		String storeName = "";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -81,7 +81,6 @@ public class StoreDAO {
 			pstmt.setString(1, storeName);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				System.out.println("check1" + storeName);
 				storeVO.setStoreName(rs.getString(1));
 				storeVO.setStoreLoc(rs.getString(2));
 				storeVO.setStoreTel(rs.getString(3));
@@ -95,35 +94,59 @@ public class StoreDAO {
 				// menuVO를 다시 storeVO에 저장한다. -강정호-
 				storeVO.setMenuVO(menuVO);
 			}
-			System.out.println(storeVO.toString());
 		} finally {
 			closeAll(rs, pstmt, con);
 		}
 		return storeVO;
 	}
-	
+
+	// 강정호 제작- storeName을 이용해서 메뉴사진 3장을 가져오기 위한 메서드입니다.
+	public ArrayList<MenuVO> getMenuImgByStoreName(String storeName) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
+		try {
+			con = getConnection();
+			String sql = "select menuNo,menuName,menuPic from menu where storeName=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, storeName);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MenuVO menuVO = new MenuVO();
+				menuVO.setMenuNo(rs.getInt(1));
+				menuVO.setMenuName(rs.getString(2));
+				menuVO.setMenuPic(rs.getString(3));
+				list.add(menuVO);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return list;
+	}
+
 	// 강정호 제작- 메뉴 번호를 이용해서 메뉴사진 3장을 가져오기 위한 메서드입니다.
-	   public ArrayList<MenuVO> getMenuImgByMenuNo(String storeName) throws SQLException {
-	      Connection con=null;
-	      PreparedStatement pstmt=null;
-	      ResultSet rs=null;
-	      ArrayList<MenuVO> list=new ArrayList<MenuVO>();
-	      try{
-	         con=getConnection();
-	         String sql="select menuPic from menu where storeName=?";
-	         pstmt=con.prepareStatement(sql);
-	         pstmt.setString(1, storeName);
-	         rs=pstmt.executeQuery();
-	         while(rs.next()){
-	            MenuVO menuVO=new MenuVO();
-	            menuVO.setMenuPic(rs.getString(1));
-	            list.add(menuVO);
-	         }
-	      }finally{
-	         closeAll(rs, pstmt, con);
-	      }
-	      return list;
-	   }
+	public ArrayList<MenuVO> getMenuImgByMenuNo(String storeName) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<MenuVO> list = new ArrayList<MenuVO>();
+		try {
+			con = getConnection();
+			String sql = "select menuPic from menu where storeName=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, storeName);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MenuVO menuVO = new MenuVO();
+				menuVO.setMenuPic(rs.getString(1));
+				list.add(menuVO);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return list;
+	}
 
 	public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException {
 		if (pstmt != null)
@@ -157,6 +180,7 @@ public class StoreDAO {
 		}
 		return totalCount;
 	}
+
 	public int getTotalStoreCount() throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -206,6 +230,7 @@ public class StoreDAO {
 		}
 		return list;
 	}
+
 	public ArrayList<StoreVO> getAllStoreList(PagingBean pagingBean) throws SQLException {
 		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
 		Connection con = null;
