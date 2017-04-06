@@ -66,7 +66,7 @@
 			<div class="box">
 				<div class="col-lg-12">
 					<hr>
-						<h2 class="text-center">${requestScope.menuList.storeName}(가게이름 들어올곳) </h2>
+						<h2 class="text-center">${requestScope.menuList.storeName}</h2>
 					<hr>
 						<img class="img-responsive img-border-left" src="${pageContext.request.contextPath }${requestScope.menuList.storePic}" 
                     alt="${requestScope.menuList.storeName}" >
@@ -110,19 +110,21 @@
 				<div class="col-lg-12">
 					<hr>
 					<h2 class="intro-text text-center">
-						<strong>${requestScope.menuList.storeName}(가게이름들어올곳)</strong>의 다른 메뉴
+						<strong>${requestScope.menuList.storeName}</strong>의 다른 메뉴
 					</h2>
 					<hr>
 				</div>
-			
+				
+				<c:forEach items="${requestScope.menuImgList.storeVO.menuVO }" var="menuImgList">
 				<div class="col-sm-4 text-center">
 					<img class="img-responsive"
-						src="${pageContext.request.contextPath}${menuList.menuVO.menuPic}"
+						src="${pageContext.request.contextPath}${menuImgList.menuPic}"
 						alt="" >
 					<h3>
 						John Smith <small>Job Title</small>
 					</h3>
 				</div>
+				</c:forEach>
 	
 				<div class="clearfix"></div>
 			</div>

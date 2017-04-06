@@ -62,7 +62,6 @@ public class StoreDAO {
 			pstmt.setString(1, storeName);
 			rs=pstmt.executeQuery();
 			if(rs.next()){
-				System.out.println("check1"+storeName);
 				storeVO.setStoreName(rs.getString(1));
 				storeVO.setStoreLoc(rs.getString(2));
 				storeVO.setStoreTel(rs.getString(3));
@@ -76,9 +75,30 @@ public class StoreDAO {
 				// menuVO를 다시 storeVO에 저장한다. -강정호-
 				storeVO.setMenuVO(menuVO);
 			}
-			System.out.println(storeVO.toString());
 		}finally{
 			closeAll(rs,pstmt,con);
+		}
+		return storeVO;
+	}
+	// 강정호 제작- 메뉴 번호를 이용해서 메뉴사진 3장을 가져오기 위한 메서드입니다.
+	public StoreVO getMenuImgByMenuNo(int menuNo) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StoreVO storeVO=new StoreVO();
+		MenuVO menuVO=new MenuVO();
+		try{
+			con=getConnection();
+			String sql="select menuPic from menu where menuNo=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, menuNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				menuVO.setMenuPic(rs.getString(1));
+				storeVO.setMenuVO(menuVO);
+			}
+		}finally{
+			closeAll(rs, pstmt, con);
 		}
 		return storeVO;
 	}
@@ -95,5 +115,6 @@ public class StoreDAO {
 			rs.close();
 		closeAll(pstmt, con);
 	}
+
 
 }
