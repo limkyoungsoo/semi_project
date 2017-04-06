@@ -28,33 +28,59 @@ public class MemberDAO {
 			con.close(); 
 	}
 	
-	public String searchId(String id) throws SQLException{
+	public boolean searchId(String id) throws SQLException{
 		Connection con = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-		String flag = "false";
+		boolean flag = false;
 		
 		try {
 			con  = getConnection();
 			
-			String sql = "select mid from msgMember where mid=?";
+			String sql = "select count(*) from msgMember where mid=?";
 			
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, id);
 			rs=psmt.executeQuery();
-			System.out.println("sql_______"+sql);
 			
 			if(rs.next()){
-				flag = "true";
+				if(rs.getInt(1) == 0){
+					flag = true;
+				}
 			}
 			
 		} finally {
 			closeAll(rs,psmt,con);
 		}
 		
-		System.out.println("플래그"+flag);
+		
 		return flag;
 		
+	}
+	public MemberVO register(String id,String password,String nick) throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		MemberVO vo = null ;
+		
+		try {
+			con = getConnection();
+			String sql = "insert into msgMember(mid,mpass,mnick) values(?,?,?)";
+			con.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			psmt.setString(1, id);
+			psmt.setString(2, password);
+			psmt.setString(3, nick);
+			
+			if(rs.next()){
+				vo = new MemberVO(id, password, nick);
+			}
+			
+		} finally {
+			closeAll(rs,psmt,con);
+		}
+		
+		return vo;
 	}
 	
 

@@ -11,7 +11,7 @@
 <title>회원가입</title>
 
 <!-- Bootstrap -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- font awesome -->
 <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css"
 	media="screen" title="no title" charset="utf-8">
@@ -28,36 +28,49 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
-		$("#idForm").keyup(function () {
+		$("#userId").keyup(function(){
 			var id = $("#userId").val();
-			var len = $("#userId").val().length;
-			
-			
-			if(len<4 && len>10){
-				$("#checkResult").text('아이디는 4자이상 10자이하만 가능!').css('background','pink');
-			}else{
-				
-				//$("#checkResult").text("");
- 	 			$.ajax({
-					type:"post",
-					url: "DispatcherServlet",
-					data: "command=idCheck&id="+ id,
-					success: function () {
-						 if(data == "true"){
-							$("#checkResult").text(data);
-						}else{
-							$("#checkResult").text(id+"는 이미 존재하는 아이디입니다.");
-						} 
-					}//success
-				}); //ajax   
-				
-				
+			if(id.length == 0){
+				$("#idCheckResult").html("");
 			}
+			else if(id.length < 4 || id.length > 10){
+				$("#idCheckResult").html("아이디는 4자 이상 10자 이하입니다!");
+			}
+			else{
+				$.ajax({
+					type:"post",
+					url:"${pageContext.request.contextPath}/DispatcherServlet?command=idCheck",
+					data:{"id":id},
+					success:function(flag){
+						if(flag == "ok"){
+							$("#idCheckResult").html("사용가능한 아이디입니다!");
+						}
+						else{
+							$("#idCheckResult").html(id+"는 사용불가능한 아이디입니다!");
+						}
+					}
+				});
+			}
+		}); // userId KeyUp event
+		
+		
+	  $('#InputPassword2').keyup(function(){
+		   if($('#InputPassword1').val()!=$('#InputPassword2').val()){
+		    $('font[name=check]').text('');
+		    $('.help-block').html("암호틀림");
+		   }else{
+		    $('font[name=check]').text('');
+		    $('.help-block').html("암호맞음");
+		   }
+		  }); //#chpass.keyup
+		  
+		  $("registerBtn").submit(function () {
+			location.href = '${pageContext.request.contextPath}/DispatcherServlet?command=register';
 		})
-	
-	});
-    </script>
+
+		
+	}); //ready
+</script>
 </head>
 <body>
 	<article class="container">
@@ -68,29 +81,28 @@
 		</div>
 		<div class="col-md-6 col-md-offset-3">
 			<form role="form" id="idForm">
-			
+
 				<div class="form-group">
-					<label for="userid"  name="id"  id="id">아이디</label> <span id="checkResult"></span>
-	              <div class="input-group">
-	                <input type="text" class="form-control" id="userId" >
-	              </div>
-					<span id="checkResult">체크 리졸트</span> 
-					<input type="hidden" name="command" 	value="idcheck">
+					<label for="userid" name="id" id="id">아이디</label>
+					<div class="input-group">
+						<input type="text" class="form-control" id="userId" required="required">
+					</div>
+					<span id="idCheckResult"></span> 
 				</div>
-				
+
 
 				<div class="form-group">
 					<label for="InputPassword1">비밀번호</label> <input type="password"
-						class="form-control" id="InputPassword1" placeholder="비밀번호">
+						class="form-control" id="InputPassword1" placeholder="비밀번호" required="required">
 				</div>
 				<div class="form-group">
 					<label for="InputPassword2">비밀번호 확인</label> <input type="password"
-						class="form-control" id="InputPassword2" placeholder="비밀번호 확인">
+						class="form-control" id="InputPassword2" placeholder="비밀번호 확인" required="required">
 					<p class="help-block">비밀번호 확인을 위해 다시한번 입력 해 주세요</p>
 				</div>
 				<div class="form-group">
 					<label for="username">닉네임</label> <input type="text"
-						class="form-control" id="username" placeholder="닉네임을 입력해 주세요">
+						class="form-control" id="username" placeholder="닉네임을 입력해 주세요" required="required">
 				</div>
 				<div class="form-group">
 					<label>약관 동의</label>

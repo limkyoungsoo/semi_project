@@ -99,6 +99,8 @@ select mid,mpass,mnick from msgMember
 insert into msgMember(mid,mpass,mnick) values('java','1234','자바')
 
 select mid from msgMember where mid='java'
+
+insert into msgMember(mid,mpass,mnick) values(val1,val2,val3)
 					
 					
 					
