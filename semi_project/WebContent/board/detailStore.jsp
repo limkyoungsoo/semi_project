@@ -46,6 +46,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery.min.js"></script>
 
+<style type="text/css">
+	img.img-responsive.img-border-left.img-rounded {
+    margin: auto;
+}
+</style>
 
 </head>
 
@@ -54,8 +59,21 @@
 	<c:import url="/template/header.jsp"></c:import>
 	<c:import url="/template/navigator.jsp"></c:import>
 
-
+	<!-- 강정호 메뉴 상세보기 파트 시작 -->
 	<div class="container">
+	<!-- 가게 메인사진 보여주는 곳 -->
+	<div class="row">
+			<div class="box">
+				<div class="col-lg-12">
+					<hr>
+						<h2 class="text-center">${requestScope.menuList.storeName}(가게이름 들어올곳) </h2>
+					<hr>
+						<img class="img-responsive img-border-left" src="${pageContext.request.contextPath }${requestScope.menuList.storePic}" 
+                    alt="${requestScope.menuList.storeName}" >
+				</div>	
+			</div>
+		</div>
+	<!-- 메인 메뉴 사진 보여주는 곳 -->
 		<div class="row">
 			<div class="box">
 				<div class="col-lg-12">
@@ -67,7 +85,7 @@
 				</div>
 				<div class="col-md-6">
 					<img class="img-responsive img-border-left"
-						src="${pageContext.request.contextPath }/menuImg/jo3.jpg" alt="">
+						src="${pageContext.request.contextPath }/menuImg/jo3.jpg" alt="" width="304" height="236">
 				</div>
 				<div class="col-md-6">
 					<p>
@@ -86,7 +104,31 @@
 				<div class="clearfix"></div>
 			</div>
 		</div>
+		<!-- 가게의 다른 메뉴를 보여주는 곳 -->
+			<div class="row">
+			<div class="box">
+				<div class="col-lg-12">
+					<hr>
+					<h2 class="intro-text text-center">
+						<strong>${requestScope.menuList.storeName}(가게이름들어올곳)</strong>의 다른 메뉴
+					</h2>
+					<hr>
+				</div>
+			
+				<div class="col-sm-4 text-center">
+					<img class="img-responsive"
+						src="${pageContext.request.contextPath}${menuList.menuVO.menuPic}"
+						alt="" >
+					<h3>
+						John Smith <small>Job Title</small>
+					</h3>
+				</div>
+	
+				<div class="clearfix"></div>
+			</div>
+		</div>
 	</div>
+	<!-- 강정호 메뉴 상세보기 파트 끝 -->
 
 
 
