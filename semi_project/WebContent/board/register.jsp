@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <title>회원가입</title>
 
 <!-- Bootstrap -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
 <!-- font awesome -->
 <link rel="stylesheet" href="bootstrap/css/font-awesome.min.css"
 	media="screen" title="no title" charset="utf-8">
@@ -30,28 +30,32 @@
 	$(document).ready(function(){
 		
 		$("#idForm").keyup(function () {
-			var id = $("#id").val();
-			var len = $("#id").val().length;
+			var id = $("#userId").val();
+			var len = $("#userId").val().length;
+			
+			console.log('id'+id+'len'+len);
 			
 			if(len<4 || len>10){
 				$("#checkResult").text('아이디는 4자이상 10자이하만 가능!').css('background','pink');
 			}else{
-				$("#checkResult").text("");
-/* 				$.ajax({
+				
+				//$("#checkResult").text("");
+ 	 			$.ajax({
 					type:"post",
-					url: "IdCheckServlet",  
-					data:$("#id").text(),
-					success: function (data) {
-						alert("sss")
-						if(data == "ok"){
+					url: "../DispatcherServlet?command=idCheck",  
+					data:$("#userId").text(),
+					success: function () {
+						alert("sss"+data);
+						
+						 if(data == "ok"){
 							//$("#id").val('');
 							//$("#id").focus();
 							$("#checkResult").text(data);
 						}else{
 							$("#checkResult").text(data);
-						}
+						} 
 					}//success
-				}); //ajax */
+				}); //ajax   
 				
 				
 			}
@@ -69,13 +73,19 @@
 		</div>
 		<div class="col-md-6 col-md-offset-3">
 			<form role="form" id="idForm">
+			
 				<div class="form-group">
-					<label for="username" name="id">아이디</label> <span id="checkResult"></span>
+					<label for="userid"  name="id"  id="id">아이디</label> <span id="checkResult"></span>
+	              <div class="input-group">
+	                <input type="text" class="form-control" id="userId" placeholder="4자 이상 10자 이하로 입력해 주세요">
+	              </div>
+
 
 					<input type="text" class="form-control" id="id" placeholder="비밀번호">
 					<span id="checkResult"></span> <input type="hidden" name="command"
 						value="idcheck">
 				</div>
+				
 
 				<div class="form-group">
 					<label for="InputPassword1">비밀번호</label> <input type="password"

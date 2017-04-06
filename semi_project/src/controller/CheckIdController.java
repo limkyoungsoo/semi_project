@@ -7,10 +7,14 @@ public class CheckIdController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		String url ="board/checkId.jsp";
 		
-		return url;
+		String command = request.getParameter("command");
+		System.out.println(command+" in controller");
+		
+		String result = "";
+		
+		
+		return result;
 	}
 
 }
