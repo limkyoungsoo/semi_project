@@ -27,7 +27,7 @@
     <script type="text/javascript">
 	$(document).ready(function(){
 		
-		$("#form").keyup(function () {
+		$("#idForm").keyup(function () {
 			var id = $("#id").val();
 			var len = $("#id").val().length;
 			
@@ -40,12 +40,14 @@
 				$.ajax({
 				type:"post",
 				url:"IdCheckServlet",
-				data:$("#form").serialize(),
+				data:$("#idForm").serialize(),
 				success: function (data) {
 					if(data == 'ok'){
-						alert('아이디 중복 체크 통과');
+						//$("#id").val('');
+						//$("#id").focus();
+						$("#checkResult").append(data);
 					}else{
-						alert('아이디 중복 체크 불합격');
+						$("#checkResult").append(data);
 					}
 				},//success
 				timeout: 1000,
@@ -66,16 +68,13 @@
           <h1>회원가입 <small>MSG form</small></h1>
         </div>
         <div class="col-md-6 col-md-offset-3">
-          <form role="form">
+          <form role="form"  id="idForm">
                <div class="form-group">
-              <label for="username" id="id">아이디</label>
-              <div class="input-group">
-                <input type="text" class="form-control" id="userId" placeholder="4자 이상 10자 이하로 입력해 주세요">
-                <span class="input-group-btn">
-                  <button class="btn btn-success"  id="checkBtn">중복확인<i class="fa fa-mail-forward spaceLeft"></i></button>
-                </span>
-              </div>
-              <input type="hidden" value="checkggg" name="command">
+              <label for="username" name="id">아이디</label>
+
+			<input type="text" class="form-control" id="id" placeholder="비밀번호">
+			<span id="checkResult"></span>
+			<input type="hidden" name="command" value="idcheck" >
             </div>
             
             <div class="form-group">
