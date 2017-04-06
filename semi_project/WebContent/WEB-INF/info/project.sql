@@ -96,12 +96,12 @@ from store s, menu m where s.storeName=m.storeName and m.storeName='쭈꾸미볶
 					
 					
 					
-					
-					
-					
-					
-					
-					
+SELECT storeName, storeLoc
+FROM (SELECT *
+        FROM store
+        ORDER BY DBMS_RANDOM.RANDOM()
+    )
+WHERE ROWNUM <=1
 					
 					
 					

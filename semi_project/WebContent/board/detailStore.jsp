@@ -115,14 +115,16 @@
 					<hr>
 				</div>
 			
-				<div class="col-sm-4 text-center">
-					<img class="img-responsive"
-						src="${pageContext.request.contextPath}${menuList.menuVO.menuPic}"
-						alt="" >
-					<h3>
-						John Smith <small>Job Title</small>
-					</h3>
-				</div>
+				<c:forEach items="${requestScope.menuImgList }" var="menuImgList">
+            <div class="col-sm-4 text-center">
+               <img class="img-responsive"
+                  src="${pageContext.request.contextPath}${menuImgList.menuPic}"
+                  alt="" >
+               <h3>
+                  John Smith <small>Job Title</small>
+               </h3>
+            </div>
+            </c:forEach>
 	
 				<div class="clearfix"></div>
 			</div>

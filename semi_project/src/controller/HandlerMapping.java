@@ -17,14 +17,14 @@ public class HandlerMapping {
 			c = new StoreShowController();
 		} else if (command.equals("detailStore")) {
 			c = new DetailStoreController();
-		} else if (command.equals("storeLocList")) {
-			c = new StoreLocListController();
-		} else if (command.equals("detailStore")) {
-			c = new DetailStoreController();
 		} else if (command.equals("storeList")) {
 			c = new ListController();
 		} else if (command.equals("register")) {
 			c = new RegisterController();
+		} else if (command.equals("randSelect")) {
+			c = new RandomSelectController();
+		} else if (command.equals("storeAllList")) {
+			c = new AllStoreListController();
 		}
 
 		return c;
