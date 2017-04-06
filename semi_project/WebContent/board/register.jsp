@@ -34,14 +34,14 @@
 			var len = $("#userId").val().length;
 			
 			
-			if(len<4 || len>10){
+			if(len<4 && len>10){
 				$("#checkResult").text('아이디는 4자이상 10자이하만 가능!').css('background','pink');
 			}else{
 				
 				//$("#checkResult").text("");
  	 			$.ajax({
 					type:"post",
-					url: "../DispatcherServlet",
+					url: "DispatcherServlet",
 					data: "command=idCheck&id="+ id,
 					success: function () {
 						 if(data == "true"){

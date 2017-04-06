@@ -36,14 +36,13 @@ public class MemberDAO {
 		
 		try {
 			con  = getConnection();
-			System.out.println("연결상태"+con);
 			
 			String sql = "select mid from msgMember where mid=?";
 			
-			System.out.println("sql_______"+sql);
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, id);
 			rs=psmt.executeQuery();
+			System.out.println("sql_______"+sql);
 			
 			if(rs.next()){
 				flag = "true";
@@ -53,6 +52,7 @@ public class MemberDAO {
 			closeAll(rs,psmt,con);
 		}
 		
+		System.out.println("플래그"+flag);
 		return flag;
 		
 	}
