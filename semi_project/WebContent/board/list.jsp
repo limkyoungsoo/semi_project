@@ -55,7 +55,9 @@
                 
                 <c:forEach var="svo" items="${requestScope.listVo.list}">
                 <div class="col-sm-4 text-center">
+                    <a href="${pageContext.request.contextPath}/DispatcherServlet?command=detailStore&storeName=${svo.storeName}">
                     <img class="img-responsive" src="${pageContext.request.contextPath}${svo.storePic}">
+                    </a>
                     <h3>${svo.storeName}<br>
                        <!--  <small>Job Title</small> 추후 별점 추가-->
                     </h3>
