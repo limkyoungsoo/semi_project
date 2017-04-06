@@ -1,14 +1,14 @@
 package controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
-
 import model.ReviewDAO;
+import model.ReviewVO;
 
 public class ReviewListController implements Controller {
 
