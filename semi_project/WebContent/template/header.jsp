@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <div class="registerInfo">
 	<a href="#"><font color="white">로그인</font></a> 
-	<a href="DispatcherServlet?command=register"><font
+	<a href="${pageContext.request.contextPath}/board/register.jsp"><font
 		color="white">회원가입d</font></a>
 
 </div>

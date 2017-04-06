@@ -14,7 +14,11 @@ public class RegisterController implements Controller {
 		String pass = request.getParameter("InputPassword1");
 		String nick = request.getParameter("username");
 		
-		MemberVO vo =  MemberDAO.getInstance().register(id,pass,nick);
+		System.out.println("아이디ㅟ"+id);
+		System.out.println("패스워드"+pass);
+		System.out.println("닉네임"+nick);
+		
+		MemberVO vo = new MemberVO(MemberDAO.getInstance().register(id,pass,nick));
 		
 		
 		String url = "board/register_ok.jsp";

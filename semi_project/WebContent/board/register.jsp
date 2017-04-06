@@ -64,7 +64,7 @@
 		   }
 		  }); //#chpass.keyup
 		  
-		  $("registerBtn").submit(function () {
+		  $("#registerBtn").click(function () {
 			location.href = '${pageContext.request.contextPath}/DispatcherServlet?command=register';
 		})
 

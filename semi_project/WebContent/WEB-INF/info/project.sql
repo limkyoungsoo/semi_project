@@ -93,7 +93,7 @@ commit
 select s.storeLoc, s.storeTel, s.storePic, s.openHour,m.menuNo, m.menuName, m.menuPrice, m.menuPic 
 from store s, menu m where s.storeName=m.storeName and m.storeName='쭈꾸미볶음집';
 					
-select mid from msgMember					
+select * from msgMember					
 select mid,mpass,mnick from msgMember		
 
 insert into msgMember(mid,mpass,mnick) values('java','1234','자바')

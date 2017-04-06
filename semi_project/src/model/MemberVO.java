@@ -5,7 +5,7 @@ public class MemberVO {
 	private String mPass;
 	private String mNick;
 
-	public MemberVO() {
+	public MemberVO(MemberVO memberVO) {
 		super();
 	}
 

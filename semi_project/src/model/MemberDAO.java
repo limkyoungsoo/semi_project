@@ -66,11 +66,17 @@ public class MemberDAO {
 		try {
 			con = getConnection();
 			String sql = "insert into msgMember(mid,mpass,mnick) values(?,?,?)";
-			con.prepareStatement(sql);
-			rs = psmt.executeQuery();
+			psmt = con.prepareStatement(sql);
 			psmt.setString(1, id);
 			psmt.setString(2, password);
 			psmt.setString(3, nick);
+			
+			System.out.println("아이디ㅟ"+id);
+			System.out.println("패스워드"+password);
+			System.out.println("닉네임"+nick);
+			
+			rs = psmt.executeQuery();
+			
 			
 			if(rs.next()){
 				vo = new MemberVO(id, password, nick);
@@ -80,6 +86,7 @@ public class MemberDAO {
 			closeAll(rs,psmt,con);
 		}
 		
+		System.out.println("브잉ㅎ"+vo);
 		return vo;
 	}
 	
