@@ -25,11 +25,38 @@
     <![endif]-->
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script type="text/javascript">
-    $(document).ready(function(){
-    	$("#checkBtn").click(function(){
-    		location.href = "${pageContext.request.contextPath}/DispatcherServlet?command=checkId";
-    		alert('12%%%%');
-		});
+	$(document).ready(function(){
+		
+		$("#form").keyup(function () {
+			var id = $("#id").val();
+			var len = $("#id").val().length;
+			
+			if(len<4 || len>10){
+				$("#checkResult").text('아이디는 4자이상 10자이하만 가능!').css('background','pink');
+			}else{
+				$("#checkResult").text(name);
+				
+				
+				$.ajax({
+				type:"post",
+				url:"IdCheckServlet",
+				data:$("#form").serialize(),
+				success: function (data) {
+					if(data == 'ok'){
+						alert('아이디 중복 체크 통과');
+					}else{
+						alert('아이디 중복 체크 불합격');
+					}
+				},//success
+				timeout: 1000,
+				error:function(){
+					alert('error');
+					//alert('timeout error');
+				}
+			}); //ajax
+			}
+		})
+	
 	});
     </script>
   </head>
@@ -41,13 +68,14 @@
         <div class="col-md-6 col-md-offset-3">
           <form role="form">
                <div class="form-group">
-              <label for="username">아이디</label>
+              <label for="username" id="id">아이디</label>
               <div class="input-group">
                 <input type="text" class="form-control" id="userId" placeholder="4자 이상 10자 이하로 입력해 주세요">
                 <span class="input-group-btn">
                   <button class="btn btn-success"  id="checkBtn">중복확인<i class="fa fa-mail-forward spaceLeft"></i></button>
                 </span>
               </div>
+              <input type="hidden" value="checkggg" name="command">
             </div>
             
             <div class="form-group">
