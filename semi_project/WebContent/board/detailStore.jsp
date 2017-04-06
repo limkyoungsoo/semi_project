@@ -47,8 +47,8 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 <style type="text/css">
-	img.img-responsive.img-border-left.img-rounded {
-    margin: auto;
+img.img-responsive.img-border-left.img-rounded {
+	margin: auto;
 }
 </style>
 
@@ -61,19 +61,20 @@
 
 	<!-- 강정호 메뉴 상세보기 파트 시작 -->
 	<div class="container">
-	<!-- 가게 메인사진 보여주는 곳 -->
-	<div class="row">
+		<!-- 가게 메인사진 보여주는 곳 -->
+		<div class="row">
 			<div class="box">
 				<div class="col-lg-12">
 					<hr>
-						<h2 class="text-center">${requestScope.menuList.storeName}(가게이름 들어올곳) </h2>
+					<h2 class="text-center">${requestScope.menuList.storeName}</h2>
 					<hr>
-						<img class="img-responsive img-border-left" src="${pageContext.request.contextPath }${requestScope.menuList.storePic}" 
-                    alt="${requestScope.menuList.storeName}" >
-				</div>	
+					<img class="img-responsive img-border-left"
+						src="${pageContext.request.contextPath }${requestScope.menuList.storePic}"
+						alt="${requestScope.menuList.storeName}">
+				</div>
 			</div>
 		</div>
-	<!-- 메인 메뉴 사진 보여주는 곳 -->
+		<!-- 메인 메뉴 사진 보여주는 곳 -->
 		<div class="row">
 			<div class="box">
 				<div class="col-lg-12">
@@ -85,45 +86,48 @@
 				</div>
 				<div class="col-md-6">
 					<img class="img-responsive img-border-left"
-						src="${pageContext.request.contextPath }/menuImg/jo3.jpg" alt="" width="304" height="236">
+						src="${pageContext.request.contextPath }${requestScope.menuList.menuVO.menuPic}"
+						alt="" width="304" height="236">
 				</div>
 				<div class="col-md-6">
 					<p>
-						<strong>메뉴번호</strong>:${requestScope.menuList.menuVO.menuNo}
+					<h3>메뉴번호</h3>
+					:${requestScope.menuList.menuVO.menuNo}
 					</p>
 					<p>
-						<strong>메뉴이름</strong>:${requestScope.menuList.menuVO.menuName}
+					<h3>메뉴이름</h3>
+					:${requestScope.menuList.menuVO.menuName}
 					</p>
 					<p>
-						<strong>메뉴가격</strong>:${requestScope.menuList.menuVO.menuPrice}
-					</p>
-					<p>
-						<strong>메뉴사진</strong>:${requestScope.menuList.menuVO.menuPic}
+					<h3>메뉴가격</h3>
+					:${requestScope.menuList.menuVO.menuPrice}
 					</p>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
 		<!-- 가게의 다른 메뉴를 보여주는 곳 -->
-			<div class="row">
+		<div class="row">
 			<div class="box">
 				<div class="col-lg-12">
 					<hr>
 					<h2 class="intro-text text-center">
-						<strong>${requestScope.menuList.storeName}(가게이름들어올곳)</strong>의 다른 메뉴
+						<strong>${requestScope.menuList.storeName}</strong>의 다른 메뉴
 					</h2>
 					<hr>
 				</div>
-			
-				<div class="col-sm-4 text-center">
-					<img class="img-responsive"
-						src="${pageContext.request.contextPath}${menuList.menuVO.menuPic}"
-						alt="" >
-					<h3>
-						John Smith <small>Job Title</small>
-					</h3>
-				</div>
-	
+
+				<c:forEach items="${requestScope.menuImgList }" var="menuImgList">
+					<div class="col-sm-4 text-center">
+						<a href="#######"><img class="img-responsive"
+							src="${pageContext.request.contextPath}${menuImgList.menuPic}"
+							alt="">
+							<h3>
+								${menuImgList.menuName} <small>Job Title</small>
+							</h3>
+					</div>
+				</c:forEach>
+
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -132,15 +136,15 @@
 
 
 
-<!-- review include -->
+	<!-- review include -->
 	<div class="container">
 		<jsp:include page="review.jsp" />
 	</div>
-<!-- review include -->
+	<!-- review include -->
 
 
 
-<c:import url="/template/footer.jsp"></c:import>
+	<c:import url="/template/footer.jsp"></c:import>
 	<!-- jQuery -->
 	<script src="js/jquery.js"></script>
 

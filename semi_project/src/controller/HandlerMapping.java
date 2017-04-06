@@ -21,12 +21,23 @@ public class HandlerMapping {
 			c=new DetailStoreController();
 		}else if(command.equals("storeList")){
 			c=new ListController();
-		}else if(command.equals("register")){
-			c=new RegisterController();
-		}else if(command.equals("idCheck")){
-			c=new CheckIdController();
+		}else if(command.equals("reviewList")){
+			c=new ReviewListController();
+		}else if(command.equals("starScore")){
+			c=new StarScoreController();
+		} else if (command.equals("detailStore")) {
+			c = new DetailStoreController();
+		} else if (command.equals("storeList")) {
+			c = new ListController();
+		} else if (command.equals("register")) {
+			c = new RegisterController();
+		} else if (command.equals("randSelect")) {
+			c = new RandomSelectController();
+		} else if (command.equals("storeAllList")) {
+			c = new AllStoreListController();
+		} else if (command.equals("idCheck")) {
+			c = new CheckIdController();
 		}
-
 		return c;
 	}
 }

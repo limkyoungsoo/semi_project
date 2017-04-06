@@ -37,6 +37,7 @@ create table menu(
 -- 메뉴 번호 시퀀스
 create sequence menuNo_seq start with 90;
 
+
 -- 메뉴 리뷰 테이블
 create table menuReview(
  reNo number primary key,
@@ -71,6 +72,7 @@ values('소바니','유스페이스1동',03112345678,'/storeImg/so1.jpg','월요
 select * from store;
 
 select storePic from store
+select distinct storeLoc from store;
 
 
 insert into store(storeName,storeLoc,storeTel,storePic,openHour)
@@ -83,7 +85,7 @@ values(menuNo_seq.nextval,'쭈꾸미볶음집','쭈꾸미불볶음',6000,'/dish.
 select * from menu;
 delete menu where storeName='쭈꾸미볶음집';
 insert into menuReview(reNo,menuNo,mId,review,grade,time_posted)
-values(reNo_seq.nextval,2,'java','음식이 맵지만 불맛이 살아있습니다',3,sysdate);
+values(reNo_seq.nextval,1,'java','허불백정식',3,sysdate);
 select * from menuReview;
 
 insert into msgMemberMenu(menuNo, mId) values(1,'java');
@@ -93,6 +95,7 @@ commit
 select s.storeLoc, s.storeTel, s.storePic, s.openHour,m.menuNo, m.menuName, m.menuPrice, m.menuPic 
 from store s, menu m where s.storeName=m.storeName and m.storeName='쭈꾸미볶음집';
 					
+<<<<<<< HEAD
 select * from msgMember					
 select mid,mpass,mnick from msgMember		
 
@@ -101,15 +104,37 @@ insert into msgMember(mid,mpass,mnick) values('java','1234','자바')
 select mid from msgMember where mid='java'
 
 insert into msgMember(mid,mpass,mnick) values(val1,val2,val3)
+=======
+
+select * from menureview
+
+
+select * from store s, menu m where s.storeName=m.storeName and storeName='하코야';
 					
+
+select round(avg(b.grade),1) as avg_grade
+from (select m.menuNo, m.menuName, m.menuPrice, s.storeName 
+from store s, menu m where s.storeName=m.storeName and 
+m.storeName='조선허불백') a, menureview b 
+where a.menuNo=b.menuNo					
+
 					
+select b.reNo b.menuNo, b.mid, b.review, b.grade, b.time_posted 
+from (select m.menuNo, m.menuName, m.menuPrice, s.storeName 
+from store s, menu m where s.storeName=m.storeName and 
+m.storeName='조선허불백') a, menureview b 
+where a.menuNo=b.menuNo					
 					
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 					
-					
-					
-					
-					
-					
+
+SELECT storeName, storeLoc
+FROM (SELECT *
+        FROM store
+        ORDER BY DBMS_RANDOM.RANDOM()
+    )
+WHERE ROWNUM <=1
+
 					
 					
 					

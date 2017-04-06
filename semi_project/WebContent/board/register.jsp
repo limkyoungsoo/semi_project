@@ -65,7 +65,7 @@
 		  }); //#chpass.keyup
 		  
 		  $("#registerBtn").click(function () {
-			location.href = '${pageContext.request.contextPath}/DispatcherServlet?command=register';
+			  $('#idForm').submit();
 		})
 
 		
@@ -80,12 +80,12 @@
 			</h1>
 		</div>
 		<div class="col-md-6 col-md-offset-3">
-			<form role="form" id="idForm">
+			<form role="form" id="idForm" action="${pageContext.request.contextPath}/DispatcherServlet">
 
 				<div class="form-group">
 					<label for="userid" name="id" id="id">아이디</label>
 					<div class="input-group">
-						<input type="text" class="form-control" id="userId" required="required">
+						<input type="text" class="form-control" id="userId" required="required" name="nameId">
 					</div>
 					<span id="idCheckResult"></span> 
 				</div>
@@ -93,7 +93,7 @@
 
 				<div class="form-group">
 					<label for="InputPassword1">비밀번호</label> <input type="password"
-						class="form-control" id="InputPassword1" placeholder="비밀번호" required="required">
+						class="form-control" id="InputPassword1" placeholder="비밀번호" required="required" name="namePW">
 				</div>
 				<div class="form-group">
 					<label for="InputPassword2">비밀번호 확인</label> <input type="password"
@@ -102,7 +102,7 @@
 				</div>
 				<div class="form-group">
 					<label for="username">닉네임</label> <input type="text"
-						class="form-control" id="username" placeholder="닉네임을 입력해 주세요" required="required">
+						class="form-control" id="username" placeholder="닉네임을 입력해 주세요" required="required" name="nameNick">
 				</div>
 				<div class="form-group">
 					<label>약관 동의</label>
@@ -117,7 +117,8 @@
 					<button type="submit" class="btn btn-info" id="registerBtn">
 						회원가입<i class="fa fa-check spaceLeft"></i>
 					</button>
-					<button type="submit" class="btn btn-warning" id="cancelBtn">
+					<input type="hidden" name="command" value="register">
+					 	<button type="submit" class="btn btn-warning" id="cancelBtn">
 						가입취소<i class="fa fa-times spaceLeft"></i>
 					</button>
 				</div>

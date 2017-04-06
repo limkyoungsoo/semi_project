@@ -5,6 +5,7 @@ public class MenuVO {
 	private String menuName;
 	private int menuPrice;
 	private String menuPic;
+	
 	public MenuVO() {
 		super();
 	}

@@ -35,14 +35,14 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+	<!-- jQuery -->
 </head>
 
 <body>
 	<c:import url="/template/header.jsp"></c:import>
 	<c:import url="/template/navigator.jsp"></c:import>
+	
     <div class="container">
-
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
@@ -55,7 +55,9 @@
                 
                 <c:forEach var="svo" items="${requestScope.listVo.list}">
                 <div class="col-sm-4 text-center">
+                    <a href="${pageContext.request.contextPath}/DispatcherServlet?command=detailStore&storeName=${svo.storeName}">
                     <img class="img-responsive" src="${pageContext.request.contextPath}${svo.storePic}">
+                    </a>
                     <h3>${svo.storeName}<br>
                        <!--  <small>Job Title</small> 추후 별점 추가-->
                     </h3>
@@ -87,14 +89,20 @@
    	     </div>
     </div>
 	    <!-- /.container -->
-	  
+  <!-- jQuery -->
+	<script src="bootstrap/js/jquery.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Script to Activate the Carousel -->
+	<script>
+		$('.carousel').carousel({
+			interval : 3000
+		//changes the speed
+		})
+	</script>
 	<c:import url="/template/footer.jsp"></c:import>
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
 
 </body>
 </html>

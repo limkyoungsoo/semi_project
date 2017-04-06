@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="//code.jquery.com/jquery.min.js"></script>
 <c:import url="/template/straplink.html"></c:import>
 
 <script type="text/javascript">
@@ -16,7 +17,7 @@
 										"img",
 										function() {
 											location.href = "${pageContext.request.contextPath}/DispatcherServlet?command=detailStore&storeName="
-													+ $(this).attr('alt');
+													 + $(this).attr('alt') ;
 										});
 					});
 </script>
@@ -54,7 +55,7 @@
 									src="${pageContext.request.contextPath}/${list[0].storePic}"
 									alt="${list[0].storeName }">
 							</div>
-							<%-- <c:forEach items="${list }" var="b" varStatus="order">
+							<c:forEach items="${list }" var="b" varStatus="order">
 								<c:if test="${order.count != 1 }">
 									<div class="item">
 										<img class="img-responsive img-border"
@@ -62,7 +63,7 @@
 											alt="${b.storeName }">
 									</div>
 								</c:if>
-							</c:forEach> --%>
+							</c:forEach>
 						</div>
 
 						<!-- Controls -->

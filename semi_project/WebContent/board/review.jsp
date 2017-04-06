@@ -2,30 +2,52 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 	$(document).ready(function() {
-		 $("#reviewForm").hide(); 
+		$("#reviewForm").hide(); 
 		$("#writeBtn").click(function(){
-			$("#reviewForm").toggle(1000, function() {
-				if ($("#reviewForm").css("display") == "none") {
+			$("#review").toggle(1000, function() {
+				if ($("#review").css("display") == "none") {
 					$("#writeBtn").text("리뷰 작성창 열기");
 				} else {
 					$("#writeBtn").text("리뷰 작성창 닫기");					
 				}
 			});  // toggle
 		});  // click
-		
+
 	 	$("#write").click(function(){
-			$.ajax({
-				type:"get",
-				url :"DispatcherServlet",
-				dataType : "json",
-				data : "command=writeReview&" // form은 serializable 로 처리하자
-			});
+	 		 alert($("#reviewForm").serialize());
+			 $.ajax({
+				type:"post",
+				url:"../DispatcherServlet",
+				dataType:"json",
+				data:"command=writeReview&"+$("#reviewForm").serialize(), // form은 serializable 로 처리하자
+				success:function(data){
+					alert(data);
+					//$("#reviewList").html(data);  // data는 식당별 리뷰리스트를 보기위한 테이블을 만들 데이터임
+				} // success
+			});   // ajax
 		}); // click
-		 
 		
+	// 	$("#sel1").click(function(){
+			/* $.ajax({
+				type:"get",
+				url:"DispatcherServlet",
+				dataType="json",
+				data : "command=reviewList",
+				success:function(data){
+					var info="<tr>";
+					info+="<td>"+data[0].reviewNo+"</td>";
+					info+="<td>"+data[0].grade+"</td>";
+					info+="<td>"+data[0].review+"</td>";
+					info+="<td>"+data[0].mid+"/"+data[0].timePosted+"</td>";
+					info+="</tr>";
+					$("#reviewInfo").html(info);
+				}//success
+			});//ajax */
+	//	}); // w초기 전체 reviewList 보여주기  
+	
 		var starRating = function() {
 			var $star = $(".star-input"), $result = $star.find("output>b");
 			$(document).on("focusin", ".star-input>.input", function() {
@@ -49,9 +71,19 @@
 					$result.text($checked.next().text());
 				}
 			});
-		};
+		}; // starRating
 		starRating();
-	});
+		$("#sel1()").change(function(){
+			$.ajax({
+				type:"get",
+				url:"DispatcherServlet",
+				data :"command=starScore",
+				success:function(data){
+					$("#avgStar").html(data);
+				}//success
+			});//ajax
+		});//change
+	});//ready
 </script>
 
 
@@ -151,7 +183,6 @@
 /*별 CSS 끝  */
 </style>
 
-
 <div class="row">
 	<div class="box">
 		<div class="col-lg-12">
@@ -162,17 +193,23 @@
 			<hr>
 		</div>
 
-		<!-- 별점 start -->
 
-		<div class="container">
-			<label for="mname">메뉴명</label> <select id="sel1">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-			</select> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 평점 : <i
-				class="fa fa-star" style="font-size: 24px; color: red"></i> <i
-				class="fa fa-star" style="font-size: 24px; color: red"></i>
+		
+		<div class="container" id="reviewList">
+		
+			<label for="mname">메뉴명</label> 
+			
+			<%-- <select id="sel1">
+			<option value="">메뉴선택</option>
+			  <c:forEach items="${requestScope.menuList.menuVO }" var="ml">
+					<option>${ml.menuName}</option>
+			   </c:forEach>
+			</select>  --%>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+			평점 : <span id="avgStar"> </span>
+			<i class="fa fa-star" style="font-size: 24px; color: red"></i> 
+			<i class="fa fa-star" style="font-size: 24px; color: red"></i>
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -182,50 +219,42 @@
 						<th>글쓴이/날짜</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td><i class="fa fa-star" style="font-size: 24px; color: red"></i></td>
-						<td>맛이 있다</td>
-						<td>김성환/2017.04.04</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td><i class="fa fa-star" style="font-size: 24px; color: red"></i>
-							<i class="fa fa-star" style="font-size: 24px; color: red"></i></td>
-						<td>맛없다</td>
-						<td>강정호/2017.04.04</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td><i class="fa fa-star" style="font-size: 24px; color: red"></i>
-							<i class="fa fa-star" style="font-size: 24px; color: red"></i> <i
-							class="fa fa-star-half-full" style="font-size: 24px; color: red"></i></td>
-						<td>더럽게맛없다</td>
-						<td>임경수/2017.04.04</td>
-					</tr>
+				<tbody id="reviewInfo">
+					<!-- reviewList 시작 -->
+					<c:forEach items="${requestScope.reviewList }" var="rl" varStatus="order">
+						<tr>
+							<td>${order.count}</td>
+							<td>${rl.grade}</td>
+							<td>${rl.review}</td>
+							<td>${rl.mid}/${rl.timePosted }</td>
+						</tr>
+					</c:forEach>
+						<!-- reviewList 끝 -->
 				</tbody>
 			</table>
 
-			<button type="button" class="btn btn-info" id="writeBtn"> 리뷰 작성창 열기 </button>
+			<button type="button" class="btn btn-info" id="writeBtn">리뷰
+				작성창 열기</button>
 
 		</div>
 		<br>
-		
-		<!-- 별점 end -->
 
-		<!-- 리뷰 시작  -->
-		<div id="reviewForm">
+		
+		<!-- 리뷰  & 별점 작성 시작 -->
+		<div id="review">
 			<div class="container">
 				<div class="well well-lg">
 					<h3>메뉴 리뷰 남기기</h3>
 					<form class="form-horizontal" id="reviewForm">
+					<!-- <input type="hidden" name="command" value="writeReview"></input> -->
 						<div class="form-group">
-							<label for="mname">메뉴명</label> <select id="sel1">
+							<label for="mname">메뉴명</label> <select id="sel1" name="menuOption">
 								<option>1</option>
 								<option>2</option>
-								<option>3</option>
-								<option>4</option>
+								<%-- <c:forEach items="${ menuList }">
+								<option>${ menuList }</option>
+								</c:forEach> --%>
+															
 							</select> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <label
 								for="putstar">별점 주기</label> <span class="star-input"> <span
 								class="input"> <input type="radio" name="star-input"
@@ -239,17 +268,20 @@
 							</span> <output for="star-input"> <b>0</b>점 </output>
 							</span>
 							<div class="col-sm-12">
-								<textarea class="form-control" rows="5" id="comment" placeholder="리뷰 내용을 입력해주세요"></textarea>
+
+								<textarea class="form-control" rows="5" id="comment" name="comment" placeholder="리뷰 내용을 입력해주세요"></textarea>
+
 							</div>
 						</div>
 						<br>
-						<button type="button" class="btn btn-success" id="write">리뷰 등록 하기</button>
+						<button type="button" class="btn btn-success" id="write">리뷰
+							등록 하기</button>
 
 					</form>
 				</div>
 			</div>
 		</div>
-		<!-- 리뷰 끝 -->
+		<!-- 리뷰 & 별점 작성 끝 -->
 
 		<div class="clearfix"></div>
 	</div>
