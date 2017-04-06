@@ -2,20 +2,38 @@ package model;
 
 public class ReviewVO {
 	private int reviewNo;
-	private int grade;
+	private float grade;
 	private String review;
 	private String mid;
 	private String timePosted;
+	private int menuNo;
 	public ReviewVO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	public ReviewVO(int reviewNo, int grade, String review, String mid, String timePosted) {
+	
+	public ReviewVO(float grade) {
+		super();
+		this.grade = grade;
+	}
+
+	public ReviewVO(float grade, String review, String mid, String timePosted, int menuNo) {
+		super();
+		this.grade = grade;
+		this.review = review;
+		this.mid = mid;
+		this.timePosted = timePosted;
+		this.menuNo = menuNo;
+	}
+
+	public ReviewVO(int reviewNo, float grade, String review, String mid, String timePosted, int menuNo) {
 		super();
 		this.reviewNo = reviewNo;
 		this.grade = grade;
 		this.review = review;
 		this.mid = mid;
 		this.timePosted = timePosted;
+		this.menuNo = menuNo;
 	}
 	public int getReviewNo() {
 		return reviewNo;
@@ -23,10 +41,10 @@ public class ReviewVO {
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
 	}
-	public int getGrade() {
+	public float getGrade() {
 		return grade;
 	}
-	public void setGrade(int grade) {
+	public void setGrade(float grade) {
 		this.grade = grade;
 	}
 	public String getReview() {
@@ -47,9 +65,16 @@ public class ReviewVO {
 	public void setTimePosted(String timePosted) {
 		this.timePosted = timePosted;
 	}
+	public int getMenuNo() {
+		return menuNo;
+	}
+	public void setMenuNo(int menuNo) {
+		this.menuNo = menuNo;
+	}
 	@Override
 	public String toString() {
 		return "ReviewVO [reviewNo=" + reviewNo + ", grade=" + grade + ", review=" + review + ", mid=" + mid
-				+ ", timePosted=" + timePosted + "]";
+				+ ", timePosted=" + timePosted + ", menuNo=" + menuNo + "]";
 	}
+
 }

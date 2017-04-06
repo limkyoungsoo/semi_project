@@ -35,7 +35,7 @@ create table menu(
 );
 
 -- 메뉴 번호 시퀀스
-create sequence menuNo_seq;
+create sequence menuNo_seq start with 90	;
 
 -- 메뉴 리뷰 테이블
 create table menuReview(
@@ -81,7 +81,7 @@ values(menuNo_seq.nextval,'쭈꾸미볶음집','쭈꾸미불볶음',6000,'/dish.
 select * from menu;
 delete menu where storeName='쭈꾸미볶음집';
 insert into menuReview(reNo,menuNo,mId,review,grade,time_posted)
-values(reNo_seq.nextval,2,'java','음식이 맵지만 불맛이 살아있습니다',3,sysdate);
+values(reNo_seq.nextval,1,'java','허불백정식',3,sysdate);
 select * from menuReview;
 
 insert into msgMemberMenu(menuNo, mId) values(1,'java');
@@ -91,10 +91,13 @@ commit
 select s.storeLoc, s.storeTel, s.storePic, s.openHour,m.menuNo, m.menuName, m.menuPrice, m.menuPic 
 from store s, menu m where s.storeName=m.storeName and m.storeName='쭈꾸미볶음집';
 					
+select * from menureview
 					
-					
-					
-					
+select b.reNo b.menuNo, b.mid, b.review, b.grade, b.time_posted 
+from (select m.menuNo, m.menuName, m.menuPrice, s.storeName 
+from store s, menu m where s.storeName=m.storeName and 
+m.storeName='조선허불백') a, menureview b 
+where a.menuNo=b.menuNo					
 					
 					
 					
