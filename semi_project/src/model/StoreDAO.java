@@ -45,7 +45,7 @@ public class StoreDAO {
 		return storeList;
 	}
 
-	// 강정호 제작
+	// 강정호 제작. 가게 이름으로 가게 정보와 메뉴 정보를 불러오기 위해서 만듬
 	public StoreVO getStoreMenuList(String storeName) throws SQLException {
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -55,7 +55,7 @@ public class StoreDAO {
 		try{
 			con=getConnection();
 			String sql="select s.storeName, s.storeLoc, s.storeTel, s.storePic, s.openHour, "
-					+ "m.menuNo, m.menuName, m.menuPrice, m.menuPic  "
+					+ "m.menuNo, m.menuName, m.menuPrice, m.menuPic "
 					+ "from store s, menu m "
 					+ "where s.storeName=m.storeName and m.storeName=?";
 			pstmt=con.prepareStatement(sql);

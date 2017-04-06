@@ -35,7 +35,7 @@ create table menu(
 );
 
 -- 메뉴 번호 시퀀스
-create sequence menuNo_seq;
+create sequence menuNo_seq start with 90;
 
 -- 메뉴 리뷰 테이블
 create table menuReview(
