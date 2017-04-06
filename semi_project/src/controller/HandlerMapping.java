@@ -15,10 +15,12 @@ public class HandlerMapping {
 
 		if (command.equals("storeShow")) {
 			c = new StoreShowController();
-		}else if(command.equals("detailStore")){
-			c=new DetailStoreController();
-		}else if(command.equals("storeList")){
-			c=new ListController();
+		} else if (command.equals("detailStore")) {
+			c = new DetailStoreController();
+		} else if (command.equals("storeList")) {
+			c = new ListController();
+		} else if (command.equals("storeLocList")) {
+			c = new StoreLocListController();
 		}
 
 		return c;

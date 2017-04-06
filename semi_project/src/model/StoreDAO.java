@@ -37,7 +37,28 @@ public class StoreDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				storeList.add(new StoreVO(rs.getString(1), rs.getString(2),rs.getString(3)));
+				storeList.add(new StoreVO(rs.getString(1), rs.getString(2), rs.getString(3)));
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return storeList;
+	}
+
+	public ArrayList<String> getStoreLocList() throws SQLException {
+		ArrayList<String> storeList = new ArrayList<String>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			// select * from store;
+			String sql = "select distinct storeLoc from store";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				storeList.add(rs.getString(1));
 			}
 		} finally {
 			closeAll(rs, pstmt, con);
@@ -47,28 +68,27 @@ public class StoreDAO {
 
 	// 강정호 제작
 	public StoreVO getStoreMenuList(String storeName) throws SQLException {
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		StoreVO storeVO=new StoreVO();
-		MenuVO menuVO=new MenuVO();
-		try{
-			con=getConnection();
-			String sql="select s.storeName, s.storeLoc, s.storeTel, s.storePic, s.openHour, "
-					+ "m.menuNo, m.menuName, m.menuPrice, m.menuPic  "
-					+ "from store s, menu m "
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StoreVO storeVO = new StoreVO();
+		MenuVO menuVO = new MenuVO();
+		try {
+			con = getConnection();
+			String sql = "select s.storeName, s.storeLoc, s.storeTel, s.storePic, s.openHour, "
+					+ "m.menuNo, m.menuName, m.menuPrice, m.menuPic  " + "from store s, menu m "
 					+ "where s.storeName=m.storeName and m.storeName=?";
-			pstmt=con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, storeName);
-			rs=pstmt.executeQuery();
-			if(rs.next()){
-				System.out.println("check1"+storeName);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				System.out.println("check1" + storeName);
 				storeVO.setStoreName(rs.getString(1));
 				storeVO.setStoreLoc(rs.getString(2));
 				storeVO.setStoreTel(rs.getString(3));
 				storeVO.setStorePic(rs.getString(4));
 				storeVO.setOpenHour(rs.getString(5));
-				//menuVO에 메뉴번호, 메뉴이름, 메뉴가격, 메뉴사진 저장 -강정호-
+				// menuVO에 메뉴번호, 메뉴이름, 메뉴가격, 메뉴사진 저장 -강정호-
 				menuVO.setMenuNo(rs.getInt(6));
 				menuVO.setMenuName(rs.getString(7));
 				menuVO.setMenuPrice(rs.getInt(8));
@@ -77,8 +97,8 @@ public class StoreDAO {
 				storeVO.setMenuVO(menuVO);
 			}
 			System.out.println(storeVO.toString());
-		}finally{
-			closeAll(rs,pstmt,con);
+		} finally {
+			closeAll(rs, pstmt, con);
 		}
 		return storeVO;
 	}

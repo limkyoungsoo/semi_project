@@ -70,7 +70,7 @@ values('소바니','유스페이스1동',03112345678,'/storeImg/so1.jpg','월요
 select * from store;
 
 select storePic from store
-
+select distinct storeLoc from store
 insert into store(storeName,storeLoc,storeTel,storePic,openHour)
 values('소바니','유스페이스1동',031,'/storeImg/so1.jpg','월요일~금요일 10시~8시');
 
