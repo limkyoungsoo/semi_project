@@ -95,31 +95,6 @@ public class ReviewDAO {
 		}
 		return list;
 	}
-	
-	
-	public void writeReview(ReviewVO rvo) throws SQLException {
-		Connection con=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		try {
-			con = getConnection();
-			String sql = "insert into menureview values(reNo_seq.nextval,?,?,?,?,sysdate)";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, rvo.getMenuNo()); //menu id review grade
-			pstmt.setString(2, rvo.getMid());
-			pstmt.setString(3, rvo.getReview());
-			pstmt.setInt(4, rvo.getGrade());
-			rs = pstmt.executeQuery();
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally{
-			closeAll(rs, pstmt, con);
-		}
-				
-	}
 	//grade 평균점수 
 	public ReviewVO ageGrade(String menuName) throws SQLException{
 		Connection con=null;
@@ -145,6 +120,32 @@ public class ReviewDAO {
 		}
 		return vo;
 	}
+	
+	// 리뷰 작성 메소드
+	public void writeReview(ReviewVO rvo) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			con = getConnection();
+			String sql = "insert into menureview values(reNo_seq.nextval,?,?,?,?,sysdate)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, rvo.getMenuNo()); //menu id review grade
+			pstmt.setString(2, rvo.getMid());
+			pstmt.setString(3, rvo.getReview());
+			pstmt.setFloat(4, rvo.getGrade());
+			rs = pstmt.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			closeAll(rs, pstmt, con);
+		}
+				
+	}
+
 }
 
 

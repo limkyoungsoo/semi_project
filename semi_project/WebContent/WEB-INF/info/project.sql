@@ -35,7 +35,8 @@ create table menu(
 );
 
 -- 메뉴 번호 시퀀스
-create sequence menuNo_seq start with 90	;
+create sequence menuNo_seq start with 90;
+
 
 -- 메뉴 리뷰 테이블
 create table menuReview(
@@ -60,6 +61,7 @@ create table msgMemberMenu(
 );
 
 insert into msgMember(mId,mPass,mNick)values('java',1234,'코스타');
+delete msgMember where mId='java'
 select * from msgMember;
 
 insert into store(storeName,storeLoc,storeTel,storePic,openHour)
@@ -70,6 +72,8 @@ values('소바니','유스페이스1동',03112345678,'/storeImg/so1.jpg','월요
 select * from store;
 
 select storePic from store
+select distinct storeLoc from store;
+
 
 insert into store(storeName,storeLoc,storeTel,storePic,openHour)
 values('소바니','유스페이스1동',031,'/storeImg/so1.jpg','월요일~금요일 10시~8시');
@@ -91,7 +95,19 @@ commit
 select s.storeLoc, s.storeTel, s.storePic, s.openHour,m.menuNo, m.menuName, m.menuPrice, m.menuPic 
 from store s, menu m where s.storeName=m.storeName and m.storeName='쭈꾸미볶음집';
 					
+
 select * from menureview
+
+
+select * from store s, menu m where s.storeName=m.storeName and storeName='하코야';
+					
+
+select round(avg(b.grade),1) as avg_grade
+from (select m.menuNo, m.menuName, m.menuPrice, s.storeName 
+from store s, menu m where s.storeName=m.storeName and 
+m.storeName='조선허불백') a, menureview b 
+where a.menuNo=b.menuNo					
+
 					
 select b.reNo b.menuNo, b.mid, b.review, b.grade, b.time_posted 
 from (select m.menuNo, m.menuName, m.menuPrice, s.storeName 
@@ -100,10 +116,14 @@ m.storeName='조선허불백') a, menureview b
 where a.menuNo=b.menuNo					
 					
 					
-					
-					
-					
-					
+
+SELECT storeName, storeLoc
+FROM (SELECT *
+        FROM store
+        ORDER BY DBMS_RANDOM.RANDOM()
+    )
+WHERE ROWNUM <=1
+
 					
 					
 					

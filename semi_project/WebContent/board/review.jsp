@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#review").hide(); 
+		$("#reviewForm").hide(); 
 		$("#writeBtn").click(function(){
 			$("#review").toggle(1000, function() {
 				if ($("#review").css("display") == "none") {
@@ -15,7 +15,7 @@
 				}
 			});  // toggle
 		});  // click
-		
+
 	 	$("#write").click(function(){
 	 		 alert($("#reviewForm").serialize());
 			 $.ajax({
@@ -29,8 +29,25 @@
 				} // success
 			});   // ajax
 		}); // click
-		 
 		
+	// 	$("#sel1").click(function(){
+			/* $.ajax({
+				type:"get",
+				url:"DispatcherServlet",
+				dataType="json",
+				data : "command=reviewList",
+				success:function(data){
+					var info="<tr>";
+					info+="<td>"+data[0].reviewNo+"</td>";
+					info+="<td>"+data[0].grade+"</td>";
+					info+="<td>"+data[0].review+"</td>";
+					info+="<td>"+data[0].mid+"/"+data[0].timePosted+"</td>";
+					info+="</tr>";
+					$("#reviewInfo").html(info);
+				}//success
+			});//ajax */
+	//	}); // w초기 전체 reviewList 보여주기  
+	
 		var starRating = function() {
 			var $star = $(".star-input"), $result = $star.find("output>b");
 			$(document).on("focusin", ".star-input>.input", function() {
@@ -56,7 +73,17 @@
 			});
 		}; // starRating
 		starRating();
-	}); // ready
+		$("#sel1()").change(function(){
+			$.ajax({
+				type:"get",
+				url:"DispatcherServlet",
+				data :"command=starScore",
+				success:function(data){
+					$("#avgStar").html(data);
+				}//success
+			});//ajax
+		});//change
+	});//ready
 </script>
 
 
@@ -156,7 +183,6 @@
 /*별 CSS 끝  */
 </style>
 
-
 <div class="row">
 	<div class="box">
 		<div class="col-lg-12">
@@ -166,6 +192,7 @@
 			</h2>
 			<hr>
 		</div>
+
 
 		
 		<div class="container" id="reviewList">
@@ -206,12 +233,14 @@
 				</tbody>
 			</table>
 
-			<button type="button" class="btn btn-info" id="writeBtn"> 리뷰 작성창 열기 </button>
+			<button type="button" class="btn btn-info" id="writeBtn">리뷰
+				작성창 열기</button>
 
 		</div>
 		<br>
+
 		
-		<!-- 리뷰  & 별점 시작 -->
+		<!-- 리뷰  & 별점 작성 시작 -->
 		<div id="review">
 			<div class="container">
 				<div class="well well-lg">
@@ -239,17 +268,20 @@
 							</span> <output for="star-input"> <b>0</b>점 </output>
 							</span>
 							<div class="col-sm-12">
+
 								<textarea class="form-control" rows="5" id="comment" name="comment" placeholder="리뷰 내용을 입력해주세요"></textarea>
+
 							</div>
 						</div>
 						<br>
-						<button type="button" class="btn btn-success" id="write">리뷰 등록 하기</button>
+						<button type="button" class="btn btn-success" id="write">리뷰
+							등록 하기</button>
 
 					</form>
 				</div>
 			</div>
 		</div>
-		<!-- 리뷰 & 별점 끝 -->
+		<!-- 리뷰 & 별점 작성 끝 -->
 
 		<div class="clearfix"></div>
 	</div>
