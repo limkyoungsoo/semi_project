@@ -21,7 +21,11 @@ public class HandlerMapping {
 			c=new ListController();
 		}else if(command.equals("register")){
 			c=new RegisterController();
+		}else if(command.equals("checkId")){
+			c=new CheckIdController();
 		}
+		
+		
 
 		return c;
 	}
