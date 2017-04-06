@@ -94,7 +94,7 @@ commit
 select s.storeLoc, s.storeTel, s.storePic, s.openHour,m.menuNo, m.menuName, m.menuPrice, m.menuPic 
 from store s, menu m where s.storeName=m.storeName and m.storeName='쭈꾸미볶음집';
 					
-					
+select * from store s, menu m where s.storeName=m.storeName and storeName='하코야';
 					
 SELECT storeName, storeLoc
 FROM (SELECT *
