@@ -12,6 +12,8 @@ public class HandlerMapping {
 
 	public Controller create(String command) {
 		Controller c = null;
+		
+		System.out.println("커맨드"+command);
 
 		if (command.equals("storeShow")) {
 			c = new StoreShowController();

@@ -33,7 +33,6 @@
 			var id = $("#userId").val();
 			var len = $("#userId").val().length;
 			
-			console.log('id'+id+'len'+len);
 			
 			if(len<4 || len>10){
 				$("#checkResult").text('아이디는 4자이상 10자이하만 가능!').css('background','pink');
@@ -42,17 +41,13 @@
 				//$("#checkResult").text("");
  	 			$.ajax({
 					type:"post",
-					url: "../DispatcherServlet?command=idCheck",  
-					data:$("#userId").text(),
+					url: "../DispatcherServlet",
+					data: "command=idCheck&id="+ id,
 					success: function () {
-						alert("sss"+data);
-						
-						 if(data == "ok"){
-							//$("#id").val('');
-							//$("#id").focus();
+						 if(data == "true"){
 							$("#checkResult").text(data);
 						}else{
-							$("#checkResult").text(data);
+							$("#checkResult").text(id+"는 이미 존재하는 아이디입니다.");
 						} 
 					}//success
 				}); //ajax   
@@ -77,13 +72,10 @@
 				<div class="form-group">
 					<label for="userid"  name="id"  id="id">아이디</label> <span id="checkResult"></span>
 	              <div class="input-group">
-	                <input type="text" class="form-control" id="userId" placeholder="4자 이상 10자 이하로 입력해 주세요">
+	                <input type="text" class="form-control" id="userId" >
 	              </div>
-
-
-					<input type="text" class="form-control" id="id" placeholder="비밀번호">
-					<span id="checkResult"></span> <input type="hidden" name="command"
-						value="idcheck">
+					<span id="checkResult">체크 리졸트</span> 
+					<input type="hidden" name="command" 	value="idcheck">
 				</div>
 				
 

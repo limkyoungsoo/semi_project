@@ -43,7 +43,7 @@ public class DispatcherServlet extends HttpServlet {
 	public void requestProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			String command=request.getParameter("command");
-			System.out.println("check"+command);
+			System.out.println("커맨드 디스패쳐::::::"+command);
 			Controller c=HandlerMapping.getInstance().create(command);
 			String url=c.execute(request, response);			
 			if(url.startsWith("redirect:"))
