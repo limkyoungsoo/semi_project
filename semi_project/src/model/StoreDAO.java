@@ -95,5 +95,56 @@ public class StoreDAO {
 			rs.close();
 		closeAll(pstmt, con);
 	}
+	// 페이징 을 위한 위치별 가게의 총 게시물을 구하는 sql -- 지원 
+	public int getTotalContentCount(String storeLoc) throws SQLException{
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalCount=0;
+		try{
+			con=getConnection();
+			String sql="select count(*) from store where storeLoc like ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,"%"+storeLoc+"%");
+			rs=pstmt.executeQuery();
+			if(rs.next())
+				totalCount=rs.getInt(1);
+		}finally{
+			closeAll(rs, pstmt, con);
+		}
+		return totalCount;
+	}
+
+	public ArrayList<StoreVO> getStoreList(PagingBean pagingBean, String loc) throws SQLException {
+		ArrayList<StoreVO> list=new ArrayList<StoreVO>();
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try{
+			con=getConnection();
+			StringBuilder sql=new StringBuilder();
+			sql.append("SELECT S.* FROM(");
+			sql.append("SELECT row_number() over(order by storename asc) rnum,");
+			sql.append("storename,storepic ");
+			sql.append("from store where  storeLoc like ?) S ");
+			sql.append("where rnum between ? and ?");
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setString(1, "%"+loc+"%");
+			pstmt.setInt(2, pagingBean.getStartRowNumber());
+			pstmt.setInt(3, pagingBean.getEndRowNumber());
+			System.out.println("startRowNum "+pagingBean.getStartRowNumber());
+			System.out.println("endRowNum "+pagingBean.getEndRowNumber());
+			rs=pstmt.executeQuery();	
+			while(rs.next()){					
+				StoreVO vo=new StoreVO();
+				vo.setStoreName(rs.getString("storename"));
+				vo.setStorePic(rs.getString("storepic"));
+				list.add(vo);			
+			}		
+		}finally{
+			closeAll(rs,pstmt,con);
+		}
+		return list;
+	}
 
 }
