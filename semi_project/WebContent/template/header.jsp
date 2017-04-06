@@ -3,7 +3,7 @@
 <div class="registerInfo">
 	<a href="#"><font color="white">로그인</font></a> 
 	<a href="DispatcherServlet?command=register"><font
-		color="white">회원가입</font></a>
+		color="white">회원가입d</font></a>
 
 </div>
 <div class="brand">Menu Selector Guide</div>
