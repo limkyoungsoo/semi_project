@@ -39,7 +39,7 @@
 				
 				$.ajax({
 				type:"post",
-				url:"IdCheckServlet",
+				url:"IdCheckServlet",  
 				data:$("#idForm").serialize(),
 				success: function (data) {
 					if(data == 'ok'){
@@ -50,11 +50,6 @@
 						$("#checkResult").append(data);
 					}
 				},//success
-				timeout: 1000,
-				error:function(){
-					alert('error');
-					//alert('timeout error');
-				}
 			}); //ajax
 			}
 		})
@@ -71,6 +66,7 @@
           <form role="form"  id="idForm">
                <div class="form-group">
               <label for="username" name="id">아이디</label>
+              <span id="checkResult"></span>
 
 			<input type="text" class="form-control" id="id" placeholder="비밀번호">
 			<span id="checkResult"></span>
