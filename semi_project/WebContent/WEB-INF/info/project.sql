@@ -104,5 +104,3 @@ from store s, menu m where s.storeName=m.storeName and m.storeName='쭈꾸미볶
 					
 					
 					
-					
-					

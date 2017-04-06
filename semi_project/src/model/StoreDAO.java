@@ -80,27 +80,29 @@ public class StoreDAO {
 		}
 		return storeVO;
 	}
-	// 강정호 제작- 메뉴 번호를 이용해서 메뉴사진 3장을 가져오기 위한 메서드입니다.
-	public StoreVO getMenuImgByMenuNo(int menuNo) throws SQLException {
+	// 강정호 제작- storeName을 이용해서 메뉴사진 3장을 가져오기 위한 메서드입니다.
+	public ArrayList<MenuVO> getMenuImgByStoreName(String storeName) throws SQLException {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		StoreVO storeVO=new StoreVO();
-		MenuVO menuVO=new MenuVO();
+		ArrayList<MenuVO> list=new ArrayList<MenuVO>();
 		try{
 			con=getConnection();
-			String sql="select menuPic from menu where menuNo=?";
+			String sql="select menuNo,menuName,menuPic from menu where storeName=?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, menuNo);
+			pstmt.setString(1, storeName);
 			rs=pstmt.executeQuery();
-			if(rs.next()){
-				menuVO.setMenuPic(rs.getString(1));
-				storeVO.setMenuVO(menuVO);
+			while(rs.next()){
+				MenuVO menuVO=new MenuVO();
+				menuVO.setMenuNo(rs.getInt(1));
+				menuVO.setMenuName(rs.getString(2));
+				menuVO.setMenuPic(rs.getString(3));
+				list.add(menuVO);
 			}
 		}finally{
 			closeAll(rs, pstmt, con);
 		}
-		return storeVO;
+		return list;
 	}
 
 	public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException {

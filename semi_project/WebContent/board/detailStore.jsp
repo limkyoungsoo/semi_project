@@ -85,20 +85,17 @@
 				</div>
 				<div class="col-md-6">
 					<img class="img-responsive img-border-left"
-						src="${pageContext.request.contextPath }/menuImg/jo3.jpg" alt="" width="304" height="236">
+						src="${pageContext.request.contextPath }${requestScope.menuList.menuVO.menuPic}" alt="" width="304" height="236">
 				</div>
 				<div class="col-md-6">
 					<p>
-						<strong>메뉴번호</strong>:${requestScope.menuList.menuVO.menuNo}
+						<h3>메뉴번호</h3>:${requestScope.menuList.menuVO.menuNo}
 					</p>
 					<p>
-						<strong>메뉴이름</strong>:${requestScope.menuList.menuVO.menuName}
+						<h3>메뉴이름</h3>:${requestScope.menuList.menuVO.menuName}
 					</p>
 					<p>
-						<strong>메뉴가격</strong>:${requestScope.menuList.menuVO.menuPrice}
-					</p>
-					<p>
-						<strong>메뉴사진</strong>:${requestScope.menuList.menuVO.menuPic}
+						<h3>메뉴가격</h3>:${requestScope.menuList.menuVO.menuPrice}
 					</p>
 				</div>
 				<div class="clearfix"></div>
@@ -115,13 +112,13 @@
 					<hr>
 				</div>
 				
-				<c:forEach items="${requestScope.menuImgList.storeVO.menuVO }" var="menuImgList">
+				<c:forEach items="${requestScope.menuImgList }" var="menuImgList">
 				<div class="col-sm-4 text-center">
-					<img class="img-responsive"
+					<a href="#######"><img class="img-responsive"
 						src="${pageContext.request.contextPath}${menuImgList.menuPic}"
 						alt="" >
 					<h3>
-						John Smith <small>Job Title</small>
+						${menuImgList.menuName} <small>Job Title</small>
 					</h3>
 				</div>
 				</c:forEach>
