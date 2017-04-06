@@ -24,8 +24,6 @@ public class HandlerMapping {
 		}else if(command.equals("checkId")){
 			c=new CheckIdController();
 		}
-		
-		
 
 		return c;
 	}
