@@ -86,7 +86,10 @@ img.img-responsive.img-border-left.img-rounded {
 			$.ajax({
 				type:"get",
 				url:"DispatcherServlet",
-				data:"commmand=markInsert&menuno="+$("#hidden").val();
+				data:"commmand=markInsert&menuno="+$("#hidden").val(),
+				success:function(){
+					alert("찜 목록에 추가되었습니다");
+				}
 			});//ajax
 		});//markBtn Click
 	});//ready
