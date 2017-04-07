@@ -70,7 +70,6 @@ img.img-responsive.img-border-left.img-rounded {
 </head>
 
 <body>
-
 	<c:import url="/template/header.jsp"></c:import>
 	<c:import url="/template/navigator.jsp"></c:import>
 
@@ -137,8 +136,6 @@ img.img-responsive.img-border-left.img-rounded {
 					</h2>
 					<hr>
 				</div>
-
-
 				<c:forEach items="${requestScope.menuImgList }" var="menuImgList">
 					<div class="col-sm-4 text-center otherMenuInfo">
 						<img class="img-responsive"

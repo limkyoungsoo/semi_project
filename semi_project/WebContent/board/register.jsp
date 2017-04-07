@@ -67,12 +67,11 @@
 		  $("#registerBtn").click(function () {
 			  $('#idForm').submit();
 		})
-
-		
 	}); //ready
 </script>
 </head>
 <body>
+	<div class="container">
 	<article class="container">
 		<div class="page-header">
 			<h1>
@@ -126,7 +125,7 @@
 		</div>
 
 	</article>
-
+</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

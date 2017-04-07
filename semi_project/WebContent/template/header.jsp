@@ -23,7 +23,8 @@
 				color="white">회원가입</font></a>
 		</c:when>
 		<c:otherwise>
-			${sessionScope.member.mNick}님
+			${sessionScope.member.mNick}　
+			<a href="#">><font color="white">즐겨찾기　</font></a>
 			<a href="#" onclick="logoutCheck()"><font color="white">로그아웃</font></a>
 		</c:otherwise>
 	</c:choose>
