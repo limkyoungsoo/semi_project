@@ -61,9 +61,24 @@ img.img-responsive.img-border-left.img-rounded {
 				dataType:"json",
 				data:"command=detailOtherMenu&menuNo="+$(this).next().next().val(),
 				success:function(data){
-					$("#result").text(data.menuName);
-				}
-			});
+					/* var info="";
+					info+="<td>"+data.menuVO.menuNo+"</td><br>";
+					info+="<td>"+data.menuVO.menuName+"</td><br>";
+					info+="<td>"+data.menuVO.menuPrice+"원"+"</td><br>";
+					info+="<td>"+data.storeName+"</td><br>";
+					$("#result").html(info); */
+					var menuNo=data.menuVO.menuNo;
+					$("#menuNo").text(menuNo);
+					var menuName=data.menuVO.menuName;
+					$("#menuName").text(menuName);
+					var menuPrice=data.menuVO.menuPrice;
+					$("#menuPrice").text(menuPrice);
+					var openHour=data.openHour;
+					$("#openHour").text(openHour);
+					$("#changeImg").attr("src","${pageContext.request.contextPath }/menuImg/"+data.menuVO.menuPic);
+					
+				}//sucess
+			});//ajax
 		});//click
 	});//ready
 </script>
@@ -102,24 +117,28 @@ img.img-responsive.img-border-left.img-rounded {
 				<div class="col-md-6">
 					<img class="img-responsive img-border-left"
 						src="${pageContext.request.contextPath }/menuImg/${requestScope.menuList.menuVO.menuPic}"
-						alt="" width="304" height="236">
+						alt="" width="304" height="236" id="changeImg">
 				</div>
 				<div class="col-md-6 menuInfo">
 					<input type="hidden" value="${requestScope.menuList.menuVO.menuNo}"> 
 					<p>
 					<h3>메뉴번호</h3>
-					:${requestScope.menuList.menuVO.menuNo}
+					<span id="menuNo">:${requestScope.menuList.menuVO.menuNo}</span>
+					
 					</p>
 					<p>
 					<h3>메뉴이름</h3>
-					:${requestScope.menuList.menuVO.menuName}
+					<span id="menuName">:${requestScope.menuList.menuVO.menuName}</span>
+					
 					</p>
 					<p>
 					<h3>메뉴가격</h3>
-					:${requestScope.menuList.menuVO.menuPrice}
+					<span id="menuPrice">:${requestScope.menuList.menuVO.menuPrice}</span>
+					
 					</p>
 					<h3>영업시간</h3>
-					:${requestScope.menuList.openHour}
+					<span id="openHour">:${requestScope.menuList.openHour}</span>
+					
 					</p>
 					<input class="btn-primary" type="button" value="메뉴찜하기">
 				</div>
@@ -127,6 +146,8 @@ img.img-responsive.img-border-left.img-rounded {
 				<div class="clearfix"></div>
 			</div>
 		</div>
+
+		
 		<!-- 가게의 다른 메뉴를 보여주는 곳 -->
 		<div class="row">
 			<div class="box">
