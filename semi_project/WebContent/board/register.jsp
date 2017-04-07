@@ -65,7 +65,37 @@
 		  }); //#chpass.keyup
 		  
 		  $("#registerBtn").click(function () {
+			var id = 	$("#userId").val();		  
+			var pass1 = 	$("#InputPassword1").val();		  
+			var pass2 = 	$("#InputPassword2").val();		  
+			var nick = 	$("#username").val();		  
+			var chkAgree = 	$("#agree").val();		  
+			  
+			  if(id == ""){
+				  alert('아이디를 입력해주세요');
+				  return false;
+			  }
+			  if(pass1 == ""){
+				  alert('비밀번호를 입력해주세요');
+				  return false;
+			  }
+			  if(pass2 == ""){
+				  alert('확인할 비밀번호를 입력해주세요');
+				  return false;
+			  }
+			  if(nick == ""){
+				  alert('닉네임을 입력해주세요');
+				  return false;
+			  }
+			  if(chkAgree != "on"){
+				  alert('회원약관에 동의해주세요. check 필수');
+				  return false;
+			  }
+			  
 			  $('#idForm').submit();
+		})
+		$("#cancelBtn").click(function () {
+			location.href = '${pageContext.request.contextPath}/main.jsp';
 		})
 	}); //ready
 </script>
