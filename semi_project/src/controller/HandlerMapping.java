@@ -12,21 +12,17 @@ public class HandlerMapping {
 
 	public Controller create(String command) {
 		Controller c = null;
-		
-		System.out.println("커맨드"+command);
+
+		System.out.println("커맨드" + command);
 
 		if (command.equals("storeShow")) {
 			c = new StoreShowController();
-		}else if(command.equals("detailStore")){
-			c=new DetailStoreController();
-		}else if(command.equals("storeList")){
-			c=new ListController();
-		}else if(command.equals("reviewList")){
-			c=new ReviewListController();
-		}else if(command.equals("starScore")){
-			c=new StarScoreController();
 		} else if (command.equals("detailStore")) {
 			c = new DetailStoreController();
+		} else if (command.equals("reviewList")) {
+			c = new ReviewListController();
+		} else if (command.equals("starScore")) {
+			c = new StarScoreController();
 		} else if (command.equals("storeList")) {
 			c = new ListController();
 		} else if (command.equals("register")) {
@@ -37,11 +33,12 @@ public class HandlerMapping {
 			c = new AllStoreListController();
 		} else if (command.equals("idCheck")) {
 			c = new CheckIdController();
-		}else if(command.equals("login")){
+		} else if (command.equals("login")) {
 			c = new LoginController();
-		}
-		else if(command.equals("logout")){
+		} else if (command.equals("logout")) {
 			c = new LogoutController();
+		} else if (command.equals("detailOtherMenu")) {
+			c = new DetailOtherMenuController();
 		}
 		return c;
 	}

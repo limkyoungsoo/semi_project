@@ -43,7 +43,6 @@
 						<li><a
 							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=삼환">삼환하이펙스</a></li>
 					</ul></li>
-
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

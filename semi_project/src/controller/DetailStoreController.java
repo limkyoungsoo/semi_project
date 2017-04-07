@@ -25,7 +25,9 @@ public class DetailStoreController implements Controller {
 
 		String storeName = request.getParameter("storeName");
 		// 강정호. storeName을 이용해서 store, menu 정보를 가져오는 메서드입니다
+
 		StoreVO storeVO = StoreDAO.getInstance().getStoreMenuList(storeName);
+		System.out.println(storeName);
 
 		// menuList : list page 의 전체 식당 보여줌
 
