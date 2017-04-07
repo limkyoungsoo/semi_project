@@ -53,7 +53,14 @@ img.img-responsive.img-border-left.img-rounded {
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
-	
+	$("#markNo").click(function(){
+		//alert($("#hidden").val());
+		$.ajax({
+			type:"get",
+			url:"DispatcherServlet",
+			data:"commmand=markInsert&menuno="+$("#hidden").val();
+		});
+	});
 });
 </script>
 
@@ -95,7 +102,7 @@ $(document).ready(function(){
 						alt="" width="304" height="236">
 				</div>
 				<div class="col-md-6 menuInfo">
-					<input type="hidden" value="${requestScope.menuList.menuVO.menuNo}"> 
+					<input type="hidden" id="hidden" value="${requestScope.menuList.menuVO.menuNo}"> 
 					<p>
 					<h3>메뉴번호</h3>
 					:${requestScope.menuList.menuVO.menuNo}
