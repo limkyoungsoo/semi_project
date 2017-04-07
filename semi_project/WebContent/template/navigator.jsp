@@ -33,9 +33,9 @@
 				</c:choose>
 
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">검색할 장소를 눌러주세요 ! <span
+					data-toggle="dropdown" href="#" role="button" aria-expanded="false">검색할 장소를 눌러주세요 ! <span
 						class="caret"></span></a>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" role="menu">
 						<li><a
 							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=유스">유스페이스</a></li>
 						<li><a
