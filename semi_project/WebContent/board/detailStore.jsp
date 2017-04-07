@@ -125,6 +125,7 @@ img.img-responsive.img-border-left.img-rounded {
 							<h3>
 								${menuImgList.menuName} <small>Job Title</small>
 							</h3>
+							</a>
 					</div>
 				</c:forEach>
 

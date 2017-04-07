@@ -12,6 +12,18 @@ public class ReviewVO {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	
+	public ReviewVO(float grade, String review, String mid, int menuNo) {
+		super();
+		this.grade = grade;
+		this.review = review;
+		this.mid = mid;
+		this.menuNo = menuNo;
+	}
+
+
+
 	public ReviewVO(float grade) {
 		super();
 		this.grade = grade;

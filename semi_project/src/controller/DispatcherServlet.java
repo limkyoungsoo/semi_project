@@ -45,7 +45,10 @@ public class DispatcherServlet extends HttpServlet {
 		try{
 			String command=request.getParameter("command");
 			Controller c=HandlerMapping.getInstance().create(command);
-			String url=c.execute(request, response);			
+			String url=c.execute(request, response);
+			if(url.equalsIgnoreCase("AjaxView")){
+				return;
+			}
 			if(url.startsWith("redirect:"))
 				response.sendRedirect(url.substring(9));
 			else

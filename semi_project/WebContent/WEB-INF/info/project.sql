@@ -47,6 +47,7 @@ create table menuReview(
  grade number not null,
  time_posted date not null
 );
+select count(*) from(select * from menureview) where menuNo;
 
 -- 리뷰등록번호 시퀀스
 create sequence reNo_seq;
@@ -124,6 +125,15 @@ FROM (SELECT *
     )
 WHERE ROWNUM <=1
 
-					
-					
+
+select count(*) 
+from(select menuNo from menu where storeName='조선허불백') m,
+ menureview r where m.menuNo=r.menuNo
+ 
+ 
+SELECT r.* FROM(
+			SELECT row_number() over(order by reNo desc) rnum,
+			reNo,menuNo,mId,review,grade,time_posted 
+			from menureview) r 
+			where rnum between 1 and 10
 					

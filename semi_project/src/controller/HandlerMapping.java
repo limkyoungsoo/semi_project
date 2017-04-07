@@ -35,6 +35,8 @@ public class HandlerMapping {
 			c = new AllStoreListController();
 		} else if (command.equals("idCheck")) {
 			c = new CheckIdController();
+		} else if (command.equals("writeReview")) {
+			c = new WriteReviewController();
 		}
 		return c;
 	}

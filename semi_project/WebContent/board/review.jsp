@@ -4,9 +4,9 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#reviewForm").hide(); 
-		$("#writeBtn").click(function(){
+	$(document).ready(function() {		
+		$("#review").hide(); 
+		$("#writeBtn").click(function(){   // 리뷰 작성창 여닫기			
 			$("#review").toggle(1000, function() {
 				if ($("#review").css("display") == "none") {
 					$("#writeBtn").text("리뷰 작성창 열기");
@@ -15,20 +15,41 @@
 				}
 			});  // toggle
 		});  // click
-
-	 	$("#write").click(function(){
-	 		 alert($("#reviewForm").serialize());
-			 $.ajax({
-				type:"post",
-				url:"../DispatcherServlet",
+				
+	 	$("#write").click(function(){		// 리뷰 등록
+	 		 $.ajax({
+				type:"get",
+				url:"DispatcherServlet",
 				dataType:"json",
-				data:"command=writeReview&"+$("#reviewForm").serialize(), // form은 serializable 로 처리하자
+				data:"command=writeReview&storeName=${requestScope.menuList.storeName}&menuOption="+menuOption+$("#reviewForm").serialize(), // form은 serializable 로 처리하자
 				success:function(data){
-					alert(data);
-					//$("#reviewList").html(data);  // data는 식당별 리뷰리스트를 보기위한 테이블을 만들 데이터임
+					var renew ="";
+					var count ="1"
+							for(var i=0; i<data.length;i++){
+							
+					 		renew+="<tr>";
+					 		renew+="<td>"+ count +"</td>";
+					 		renew+="<td>"+ data[i].grade +"</td>";		
+					 		renew+="<td>"+ data[i].review +"</td>";
+					 		renew+="<td>"+ data[i].mid +"/"+ data[i].timePosted +"</td>";
+					 		renew+="</tr>";
+					 		count++
+							}
+					  $("#reviewInfo").html(renew);
+					  alert("리뷰가 등록되었습니다");
+					  $("#comment").val("");
 				} // success
-			});   // ajax
+			});   // ajax						
 		}); // click
+		
+		$("#menuOption").change(function(){
+			var menuOption = $(this).val();
+			alert(menuOption);
+		});
+		
+		$("#pageNo").click(function(){
+			alert($(this).val());
+		});
 		
 	// 	$("#sel1").click(function(){
 			/* $.ajax({
@@ -199,12 +220,12 @@
 		
 			<label for="mname">메뉴명</label> 
 			
-			<%-- <select id="sel1">
+			<select id="sel1">
 			<option value="">메뉴선택</option>
-			  <c:forEach items="${requestScope.menuList.menuVO }" var="ml">
+			  <c:forEach items="${requestScope.menuImgList }" var="ml">
 					<option>${ml.menuName}</option>
 			   </c:forEach>
-			</select>  --%>
+			</select>
 			
 			&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
 			평점 : <span id="avgStar"> </span>
@@ -214,6 +235,7 @@
 				<thead>
 					<tr>
 						<th>번호</th>
+						<!-- <th>메뉴</th> -->
 						<th>평점</th>
 						<th>리뷰</th>
 						<th>글쓴이/날짜</th>
@@ -221,9 +243,9 @@
 				</thead>
 				<tbody id="reviewInfo">
 					<!-- reviewList 시작 -->
-					<c:forEach items="${requestScope.reviewList }" var="rl" varStatus="order">
+					<c:forEach items="${requestScope.rlistVo.list }" var="rl" varStatus="order">
 						<tr>
-							<td>${order.count}</td>
+							<td>${order.count}</td>							
 							<td>${rl.grade}</td>
 							<td>${rl.review}</td>
 							<td>${rl.mid}/${rl.timePosted }</td>
@@ -232,6 +254,29 @@
 						<!-- reviewList 끝 -->
 				</tbody>
 			</table>
+			
+			<!-- list paging 시작-->
+			<p class="paging">
+					<c:set var="pb" value="${requestScope.rlistVo.pagingBean}"></c:set>
+					
+					<c:if test="${pb.previousPageGroup}">
+						◀			
+					</c:if>
+					<c:forEach var="pageNo" begin="${pb.startPageOfPageGroup}"
+						end="${pb.endPageOfPageGroup}">
+						<c:choose>
+							<c:when test="${pb.nowPage!=pageNo}">
+								<a href="" id="pageNo">${pageNo}</a>
+							</c:when>
+							<c:otherwise>${pageNo}</c:otherwise>
+						</c:choose>&nbsp;
+					</c:forEach>
+					<c:if test="${pb.nextPageGroup}">
+						▶
+					</c:if>
+				</p>
+				
+				<!-- list paging 끝 -->
 
 			<button type="button" class="btn btn-info" id="writeBtn">리뷰
 				작성창 열기</button>
@@ -246,14 +291,11 @@
 				<div class="well well-lg">
 					<h3>메뉴 리뷰 남기기</h3>
 					<form class="form-horizontal" id="reviewForm">
-					<!-- <input type="hidden" name="command" value="writeReview"></input> -->
 						<div class="form-group">
-							<label for="mname">메뉴명</label> <select id="sel1" name="menuOption">
-								<option>1</option>
-								<option>2</option>
-								<%-- <c:forEach items="${ menuList }">
-								<option>${ menuList }</option>
-								</c:forEach> --%>
+							<label for="mname">메뉴명</label> <select id="menuOption" name="menuOption">
+								<c:forEach items="${requestScope.menuImgList }" var="ml">
+									<option value="${ml.menuNo}">${ml.menuName}</option>
+			  					</c:forEach>
 															
 							</select> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <label
 								for="putstar">별점 주기</label> <span class="star-input"> <span
@@ -274,8 +316,7 @@
 							</div>
 						</div>
 						<br>
-						<button type="button" class="btn btn-success" id="write">리뷰
-							등록 하기</button>
+						<input type="button" class="btn btn-success" id="write" value="리뷰 등록 하기"></input>
 
 					</form>
 				</div>
