@@ -41,14 +41,14 @@
 <body>
 	<c:import url="/template/header.jsp"></c:import>
 	<c:import url="/template/navigator.jsp"></c:import>
-	
+	<c:set var="loc" value="${requestScope.loc}"></c:set>
     <div class="container">
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center">Our
-                        <strong>Team</strong>
+                    <h2 class="intro-text text-center">
+                    <strong>${loc}</strong>
                     </h2>
                     <hr>
                 </div>
@@ -56,7 +56,7 @@
                 <c:forEach var="svo" items="${requestScope.listVo.list}">
                 <div class="col-sm-4 text-center">
                     <a href="${pageContext.request.contextPath}/DispatcherServlet?command=detailStore&storeName=${svo.storeName}">
-                    <img class="img-responsive" src="${pageContext.request.contextPath}${svo.storePic}">
+                    <img class="img-responsive" src="${pageContext.request.contextPath}/storeImg/${svo.storePic}">
                     </a>
                     <h3>${svo.storeName}<br>
                        <!--  <small>Job Title</small> 추후 별점 추가-->
@@ -67,7 +67,7 @@
                 <div class="clearfix"></div>
 				<p class="paging">
 					<c:set var="pb" value="${requestScope.listVo.pagingBean}"></c:set>
-					<c:set var="loc" value="${requestScope.loc}"></c:set>
+					
 					<c:if test="${pb.previousPageGroup}">
 						<a href="DispatcherServlet?command=storeList&pageNo=${pb.startPageOfPageGroup-1}&loc=${loc}">◀&nbsp;
 						</a>
