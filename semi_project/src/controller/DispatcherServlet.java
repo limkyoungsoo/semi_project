@@ -44,10 +44,7 @@ public class DispatcherServlet extends HttpServlet {
 	public void requestProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			String command=request.getParameter("command");
-<<<<<<< HEAD
-			System.out.println("커맨드 디스패쳐::::::"+command);
-=======
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
+			System.out.println("check : "+ command);
 			Controller c=HandlerMapping.getInstance().create(command);
 			String url=c.execute(request, response);			
 			if(url.equalsIgnoreCase("AjaxView")){
