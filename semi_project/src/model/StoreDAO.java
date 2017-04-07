@@ -23,6 +23,26 @@ public class StoreDAO {
 	public Connection getConnection() throws SQLException {
 		return dataSource.getConnection();
 	}
+	
+	public ArrayList<StoreVO> getStoreNameList() throws SQLException {
+		ArrayList<StoreVO> storeList = new ArrayList<StoreVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			String sql = "select distinct storePla from store order by storePla";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				storeList.add(new StoreVO(rs.getString(1)));
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return storeList;
+	}
 
 	public ArrayList<StoreVO> getStoreShowList() throws SQLException {
 		ArrayList<StoreVO> storeList = new ArrayList<StoreVO>();

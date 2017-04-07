@@ -86,7 +86,7 @@ img.img-responsive.img-border-left.img-rounded {
 			$.ajax({
 				type:"get",
 				url:"DispatcherServlet",
-				data:"commmand=markInsert&menuno="+$("#hidden").val();
+				data:"commmand=markInsert&menuno="+$("#hidden").val()
 			});//ajax
 		});//markBtn Click
 	});//ready

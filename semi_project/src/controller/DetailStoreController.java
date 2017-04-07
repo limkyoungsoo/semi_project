@@ -20,7 +20,7 @@ public class DetailStoreController implements Controller {
 		// session 이 없다면 main.jsp로 돌아가겠습니당 ~ ㅋㅋㅋㅋ by 임경수
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("member") == null) {
-			return "redirect:main.jsp";
+			return "/board/detailShowFail.jsp";
 		}
 
 		String storeName = request.getParameter("storeName");

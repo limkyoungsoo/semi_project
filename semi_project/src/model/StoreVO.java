@@ -6,10 +6,17 @@ public class StoreVO {
 	private String storeTel;
 	private String storePic;
 	private String openHour;
+	private String storePla;
 	private MenuVO menuVO;
+	
 
 	public StoreVO() {
 		super();
+	}
+
+	public StoreVO(String storePla) {
+		super();
+		this.storePla = storePla;
 	}
 
 	public StoreVO(String storeName, String storeLoc, String storeTel, String storePic, String openHour,
@@ -78,9 +85,19 @@ public class StoreVO {
 		this.menuVO = menuVO;
 	}
 
+	public String getStorePla() {
+		return storePla;
+	}
+
+	public void setStorePla(String storePla) {
+		this.storePla = storePla;
+	}
+
 	@Override
 	public String toString() {
 		return "StoreVO [storeName=" + storeName + ", storeLoc=" + storeLoc + ", storeTel=" + storeTel + ", storePic="
-				+ storePic + ", openHour=" + openHour + ", menuVO=" + menuVO + "]";
+				+ storePic + ", openHour=" + openHour + ", storePla=" + storePla + ", menuVO=" + menuVO + "]";
 	}
+
+ 
 }
