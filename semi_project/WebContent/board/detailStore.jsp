@@ -91,6 +91,7 @@ img.img-responsive.img-border-left.img-rounded {
 					alert("찜 목록에 추가되었습니다");
 				}//success
 			});//ajax 
+
 		});//markBtn Click
 	});//ready
 </script>
@@ -177,6 +178,7 @@ img.img-responsive.img-border-left.img-rounded {
 							<h3>
 								${menuImgList.menuName} <small>메뉴번호:${menuImgList.menuNo}</small>
 							</h3>
+
 							<input type="hidden" value="${menuImgList.menuNo}">
 					</div>
 				</c:forEach>

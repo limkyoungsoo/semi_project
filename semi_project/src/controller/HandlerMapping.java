@@ -43,7 +43,9 @@ public class HandlerMapping {
 			c = new MarkListController();
 		}  else if (command.equals("markInsert")) {
 	         c = new MarkInsertController();
-	      }
+		} else if (command.equals("writeReview")) {
+			c = new WriteReviewController();
+		}
 		return c;
 	}
 }
