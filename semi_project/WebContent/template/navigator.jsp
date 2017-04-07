@@ -24,9 +24,9 @@
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">검색할 장소를 눌러주세요 ! <span class="caret"></span></a>
 					<ul class="dropdown-menu" >
-							<li><a href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=유스">유스페이스</a></li>
-						<li><a href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=스퀘어">H스퀘어</a></li>
-						<li><a href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=삼환">삼환하이펙스</a></li>
+							<li><a href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=유스페이스">유스페이스</a></li>
+						<li><a href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=H스퀘어">H스퀘어</a></li>
+						<li><a href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=삼환하이펙스">삼환하이펙스</a></li>
 					</ul>
 				</li>
 				
