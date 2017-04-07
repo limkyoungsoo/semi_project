@@ -22,6 +22,14 @@ public class ReviewVO {
 		super();
 		this.grade = grade;
 	}
+	
+	public ReviewVO(float grade, String review, String mid, int menuNo) {
+		super();
+		this.grade = grade;
+		this.review = review;
+		this.mid = mid;
+		this.menuNo = menuNo;
+	}
 
 	public ReviewVO(float grade, String review, String mid, String timePosted, int menuNo) {
 		super();
