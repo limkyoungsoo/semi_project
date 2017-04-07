@@ -11,12 +11,12 @@
 <title>회원가입</title>
 
 <!-- Bootstrap -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- font awesome -->
-<link rel="stylesheet" href="bootstrap/css/font-awesome.min.css"
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/font-awesome.min.css"
 	media="screen" title="no title" charset="utf-8">
 <!-- Custom style -->
-<link rel="stylesheet" href="bootstrap/css/style.css" media="screen"
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/style.css" media="screen"
 	title="no title" charset="utf-8">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
