@@ -37,6 +37,8 @@ public class HandlerMapping {
 			c = new AllStoreListController();
 		} else if (command.equals("idCheck")) {
 			c = new CheckIdController();
+		} else if(command.equals("detailOtherMenu")){
+			c= new DetailOtherMenuController();
 		}
 		return c;
 	}

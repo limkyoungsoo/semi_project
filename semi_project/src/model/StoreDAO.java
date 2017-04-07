@@ -262,4 +262,32 @@ public class StoreDAO {
 		return list;
 	}
 
+	public StoreVO getOtherMenuInfoByMenuNo(int menuNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StoreVO storeVO=new StoreVO();
+		MenuVO menuVO=new MenuVO();
+		try{
+			con=getConnection();
+			String sql="select m.menuNo,m.menuName,m.menuPrice,m.menuPic,s.openHour "
+					+ "from menu m, store s "
+					+ "where m.storeName=s.storeName and m.menuNo=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, menuNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()){
+				menuVO.setMenuNo(rs.getInt(1));
+				menuVO.setMenuName(rs.getString(2));
+				menuVO.setMenuPrice(rs.getInt(3));
+				menuVO.setMenuPic(rs.getString(4));
+				storeVO.setMenuVO(menuVO);
+				storeVO.setOpenHour(rs.getString(5));
+			}
+		}finally{
+			closeAll(rs, pstmt, con);
+		}
+		return storeVO;
+	}
+
 }

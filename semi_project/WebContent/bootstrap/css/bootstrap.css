@@ -1123,7 +1123,6 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
-  margin:auto;
 }
 .img-rounded {
   border-radius: 6px;
@@ -6754,9 +6753,6 @@ button.close {
   .hidden-print {
     display: none !important;
   }
-}
-p.paging {
-    text-align: center;
 }
 /*# sourceMappingURL=bootstrap.css.map */
 
