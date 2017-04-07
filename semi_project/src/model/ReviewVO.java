@@ -18,6 +18,7 @@ public class ReviewVO {
 		this.grade = grade;
 	}
 
+
 	public ReviewVO(float grade, String review, String mid, int menuNo) {
 		super();
 		this.grade = grade;

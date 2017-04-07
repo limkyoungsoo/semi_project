@@ -51,6 +51,7 @@ img.img-responsive.img-border-left.img-rounded {
 	margin: auto;
 }
 </style>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".otherMenuInfo img").click(function(){
@@ -80,6 +81,14 @@ img.img-responsive.img-border-left.img-rounded {
 				}//sucess
 			});//ajax
 		});//click
+		$("#markNo").click(function(){
+			//alert($("#hidden").val());
+			$.ajax({
+				type:"get",
+				url:"DispatcherServlet",
+				data:"commmand=markInsert&menuno="+$("#hidden").val();
+			});//ajax
+		});//markBtn Click
 	});//ready
 </script>
 </head>
@@ -119,7 +128,7 @@ img.img-responsive.img-border-left.img-rounded {
 						alt="" width="304" height="236" id="changeImg">
 				</div>
 				<div class="col-md-6 menuInfo">
-					<input type="hidden" value="${requestScope.menuList.menuVO.menuNo}"> 
+					<input type="hidden" id="hidden" value="${requestScope.menuList.menuVO.menuNo}"> 
 					<p>
 					<h3>메뉴번호</h3>
 					<span id="menuNo">:${requestScope.menuList.menuVO.menuNo}</span>
