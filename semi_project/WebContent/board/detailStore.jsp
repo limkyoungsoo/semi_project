@@ -69,7 +69,7 @@ img.img-responsive.img-border-left.img-rounded {
 					<h2 class="text-center">${requestScope.menuList.storeName}</h2>
 					<hr>
 					<img class="img-responsive img-border-left"
-						src="${pageContext.request.contextPath }${requestScope.menuList.storePic}"
+						src="${pageContext.request.contextPath }/storeImg/${requestScope.menuList.storePic}"
 						alt="${requestScope.menuList.storeName}">
 				</div>
 			</div>
@@ -86,7 +86,7 @@ img.img-responsive.img-border-left.img-rounded {
 				</div>
 				<div class="col-md-6">
 					<img class="img-responsive img-border-left"
-						src="${pageContext.request.contextPath }${requestScope.menuList.menuVO.menuPic}"
+						src="${pageContext.request.contextPath }/menuImg/${requestScope.menuList.menuVO.menuPic}"
 						alt="" width="304" height="236">
 				</div>
 				<div class="col-md-6">
@@ -120,7 +120,7 @@ img.img-responsive.img-border-left.img-rounded {
 				<c:forEach items="${requestScope.menuImgList }" var="menuImgList">
 					<div class="col-sm-4 text-center">
 						<a href="#######"><img class="img-responsive"
-							src="${pageContext.request.contextPath}${menuImgList.menuPic}"
+							src="${pageContext.request.contextPath}/menuImg/${menuImgList.menuPic}"
 							alt="">
 							<h3>
 								${menuImgList.menuName} <small>Job Title</small>
