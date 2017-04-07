@@ -37,6 +37,11 @@ public class HandlerMapping {
 			c = new AllStoreListController();
 		} else if (command.equals("idCheck")) {
 			c = new CheckIdController();
+		}else if(command.equals("login")){
+			c = new LoginController();
+		}
+		else if(command.equals("logout")){
+			c = new LogoutController();
 		}
 		return c;
 	}

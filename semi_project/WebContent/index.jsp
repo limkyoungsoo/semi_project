@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="//code.jquery.com/jquery.min.js"></script>
 <c:import url="/template/straplink.html"></c:import>
 
 <script type="text/javascript">

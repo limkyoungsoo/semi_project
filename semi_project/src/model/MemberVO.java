@@ -9,6 +9,12 @@ public class MemberVO {
 		super();
 	}
 
+	public MemberVO(String mId, String mNick) {
+		super();
+		this.mId = mId;
+		this.mNick = mNick;
+	}
+
 	public MemberVO(String mId, String mPass, String mNick) {
 		super();
 		this.mId = mId;
