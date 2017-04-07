@@ -7,6 +7,15 @@ drop table msgMemberMenu;
 drop sequence menuNo_seq;
 drop sequence reNo_seq;
 
+select * from store;
+select * from menu;
+select * from msgMemberMenu;
+
+insert into msgMemberMenu(menuno,mid) values(val1,val2)
+
+delete store where storetel like '%031%'
+delete store where storetel like '%031%'
+
 -- 회원 관리 테이블
 create table msgMember(
  mId varchar2(100) primary key,

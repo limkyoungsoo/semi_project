@@ -20,7 +20,7 @@ public class WriteReviewController implements Controller {
 		System.out.println(command);
 	
 		int grade = Integer.parseInt(request.getParameter("star-input"));		
-		String comment = request.getParameter("comment");
+		String review = request.getParameter("comment");
 		
 		
 		// mid가 session 에서 오는가 파라미터로 받는가
@@ -30,7 +30,7 @@ public class WriteReviewController implements Controller {
 		
 		int menuNo = Integer.parseInt(request.getParameter("menuOption"));
 				
-		ReviewVO rvo = new ReviewVO(grade, comment, mid, menuNo);
+		ReviewVO rvo = new ReviewVO(grade, review, mid, menuNo);
 		
 		ReviewDAO.getInstance().writeReview(rvo);
 				

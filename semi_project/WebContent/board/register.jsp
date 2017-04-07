@@ -11,12 +11,12 @@
 <title>회원가입</title>
 
 <!-- Bootstrap -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- font awesome -->
-<link rel="stylesheet" href="bootstrap/css/font-awesome.min.css"
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/font-awesome.min.css"
 	media="screen" title="no title" charset="utf-8">
 <!-- Custom style -->
-<link rel="stylesheet" href="bootstrap/css/style.css" media="screen"
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/style.css" media="screen"
 	title="no title" charset="utf-8">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -65,8 +65,41 @@
 		  }); //#chpass.keyup
 		  
 		  $("#registerBtn").click(function () {
+			var id = 	$("#userId").val();		  
+			var pass1 = 	$("#InputPassword1").val();		  
+			var pass2 = 	$("#InputPassword2").val();		  
+			var nick = 	$("#username").val();		  
+			var chkAgree = 	$("#agree").val();		  
+			  
+			  if(id == ""){
+				  alert('아이디를 입력해주세요');
+				  return false;
+			  }
+			  if(pass1 == ""){
+				  alert('비밀번호를 입력해주세요');
+				  return false;
+			  }
+			  if(pass2 == ""){
+				  alert('확인할 비밀번호를 입력해주세요');
+				  return false;
+			  }
+			  if(nick == ""){
+				  alert('닉네임을 입력해주세요');
+				  return false;
+			  }
+			  if(chkAgree != "on"){
+				  alert('회원약관에 동의해주세요. check 필수');
+				  return false;
+			  }
+			  
 			  $('#idForm').submit();
 		})
+		
+		$("#cancelBtn").click(function () {
+			location.href = '${pageContext.request.contextPath}/index.jsp';
+		})
+		
+		
 
 		
 	}); //ready
