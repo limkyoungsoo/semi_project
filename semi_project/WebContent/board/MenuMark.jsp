@@ -44,18 +44,20 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Firstname</th>
-					<th>Lastname</th>
-					<th>Email</th>
+					<th>미리보기</th>
+					<th>상세정보</th>
+					<th>삭제/페이지로 이동</th>
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach items="${requestScope.markList}" var="mark">
 				<tr>
-					<td><img src="cinqueterre.jpg" class="img-rounded"
+					<td><img src="${pageContext.request.contextPath}/menuImg/${mark.menuVO.menuPic}" class="img-rounded"
 						alt="Cinque Terre" width="210" height="150"></td>
 					<td>
-						<h3>브랜든 돈까스</h3> 메뉴이름<br> 매일 12:00~21:00 일요일 휴무<br> 7000<br>
-						경기 성남시 분당구 삼평동 678 삼환하이펙스 A동 208호
+						<h3>${mark.storeName}</h3>${mark.menuVO.menuName}
+						<br>${mark.openHour}<br>${mark.menuVO.menuPrice}<br>
+						${mark.storeLoc}
 					</td>
 					<td><br>
 					<br>
@@ -63,21 +65,9 @@
 					<br>
 					<input type="button" value="이동"></td>
 				</tr>
-				<tr>
-					<td><img src="cinqueterre.jpg" class="img-rounded"
-						alt="Cinque Terre" width="210" height="150"></td>
-					<td>
-						<h3>브랜든 돈까스</h3> 메뉴이름<br> 매일 12:00~21:00 일요일 휴무<br> 7000<br>
-						경기 성남시 분당구 삼평동 678 삼환하이펙스 A동 208호
-					</td>
-					<td><br>
-					<br>
-					<input type="button" value="삭제"> <br>
-					<br>
-					<input type="button" value="이동"></td>
-				</tr>
+				</c:forEach>
 			</tbody>
-		</table>0
+		</table>
 		</div>
 	</div>
 	<c:import url="/template/footer.jsp"></c:import>

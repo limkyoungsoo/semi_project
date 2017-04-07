@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+
+import model.PagingBean;
 import model.ReviewDAO;
+import model.ReviewListVO;
 import model.ReviewVO;
 
 public class ReviewListController implements Controller {
@@ -21,6 +24,22 @@ public class ReviewListController implements Controller {
 		out.println(reviewJson.toString());
 		System.out.println(reviewJson.toString());
 		out.close();
+		
+		/*// paging bean
+		int totalCount = ReviewDAO.getInstance().getTotalReivewCount(storeName);
+		String pno=request.getParameter("pageNo");	
+		System.out.println(pno);
+		
+		PagingBean pagingBean=null;
+		if(pno==null){
+			pagingBean=new PagingBean(totalCount);
+		}else{
+			pagingBean=new PagingBean(totalCount,Integer.parseInt(pno));
+		}
+		ArrayList<ReviewVO> list=ReviewDAO.getInstance().getAllReviewList(pagingBean);		
+		ReviewListVO listVO=new ReviewListVO(list,pagingBean);
+		request.setAttribute("rlistVo", listVO);*/
+		
 		return "AjaxView";
 	}
 }
