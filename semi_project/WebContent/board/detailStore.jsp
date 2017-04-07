@@ -58,9 +58,10 @@ img.img-responsive.img-border-left.img-rounded {
 			$.ajax({
 				type:"get",
 				url:"DispatcherServlet",
+				dataType:"json",
 				data:"command=detailOtherMenu&menuNo="+$(this).next().next().val(),
 				success:function(data){
-					$("#result").val(data);
+					$("#result").text(data.menuName);
 				}
 			});
 		});//click
@@ -122,7 +123,7 @@ img.img-responsive.img-border-left.img-rounded {
 					</p>
 					<input class="btn-primary" type="button" value="메뉴찜하기">
 				</div>
-				<input type="hidden" value="" id="result">
+				<span id="result"></span>
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -138,8 +139,8 @@ img.img-responsive.img-border-left.img-rounded {
 				</div>
 
 				<c:forEach items="${requestScope.menuImgList }" var="menuImgList">
-					<div class="col-sm-4 text-center">
-						<a href="#######"><img class="img-responsive"
+					<div class="col-sm-4 text-center otherMenuInfo">
+						<img class="img-responsive"
 							src="${pageContext.request.contextPath}/menuImg/${menuImgList.menuPic}"
 							alt="">
 							<h3>
