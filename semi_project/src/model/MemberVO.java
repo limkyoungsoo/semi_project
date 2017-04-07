@@ -5,8 +5,14 @@ public class MemberVO {
 	private String mPass;
 	private String mNick;
 
-	public MemberVO() {
+	public MemberVO(MemberVO memberVO) {
 		super();
+	}
+
+	public MemberVO(String mId, String mNick) {
+		super();
+		this.mId = mId;
+		this.mNick = mNick;
 	}
 
 	public MemberVO(String mId, String mPass, String mNick) {

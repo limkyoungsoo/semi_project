@@ -44,12 +44,14 @@ public class DispatcherServlet extends HttpServlet {
 	public void requestProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			String command=request.getParameter("command");
+			System.out.println("check : "+ command);
 			Controller c=HandlerMapping.getInstance().create(command);
-			String url=c.execute(request, response);
+
+			String url=c.execute(request, response);			
 			if(url.equalsIgnoreCase("AjaxView")){
 				return;
 			}
-			if(url.startsWith("redirect:"))
+			else if(url.startsWith("redirect:"))
 				response.sendRedirect(url.substring(9));
 			else
 				request.getRequestDispatcher(url).forward(request, response);

@@ -11,12 +11,12 @@
 <title>회원가입</title>
 
 <!-- Bootstrap -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- font awesome -->
-<link rel="stylesheet" href="bootstrap/css/font-awesome.min.css"
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/font-awesome.min.css"
 	media="screen" title="no title" charset="utf-8">
 <!-- Custom style -->
-<link rel="stylesheet" href="bootstrap/css/style.css" media="screen"
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/style.css" media="screen"
 	title="no title" charset="utf-8">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -28,43 +28,80 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
-		$("#idForm").keyup(function () {
+		$("#userId").keyup(function(){
 			var id = $("#userId").val();
-			var len = $("#userId").val().length;
-			
-			console.log('id'+id+'len'+len);
-			
-			if(len<4 || len>10){
-				$("#checkResult").text('아이디는 4자이상 10자이하만 가능!').css('background','pink');
-			}else{
-				
-				//$("#checkResult").text("");
- 	 			$.ajax({
-					type:"post",
-					url: "../DispatcherServlet?command=idCheck",  
-					data:$("#userId").text(),
-					success: function () {
-						alert("sss"+data);
-						
-						 if(data == "ok"){
-							//$("#id").val('');
-							//$("#id").focus();
-							$("#checkResult").text(data);
-						}else{
-							$("#checkResult").text(data);
-						} 
-					}//success
-				}); //ajax   
-				
-				
+			if(id.length == 0){
+				$("#idCheckResult").html("");
 			}
+			else if(id.length < 4 || id.length > 10){
+				$("#idCheckResult").html("아이디는 4자 이상 10자 이하입니다!");
+			}
+			else{
+				$.ajax({
+					type:"post",
+					url:"${pageContext.request.contextPath}/DispatcherServlet?command=idCheck",
+					data:{"id":id},
+					success:function(flag){
+						if(flag == "ok"){
+							$("#idCheckResult").html("사용가능한 아이디입니다!");
+						}
+						else{
+							$("#idCheckResult").html(id+"는 사용불가능한 아이디입니다!");
+						}
+					}
+				});
+			}
+		}); // userId KeyUp event
+		
+		
+	  $('#InputPassword2').keyup(function(){
+		   if($('#InputPassword1').val()!=$('#InputPassword2').val()){
+		    $('font[name=check]').text('');
+		    $('.help-block').html("암호틀림");
+		   }else{
+		    $('font[name=check]').text('');
+		    $('.help-block').html("암호맞음");
+		   }
+		  }); //#chpass.keyup
+		  
+		  $("#registerBtn").click(function () {
+			var id = 	$("#userId").val();		  
+			var pass1 = 	$("#InputPassword1").val();		  
+			var pass2 = 	$("#InputPassword2").val();		  
+			var nick = 	$("#username").val();		  
+			var chkAgree = 	$("#agree").val();		  
+			  
+			  if(id == ""){
+				  alert('아이디를 입력해주세요');
+				  return false;
+			  }
+			  if(pass1 == ""){
+				  alert('비밀번호를 입력해주세요');
+				  return false;
+			  }
+			  if(pass2 == ""){
+				  alert('확인할 비밀번호를 입력해주세요');
+				  return false;
+			  }
+			  if(nick == ""){
+				  alert('닉네임을 입력해주세요');
+				  return false;
+			  }
+			  if(chkAgree != "on"){
+				  alert('회원약관에 동의해주세요. check 필수');
+				  return false;
+			  }
+			  
+			  $('#idForm').submit();
 		})
-	
-	});
-    </script>
+		$("#cancelBtn").click(function () {
+			location.href = '${pageContext.request.contextPath}/main.jsp';
+		})
+	}); //ready
+</script>
 </head>
 <body>
+	<div class="container">
 	<article class="container">
 		<div class="page-header">
 			<h1>
@@ -72,33 +109,29 @@
 			</h1>
 		</div>
 		<div class="col-md-6 col-md-offset-3">
-			<form role="form" id="idForm">
-			
+			<form role="form" id="idForm" action="${pageContext.request.contextPath}/DispatcherServlet">
+
 				<div class="form-group">
-					<label for="userid"  name="id"  id="id">아이디</label> <span id="checkResult"></span>
-	              <div class="input-group">
-	                <input type="text" class="form-control" id="userId" placeholder="4자 이상 10자 이하로 입력해 주세요">
-	              </div>
-
-
-					<input type="text" class="form-control" id="id" placeholder="비밀번호">
-					<span id="checkResult"></span> <input type="hidden" name="command"
-						value="idcheck">
+					<label for="userid" name="id" id="id">아이디</label>
+					<div class="input-group">
+						<input type="text" class="form-control" id="userId" required="required" name="nameId">
+					</div>
+					<span id="idCheckResult"></span> 
 				</div>
-				
+
 
 				<div class="form-group">
 					<label for="InputPassword1">비밀번호</label> <input type="password"
-						class="form-control" id="InputPassword1" placeholder="비밀번호">
+						class="form-control" id="InputPassword1" placeholder="비밀번호" required="required" name="namePW">
 				</div>
 				<div class="form-group">
 					<label for="InputPassword2">비밀번호 확인</label> <input type="password"
-						class="form-control" id="InputPassword2" placeholder="비밀번호 확인">
+						class="form-control" id="InputPassword2" placeholder="비밀번호 확인" required="required">
 					<p class="help-block">비밀번호 확인을 위해 다시한번 입력 해 주세요</p>
 				</div>
 				<div class="form-group">
 					<label for="username">닉네임</label> <input type="text"
-						class="form-control" id="username" placeholder="닉네임을 입력해 주세요">
+						class="form-control" id="username" placeholder="닉네임을 입력해 주세요" required="required" name="nameNick">
 				</div>
 				<div class="form-group">
 					<label>약관 동의</label>
@@ -113,7 +146,8 @@
 					<button type="submit" class="btn btn-info" id="registerBtn">
 						회원가입<i class="fa fa-check spaceLeft"></i>
 					</button>
-					<button type="submit" class="btn btn-warning" id="cancelBtn">
+					<input type="hidden" name="command" value="register">
+					 	<button type="submit" class="btn btn-warning" id="cancelBtn">
 						가입취소<i class="fa fa-times spaceLeft"></i>
 					</button>
 				</div>
@@ -121,7 +155,7 @@
 		</div>
 
 	</article>
-
+</div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

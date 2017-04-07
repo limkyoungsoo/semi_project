@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="//code.jquery.com/jquery.min.js"></script>
 <c:import url="/template/straplink.html"></c:import>
 
 <script type="text/javascript">
@@ -52,14 +51,14 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<img class="img-responsive img-border"
-									src="${pageContext.request.contextPath}/${list[0].storePic}"
+									src="${pageContext.request.contextPath}/storeImg/${list[0].storePic}"
 									alt="${list[0].storeName }">
 							</div>
 							<c:forEach items="${list }" var="b" varStatus="order">
 								<c:if test="${order.count != 1 }">
 									<div class="item">
 										<img class="img-responsive img-border"
-											src="${pageContext.request.contextPath}/${b.storePic }"
+											src="${pageContext.request.contextPath}/storeImg/${b.storePic }"
 											alt="${b.storeName }">
 									</div>
 								</c:if>

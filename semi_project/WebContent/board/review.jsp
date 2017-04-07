@@ -93,21 +93,43 @@
 				}
 			});
 		}; // starRating
+		
 		starRating();
-		$("#sel1()").change(function(){
+		
+		$("#sel1").change(function(){
+			if($("#sel1").val() =="" || $("#sel1").val() == null){
+				$("#avgStar").hide();
+				$("#totalAvg").show();
+			}
+			else{
+				$("#avgStar").show();
+				$("#totalAvg").hide();
+			}
 			$.ajax({
 				type:"get",
-				url:"DispatcherServlet",
-				data :"command=starScore",
+				url:"${pageContext.request.contextPath}/DispatcherServlet",
+				dataType:"json",
+				data :"command=starScore&menuName="+$("#sel1").val(),
 				success:function(data){
-					$("#avgStar").html(data);
+					var info="";
+					var grade=data.grade;
+					if(grade=="1"){
+						info+='<i class="fa fa-star" style="font-size: 24px; color: red">'
+					}else if(grade=="2"){
+						info+='<i class="fa fa-star" style="font-size: 24px; color: red"><i class="fa fa-star" style="font-size: 24px; color: red">'
+					}else if(grade=="3"){
+						info+='<i class="fa fa-star" style="font-size: 24px; color: red"><i class="fa fa-star" style="font-size: 24px; color: red"><i class="fa fa-star" style="font-size: 24px; color: red">'
+					}else if(grade=="4"){
+						info+='<i class="fa fa-star" style="font-size: 24px; color: red"><i class="fa fa-star" style="font-size: 24px; color: red"><i class="fa fa-star" style="font-size: 24px; color: red"><i class="fa fa-star" style="font-size: 24px; color: red">'
+					}else if(grade=="5"){
+						info+='<i class="fa fa-star" style="font-size: 24px; color: red"><i class="fa fa-star" style="font-size: 24px; color: red"><i class="fa fa-star" style="font-size: 24px; color: red"><i class="fa fa-star" style="font-size: 24px; color: red"><i class="fa fa-star" style="font-size: 24px; color: red">'
+					}
+					$("#avgStar").html(info); 
 				}//success
 			});//ajax
 		});//change
 	});//ready
 </script>
-
-
 
 <style type="text/css"> /*별 CSS 시작  */
 .star-input>.input, .star-input>.input>label:hover, .star-input>.input>input:focus+label,
@@ -214,28 +236,36 @@
 			<hr>
 		</div>
 
-
-		
-		<div class="container" id="reviewList">
+		<!-- 별점 start -->
+		<div class="container">
 		
 			<label for="mname">메뉴명</label> 
 			
 			<select id="sel1">
-			<option value="">메뉴선택</option>
+
+			<option id ="optionTest" value="">메뉴선택</option>
 			  <c:forEach items="${requestScope.menuImgList }" var="ml">
-					<option>${ml.menuName}</option>
+					<option id="menuN" value="${ml.menuName}">${ml.menuName}</option>
 			   </c:forEach>
-			</select>
-			
+			</select>		
+
 			&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
-			평점 : <span id="avgStar"> </span>
-			<i class="fa fa-star" style="font-size: 24px; color: red"></i> 
-			<i class="fa fa-star" style="font-size: 24px; color: red"></i>
+			
+			 <span id="totalAvg">총평점 : 
+			 <c:forEach begin="1" end="${requestScope.totalAvg}">
+			 <i class="fa fa-star" style="font-size: 24px; color: red"></i>
+			 </c:forEach>
+			 </span>
+			<%--  ${requestScope.totalAvg }<i class="fa fa-star" style="font-size: 24px; color: red"></i></span>
+			&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; --%>
+		
+			 <span id="avgStar"></span>
+		
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>번호</th>
-						<!-- <th>메뉴</th> -->
+						<th>메뉴명</th>
 						<th>평점</th>
 						<th>리뷰</th>
 						<th>글쓴이/날짜</th>
@@ -245,7 +275,8 @@
 					<!-- reviewList 시작 -->
 					<c:forEach items="${requestScope.rlistVo.list }" var="rl" varStatus="order">
 						<tr>
-							<td>${order.count}</td>							
+							<td>${order.count}</td>
+							<td>${rl.menuName}</td>
 							<td>${rl.grade}</td>
 							<td>${rl.review}</td>
 							<td>${rl.mid}/${rl.timePosted }</td>
@@ -280,7 +311,6 @@
 
 			<button type="button" class="btn btn-info" id="writeBtn">리뷰
 				작성창 열기</button>
-
 		</div>
 		<br>
 

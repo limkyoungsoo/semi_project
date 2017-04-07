@@ -52,10 +52,51 @@ img.img-responsive.img-border-left.img-rounded {
 }
 </style>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".otherMenuInfo img").click(function(){
+			//alert($(this).next().next().val());
+			$.ajax({
+				type:"get",
+				url:"DispatcherServlet",
+				dataType:"json",
+				data:"command=detailOtherMenu&menuNo="+$(this).next().next().val(),
+				success:function(data){
+					/* var info="";
+					info+="<td>"+data.menuVO.menuNo+"</td><br>";
+					info+="<td>"+data.menuVO.menuName+"</td><br>";
+					info+="<td>"+data.menuVO.menuPrice+"원"+"</td><br>";
+					info+="<td>"+data.storeName+"</td><br>";
+					$("#result").html(info); */
+					var menuNo=data.menuVO.menuNo;
+					$("#menuNo").text(menuNo);
+					var menuName=data.menuVO.menuName;
+					$("#menuName").text(menuName);
+					var menuPrice=data.menuVO.menuPrice;
+					$("#menuPrice").text(menuPrice);
+					var openHour=data.openHour;
+					$("#openHour").text(openHour);
+					$("#changeImg").attr("src","${pageContext.request.contextPath }/menuImg/"+data.menuVO.menuPic);
+					
+				}//sucess
+			});//ajax
+		});//click
+		$("#markNo").click(function(){
+			//alert($("#hidden").val());
+			$.ajax({
+				type:"get",
+				url:"DispatcherServlet",
+				data:"commmand=markInsert&menuno="+$("#hidden").val(),
+				success:function(){
+					alert("찜 목록에 추가되었습니다");
+				}
+			});//ajax
+		});//markBtn Click
+	});//ready
+</script>
 </head>
 
 <body>
-
 	<c:import url="/template/header.jsp"></c:import>
 	<c:import url="/template/navigator.jsp"></c:import>
 
@@ -69,7 +110,7 @@ img.img-responsive.img-border-left.img-rounded {
 					<h2 class="text-center">${requestScope.menuList.storeName}</h2>
 					<hr>
 					<img class="img-responsive img-border-left"
-						src="${pageContext.request.contextPath }${requestScope.menuList.storePic}"
+						src="${pageContext.request.contextPath }/storeImg/${requestScope.menuList.storePic}"
 						alt="${requestScope.menuList.storeName}">
 				</div>
 			</div>
@@ -86,26 +127,38 @@ img.img-responsive.img-border-left.img-rounded {
 				</div>
 				<div class="col-md-6">
 					<img class="img-responsive img-border-left"
-						src="${pageContext.request.contextPath }${requestScope.menuList.menuVO.menuPic}"
-						alt="" width="304" height="236">
+						src="${pageContext.request.contextPath }/menuImg/${requestScope.menuList.menuVO.menuPic}"
+						alt="" width="304" height="236" id="changeImg">
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 menuInfo">
+					<input type="hidden" id="hidden" value="${requestScope.menuList.menuVO.menuNo}"> 
 					<p>
 					<h3>메뉴번호</h3>
-					:${requestScope.menuList.menuVO.menuNo}
+					<span id="menuNo">:${requestScope.menuList.menuVO.menuNo}</span>
+					
 					</p>
 					<p>
 					<h3>메뉴이름</h3>
-					:${requestScope.menuList.menuVO.menuName}
+					<span id="menuName">:${requestScope.menuList.menuVO.menuName}</span>
+					
 					</p>
 					<p>
 					<h3>메뉴가격</h3>
-					:${requestScope.menuList.menuVO.menuPrice}
+					<span id="menuPrice">:${requestScope.menuList.menuVO.menuPrice}</span>
+					
 					</p>
+					<h3>영업시간</h3>
+					<span id="openHour">:${requestScope.menuList.openHour}</span>
+					
+					</p>
+					<input class="btn-primary" type="button" value="메뉴찜하기">
 				</div>
+				<span id="result"></span>
 				<div class="clearfix"></div>
 			</div>
 		</div>
+
+		
 		<!-- 가게의 다른 메뉴를 보여주는 곳 -->
 		<div class="row">
 			<div class="box">
@@ -116,16 +169,16 @@ img.img-responsive.img-border-left.img-rounded {
 					</h2>
 					<hr>
 				</div>
-
 				<c:forEach items="${requestScope.menuImgList }" var="menuImgList">
-					<div class="col-sm-4 text-center">
-						<a href="#######"><img class="img-responsive"
-							src="${pageContext.request.contextPath}${menuImgList.menuPic}"
+					<div class="col-sm-4 text-center otherMenuInfo">
+						<img class="img-responsive"
+							src="${pageContext.request.contextPath}/menuImg/${menuImgList.menuPic}"
 							alt="">
 							<h3>
-								${menuImgList.menuName} <small>Job Title</small>
+								${menuImgList.menuName} <small>메뉴번호:${menuImgList.menuNo}</small>
 							</h3>
-							</a>
+
+							<input type="hidden" value="${menuImgList.menuNo}">
 					</div>
 				</c:forEach>
 

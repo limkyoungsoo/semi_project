@@ -18,12 +18,12 @@ public class WriteReviewController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String command = request.getParameter("command");
-		System.out.println("command: "+command + " in WRC");
+		System.out.println(command);
+				
+		String review = request.getParameter("comment");
 		
 		String starInput = request.getParameter("star-input");
-		float grade = Float.parseFloat(starInput);
-		
-		String review = request.getParameter("comment");
+		float grade = Float.parseFloat(starInput);		
 		
 		String menuOption = request.getParameter("menuOption");
 		int menuNo = Integer.parseInt(menuOption.substring(menuOption.length()-1,menuOption.length()));

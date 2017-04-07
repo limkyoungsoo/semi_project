@@ -7,6 +7,15 @@ drop table msgMemberMenu;
 drop sequence menuNo_seq;
 drop sequence reNo_seq;
 
+select * from store;
+select * from menu;
+select * from msgMemberMenu;
+
+insert into msgMemberMenu(menuno,mid) values(val1,val2)
+
+delete store where storetel like '%031%'
+delete store where storetel like '%031%'
+
 -- 회원 관리 테이블
 create table msgMember(
  mId varchar2(100) primary key,
@@ -97,6 +106,16 @@ select s.storeLoc, s.storeTel, s.storePic, s.openHour,m.menuNo, m.menuName, m.me
 from store s, menu m where s.storeName=m.storeName and m.storeName='쭈꾸미볶음집';
 					
 
+select * from msgMember					
+select mid,mpass,mnick from msgMember		
+
+insert into msgMember(mid,mpass,mnick) values('java','1234','자바')
+
+select mid from msgMember where mid='java'
+
+insert into msgMember(mid,mpass,mnick) values(val1,val2,val3)
+
+
 select * from menureview
 
 
@@ -116,6 +135,7 @@ from store s, menu m where s.storeName=m.storeName and
 m.storeName='조선허불백') a, menureview b 
 where a.menuNo=b.menuNo					
 					
+
 					
 
 SELECT storeName, storeLoc
@@ -124,6 +144,7 @@ FROM (SELECT *
         ORDER BY DBMS_RANDOM.RANDOM()
     )
 WHERE ROWNUM <=1
+
 
 
 select count(*) 
@@ -136,4 +157,5 @@ SELECT r.* FROM(
 			reNo,menuNo,mId,review,grade,time_posted 
 			from menureview) r 
 			where rnum between 1 and 10
+
 					
