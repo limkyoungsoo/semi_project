@@ -42,7 +42,11 @@ public class DetailStoreController implements Controller {
 		// storeMenuName : reviewList 의 조건 설정의 menuName 보여줌
 
 		request.setAttribute("menuImgList", menuImgList);
-
+		
+		//detailStore 에 딱 들어간다.
+				//딱 보여지는 가게의 총 별점
+		int totalAvg = new ReviewVO().calAvg(reviewList);
+		request.setAttribute("totalAvg", totalAvg);
 		return "/board/detailStore.jsp";
 	}
 
