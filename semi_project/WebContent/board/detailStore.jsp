@@ -51,7 +51,21 @@ img.img-responsive.img-border-left.img-rounded {
 	margin: auto;
 }
 </style>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".otherMenuInfo img").click(function(){
+			//alert($(this).next().next().val());
+			$.ajax({
+				type:"get",
+				url:"DispatcherServlet",
+				data:"command=detailOtherMenu&menuNo="+$(this).next().next().val(),
+				success:function(data){
+					$("#result").val(data);
+				}
+			});
+		});//click
+	});//ready
+</script>
 </head>
 
 <body>
@@ -102,7 +116,12 @@ img.img-responsive.img-border-left.img-rounded {
 					<h3>메뉴가격</h3>
 					:${requestScope.menuList.menuVO.menuPrice}
 					</p>
+					<h3>영업시간</h3>
+					:${requestScope.menuList.openHour}
+					</p>
+					<input class="btn-primary" type="button" value="메뉴찜하기">
 				</div>
+				<input type="hidden" value="" id="result">
 				<div class="clearfix"></div>
 			</div>
 		</div>
@@ -118,13 +137,14 @@ img.img-responsive.img-border-left.img-rounded {
 				</div>
 
 				<c:forEach items="${requestScope.menuImgList }" var="menuImgList">
-					<div class="col-sm-4 text-center">
-						<a href="#######"><img class="img-responsive"
+					<div class="col-sm-4 text-center otherMenuInfo" >
+						<img class="img-responsive"
 							src="${pageContext.request.contextPath}${menuImgList.menuPic}"
-							alt="">
+							alt="" >
 							<h3>
-								${menuImgList.menuName} <small>Job Title</small>
+								${menuImgList.menuName} <small>메뉴번호:${menuImgList.menuNo}</small>
 							</h3>
+							<input type="hidden" value="${menuImgList.menuNo}">
 					</div>
 				</c:forEach>
 
