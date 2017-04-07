@@ -28,7 +28,6 @@
 		</c:otherwise>
 	</c:choose>
 
-
 </div>
 <div class="brand">Menu Selector Guide</div>
 <div class="address-bar">김성환, 김지원, 강정호, 이현근, 임경수, 한지선</div>
