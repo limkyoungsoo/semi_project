@@ -143,7 +143,6 @@ FROM (SELECT *
         ORDER BY DBMS_RANDOM.RANDOM()
     )
 WHERE ROWNUM <=1
-
-					
+			
 					
 					
