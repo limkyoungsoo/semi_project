@@ -82,11 +82,14 @@ img.img-responsive.img-border-left{
 		});//click
 		$("#markNo").click(function(){
 			//alert($("#hidden").val());
-			$.ajax({
+			 $.ajax({
 				type:"get",
 				url:"DispatcherServlet",
 				data:"command=markInsert&menuno="+$("#hidden").val(),
-			});//ajax
+				success:function(){
+					alert("찜 목록에 추가되었습니다");
+				}//success
+			});//ajax 
 		});//markBtn Click
 	});//ready
 </script>
@@ -146,7 +149,7 @@ img.img-responsive.img-border-left{
 					<h3>영업시간</h3>
 					<h4><span id="openHour">${requestScope.menuList.openHour}</span></h4>
 					</p>
-					<input class="btn-primary" type="button" value="메뉴찜하기">
+					<input class="btn-primary" id="markNo" type="button" value="메뉴찜하기">
 				</div>
 				<span id="result"></span>
 				<div class="clearfix"></div>
@@ -172,6 +175,7 @@ img.img-responsive.img-border-left{
 							<h3>
 								${menuImgList.menuName} <small>메뉴번호:${menuImgList.menuNo}</small>
 							</h3>
+
 							<input type="hidden" value="${menuImgList.menuNo}">
 					</div>
 				</c:forEach>

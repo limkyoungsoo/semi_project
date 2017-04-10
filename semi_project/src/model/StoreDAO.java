@@ -290,4 +290,61 @@ public class StoreDAO {
 		return storeVO;
 	}
 
+	public ArrayList<StoreVO> markList(String memId) throws SQLException {
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("select m.menuNo,s.storeName,m.menuName,m.menuPrice,");
+			sql.append("m.menuPic,s.storeLoc,s.storeTel,s.openHour ");
+			sql.append("from MSGMEMBERMENU msg, MENU m,");
+			sql.append("STORE s where s.storeName=m.storeName ");
+			sql.append("and m.menuNo=msg.menuNo and mId=?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, memId);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MenuVO vo = new MenuVO();
+				vo.setMenuName(rs.getString("menuName"));
+				vo.setMenuNo(rs.getInt("menuNo"));
+				vo.setMenuPic(rs.getString("menuPic"));
+				vo.setMenuPrice(rs.getInt("menuPrice"));
+				StoreVO svo= new StoreVO();
+				svo.setOpenHour(rs.getString("openHour"));
+				svo.setStoreLoc(rs.getString("storeLoc"));
+				svo.setStoreName(rs.getString("storeName"));
+				svo.setStoreTel(rs.getString("storeTel"));
+				svo.setMenuVO(vo);
+				
+				list.add(svo);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return list;
+	}
+
+	 public void insertMenumark(String memId, String menuNo) throws SQLException {
+      Connection con = null;
+      PreparedStatement psmt =null;
+      ResultSet rs = null;
+      int no = Integer.parseInt(menuNo);
+      
+      try {
+         con = getConnection();
+         String sql ="insert into msgMemberMenu(menuno,mid) values(?,?)";
+         psmt = con.prepareStatement(sql);
+         psmt.setInt(1, no);
+         psmt.setString(2, memId);
+         psmt.executeUpdate();
+         
+      } finally {
+         closeAll(rs, psmt, con);
+      }
+      
+   }
+
 }

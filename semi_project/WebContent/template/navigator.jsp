@@ -37,11 +37,14 @@
 						class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a
-							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=유스">유스페이스</a></li>
+							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=유스페이스">유스페이스</a></li>
+						<li><li><a
+							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=유스페이스2">유스페이스2</a></li>
+						<li>
+						<a
+							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=H스퀘어">H스퀘어</a></li>
 						<li><a
-							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=스퀘어">H스퀘어</a></li>
-						<li><a
-							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=삼환">삼환하이펙스</a></li>
+							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=삼환하이펙스">삼환하이펙스</a></li>
 					</ul></li>
 			</ul>
 		</div>

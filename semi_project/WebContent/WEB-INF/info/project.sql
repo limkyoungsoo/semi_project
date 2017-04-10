@@ -56,6 +56,7 @@ create table menuReview(
  grade number not null,
  time_posted date not null
 );
+select count(*) from(select * from menureview) where menuNo;
 
 -- 리뷰등록번호 시퀀스
 create sequence reNo_seq;
@@ -104,7 +105,7 @@ commit
 select s.storeLoc, s.storeTel, s.storePic, s.openHour,m.menuNo, m.menuName, m.menuPrice, m.menuPic 
 from store s, menu m where s.storeName=m.storeName and m.storeName='쭈꾸미볶음집';
 					
-<<<<<<< HEAD
+
 select * from msgMember					
 select mid,mpass,mnick from msgMember		
 
@@ -113,7 +114,7 @@ insert into msgMember(mid,mpass,mnick) values('java','1234','자바')
 select mid from msgMember where mid='java'
 
 insert into msgMember(mid,mpass,mnick) values(val1,val2,val3)
-=======
+
 
 select * from menureview
 
@@ -134,7 +135,7 @@ from store s, menu m where s.storeName=m.storeName and
 m.storeName='조선허불백') a, menureview b 
 where a.menuNo=b.menuNo					
 					
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
+
 					
 
 SELECT storeName, storeLoc
@@ -144,5 +145,16 @@ FROM (SELECT *
     )
 WHERE ROWNUM <=1
 
-					
+
+select count(*) 
+from(select menuNo from menu where storeName='조선허불백') m,
+ menureview r where m.menuNo=r.menuNo
+ 
+ 
+SELECT r.* FROM(
+			SELECT row_number() over(order by reNo desc) rnum,
+			reNo,menuNo,mId,review,grade,time_posted 
+			from menureview) r 
+			where rnum between 1 and 10
+
 					
