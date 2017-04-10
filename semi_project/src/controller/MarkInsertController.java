@@ -6,10 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.MemberDAO;
 import model.MemberVO;
-import model.MenuDAO;
-import model.ReviewDAO;
 import model.StoreDAO;
 
 public class MarkInsertController implements Controller {

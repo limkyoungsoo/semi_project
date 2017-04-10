@@ -85,7 +85,6 @@ img.img-responsive.img-border-left{
 			 $.ajax({
 				type:"get",
 				url:"DispatcherServlet",
-<<<<<<< HEAD
 				data:"command=markInsert&menuno="+$("#hidden").val(),
 				success:function(){
 					alert('찜 목록에 추가되었습니다');
@@ -95,13 +94,6 @@ img.img-responsive.img-border-left{
 					return false;
 				}
 			});//ajax
-=======
-				data:"command=markInsert&menuno="+$("#hidden").val(),
-				success:function(){
-					alert("찜 목록에 추가되었습니다");
-				}//success
-			});//ajax 
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 		});//markBtn Click
 	});//ready
 </script>
