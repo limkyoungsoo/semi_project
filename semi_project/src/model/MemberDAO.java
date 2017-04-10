@@ -31,6 +31,12 @@ public class MemberDAO {
 		if (con != null)
 			con.close();
 	}
+	public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException{
+		if (pstmt != null)
+			pstmt.close();
+		if (con != null)
+			con.close();
+	}
 
 	public MemberVO checkIdAndPass(String id, String pass) throws SQLException {
 		Connection con = null;
@@ -105,6 +111,29 @@ public class MemberDAO {
 
 		System.out.println("브잉ㅎ" + vo);
 		return vo;
+	}
+
+	public void updateMemberInfo(String mId, String mPass, String mNick) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int result=-1;
+		try{
+			con=getConnection();
+			String sql="update msgMember set mPass=?, mNick=? where mId=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, mPass);
+			pstmt.setString(2, mNick);
+			pstmt.setString(3, mId);
+			result=pstmt.executeUpdate();
+			if(result==1){
+				System.out.println("회원정보 변경여부:true");
+			}else if(result==0){
+				System.out.println("회원정보 변경여부:false");
+			}
+		}finally{
+			closeAll(pstmt, con);
+		}
+		
 	}
 
 }

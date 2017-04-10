@@ -3,6 +3,6 @@
 
 <script>
 alert("로그인 후 사용 가능한 페이지 입니다.");
-location.href="${pageContext.request.contextPath}/board/login.jsp"
-//location.href="${pageContext.request.contextPath}/main.jsp"
+//location.href="${pageContext.request.contextPath}/board/login.jsp"
+location.href="${pageContext.request.contextPath}/main.jsp"
 </script>

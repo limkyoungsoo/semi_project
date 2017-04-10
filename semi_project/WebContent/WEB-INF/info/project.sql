@@ -150,11 +150,15 @@ FROM (SELECT *
         FROM store
         ORDER BY DBMS_RANDOM.RANDOM()
     )
+<<<<<<< HEAD
 WHERE ROWNUM <=1
 			
 					
 commit
 
+=======
+WHERE ROWNUM <=1
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 
 
 select count(*) 
