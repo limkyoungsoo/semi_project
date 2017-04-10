@@ -39,6 +39,8 @@ public class HandlerMapping {
 			c = new LogoutController();
 		} else if (command.equals("detailOtherMenu")) {
 			c = new DetailOtherMenuController();
+		} else if(command.equals("updateMemberInfo")){
+			c= new UpdateMemberInfoController();
 		}
 		return c;
 	}

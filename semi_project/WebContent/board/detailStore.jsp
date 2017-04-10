@@ -47,7 +47,7 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 
 <style type="text/css">
-img.img-responsive.img-border-left.img-rounded {
+img.img-responsive.img-border-left{
 	margin: auto;
 }
 </style>
@@ -77,7 +77,6 @@ img.img-responsive.img-border-left.img-rounded {
 					var openHour=data.openHour;
 					$("#openHour").text(openHour);
 					$("#changeImg").attr("src","${pageContext.request.contextPath }/menuImg/"+data.menuVO.menuPic);
-					
 				}//sucess
 			});//ajax
 		});//click
@@ -86,7 +85,7 @@ img.img-responsive.img-border-left.img-rounded {
 			$.ajax({
 				type:"get",
 				url:"DispatcherServlet",
-				data:"commmand=markInsert&menuno="+$("#hidden").val();
+				data:"command=markInsert&menuno="+$("#hidden").val(),
 			});//ajax
 		});//markBtn Click
 	});//ready
@@ -131,22 +130,21 @@ img.img-responsive.img-border-left.img-rounded {
 					<input type="hidden" id="hidden" value="${requestScope.menuList.menuVO.menuNo}"> 
 					<p>
 					<h3>메뉴번호</h3>
-					<span id="menuNo">:${requestScope.menuList.menuVO.menuNo}</span>
+					<h3><span id="menuNo">${requestScope.menuList.menuVO.menuNo}</span></h3>
 					
 					</p>
 					<p>
 					<h3>메뉴이름</h3>
-					<span id="menuName">:${requestScope.menuList.menuVO.menuName}</span>
+					<h4><span id="menuName">${requestScope.menuList.menuVO.menuName}</span></h4>
 					
 					</p>
 					<p>
 					<h3>메뉴가격</h3>
-					<span id="menuPrice">:${requestScope.menuList.menuVO.menuPrice}</span>
+					<h4><span id="menuPrice">${requestScope.menuList.menuVO.menuPrice}</span></h4>
 					
 					</p>
 					<h3>영업시간</h3>
-					<span id="openHour">:${requestScope.menuList.openHour}</span>
-					
+					<h4><span id="openHour">${requestScope.menuList.openHour}</span></h4>
 					</p>
 					<input class="btn-primary" type="button" value="메뉴찜하기">
 				</div>
