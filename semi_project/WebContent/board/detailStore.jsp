@@ -153,11 +153,7 @@ img.img-responsive.img-border-left{
 					<h3>영업시간</h3>
 					<h4><span id="openHour">${requestScope.menuList.openHour}</span></h4>
 					</p>
-<<<<<<< HEAD
-					<input class="btn-primary" id="markNo" type="button" value="메뉴찜하기" >
-=======
 					<input class="btn-primary" id="markNo" type="button" value="메뉴찜하기">
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 				</div>
 				<span id="result"></span>
 				<div class="clearfix"></div>
