@@ -290,26 +290,6 @@ public class StoreDAO {
 		return storeVO;
 	}
 	
-	public void insertMenumark(String memId, String menuNo) throws SQLException {
-		Connection con = null;
-		PreparedStatement psmt =null;
-		ResultSet rs = null;
-		int no = Integer.parseInt(menuNo);
-		
-		try {
-			con = getConnection();
-			String sql ="insert into msgMemberMenu(menuno,mid) values(?,?)";
-			psmt = con.prepareStatement(sql);
-			psmt.setInt(1, no);
-			psmt.setString(2, memId);
-			psmt.executeUpdate();
-			
-		} finally {
-			closeAll(rs, psmt, con);
-		}
-		
-	}
-
 	public boolean findMenuNo(String menuNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement psmt =null;
