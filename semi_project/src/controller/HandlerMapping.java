@@ -41,6 +41,8 @@ public class HandlerMapping {
 			c = new DetailOtherMenuController();
 		} else if (command.equals("markInsert")) {
 			c = new MarkInsertController();
+		}else if (command.equals("writeReview")) {
+			c = new WriteReviewController();
 		}
 		
 		

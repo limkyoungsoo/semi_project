@@ -145,6 +145,62 @@ public class ReviewDAO {
 		}
 				
 	}
+	
+	
+	// 가게 당 총 리뷰 개수
+	public int getTotalReivewCount(String storeName) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int totalCount = 0;
+		try {
+			con = getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("select count(*) ");
+			sql.append("from(select menuNo from menu where storeName=?) m,");
+			sql.append(" menureview r where m.menuNo=r.menuNo");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, storeName);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				totalCount = rs.getInt(1);
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return totalCount;
+	}
+	
+	// 페이징이 나눠진 리뷰리스트
+	public ArrayList<ReviewVO> getAllReviewList(PagingBean pagingBean) throws SQLException {
+		ArrayList<ReviewVO> list = new ArrayList<ReviewVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT r.* FROM(");
+			sql.append("SELECT row_number() over(order by reNo desc) rnum,");
+			sql.append("reNo,menuNo,mId,review,grade,time_posted ");
+			sql.append("from menureview) r ");
+			sql.append("where rnum between ? and ?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, pagingBean.getStartRowNumber());
+			pstmt.setInt(2, pagingBean.getEndRowNumber());
+			System.out.println("startRowNum " + pagingBean.getStartRowNumber());
+			System.out.println("endRowNum " + pagingBean.getEndRowNumber());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ReviewVO rvo = new ReviewVO(rs.getInt("reNo"),rs.getFloat("grade"),rs.getString("review"),
+						rs.getString("mid"),rs.getString("time_Posted"),rs.getInt("menuNo"));				
+				list.add(rvo);
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return list;
+	}
+
 
 
 }
