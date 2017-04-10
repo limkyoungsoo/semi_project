@@ -39,7 +39,12 @@ public class HandlerMapping {
 			c = new LogoutController();
 		} else if (command.equals("detailOtherMenu")) {
 			c = new DetailOtherMenuController();
+		} else if (command.equals("markInsert")) {
+			c = new MarkInsertController();
 		}
+		
+		
+		
 		return c;
 	}
 }

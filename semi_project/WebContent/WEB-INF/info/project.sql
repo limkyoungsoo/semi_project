@@ -12,6 +12,8 @@ select * from menu;
 select * from msgMemberMenu;
 
 insert into msgMemberMenu(menuno,mid) values(val1,val2)
+select * from msgMemberMenu where menuno=13
+
 
 delete store where storetel like '%031%'
 delete store where storetel like '%031%'

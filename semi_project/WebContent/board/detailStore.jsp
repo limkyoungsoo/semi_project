@@ -86,7 +86,14 @@ img.img-responsive.img-border-left.img-rounded {
 			$.ajax({
 				type:"get",
 				url:"DispatcherServlet",
-				data:"commmand=markInsert&menuno="+$("#hidden").val();
+				data:"command=markInsert&menuno="+$("#hidden").val(),
+				success:function(){
+					alert('찜 목록에 추가되었습니다');
+				},
+				error: function () {
+					alert('이미 등록되어 있는 메뉴입니다. ');
+					return false;
+				}
 			});//ajax
 		});//markBtn Click
 	});//ready
@@ -148,7 +155,7 @@ img.img-responsive.img-border-left.img-rounded {
 					<span id="openHour">:${requestScope.menuList.openHour}</span>
 					
 					</p>
-					<input class="btn-primary" type="button" value="메뉴찜하기">
+					<input class="btn-primary" id="markNo" type="button" value="메뉴찜하기" >
 				</div>
 				<span id="result"></span>
 				<div class="clearfix"></div>
