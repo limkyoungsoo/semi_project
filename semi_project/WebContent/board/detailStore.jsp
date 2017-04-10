@@ -82,7 +82,7 @@ img.img-responsive.img-border-left.img-rounded {
 			});//ajax
 		});//click
 		$("#markNo").click(function(){
-			//alert($("#hidden").val());
+			alert($("#hidden").val());
 			 $.ajax({
 				type:"get",
 				url:"DispatcherServlet",
@@ -90,8 +90,7 @@ img.img-responsive.img-border-left.img-rounded {
 				success:function(){
 					alert("찜 목록에 추가되었습니다");
 				}//success
-			});//ajax 
-
+			});//ajax
 		});//markBtn Click
 	});//ready
 </script>
