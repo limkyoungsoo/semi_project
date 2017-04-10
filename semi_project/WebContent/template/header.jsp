@@ -24,9 +24,9 @@
 		</c:when>
 		<c:otherwise>
 			${sessionScope.member.mNick}
-			&nbsp<a href="#"><font color="white">즐겨찾기</font></a>
-			&nbsp<a href="${pageContext.request.contextPath }/board/updateMemberInfo.jsp"><font color="white">회원정보수정 </font></a>
-			&nbsp<a href="#" onclick="logoutCheck()"><font color="white">로그아웃</font></a>
+			&nbsp;<a href="#"><font color="white">즐겨찾기</font></a>
+			&nbsp;<a href="${pageContext.request.contextPath }/board/updateMemberInfo.jsp"><font color="white">회원정보수정 </font></a>
+			&nbsp;<a href="#" onclick="logoutCheck()"><font color="white">로그아웃</font></a>
 		</c:otherwise>
 	</c:choose>
 

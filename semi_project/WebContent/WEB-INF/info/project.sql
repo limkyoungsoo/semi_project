@@ -146,7 +146,6 @@ FROM (SELECT *
 WHERE ROWNUM <=1
 
 
-
 select count(*) 
 from(select menuNo from menu where storeName='조선허불백') m,
  menureview r where m.menuNo=r.menuNo

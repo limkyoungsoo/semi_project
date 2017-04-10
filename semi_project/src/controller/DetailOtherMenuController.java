@@ -17,7 +17,6 @@ public class DetailOtherMenuController implements Controller {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		String menuNo=request.getParameter("menuNo");
-		System.out.println("다른 메뉴 번호:"+menuNo);
 		StoreVO storeVO=StoreDAO.getInstance().getOtherMenuInfoByMenuNo(Integer.parseInt(menuNo));
 		JSONObject json=new JSONObject(storeVO);
 		out.println(json.toString());
