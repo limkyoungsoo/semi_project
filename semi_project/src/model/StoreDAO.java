@@ -347,4 +347,132 @@ public class StoreDAO {
       
    }
 
+	public void deleteMenumark(int menuNo) throws SQLException {
+		Connection con = null;
+	      PreparedStatement psmt =null;
+	      ResultSet rs = null;
+	      
+	      try {
+	         con = getConnection();
+	         String sql ="delete msgMemberMenu where menuNo=?";
+	         psmt = con.prepareStatement(sql);
+	         psmt.setInt(1, menuNo);
+	         psmt.executeUpdate();
+	         
+	      } finally {
+	         closeAll(rs, psmt, con);
+	      }
+	}
+	public ArrayList<StoreVO>  getAdminStoreList(PagingBean pagingBean) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		
+		try {
+			con = getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT S.* FROM(");
+			sql.append("SELECT row_number() over(order by storeName asc) rnum,");
+			sql.append("storeName,storePic,storeLoc,storeTel,openHour ");
+			sql.append("from store) S ");
+			sql.append("where rnum between ? and ?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, pagingBean.getStartRowNumber());
+			pstmt.setInt(2, pagingBean.getEndRowNumber());
+			System.out.println("startRowNum " + pagingBean.getStartRowNumber());
+			System.out.println("endRowNum " + pagingBean.getEndRowNumber());
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				StoreVO vo = new StoreVO();
+				vo.setRnum(rs.getInt("rnum"));
+				vo.setStoreName(rs.getString("storeName"));
+				vo.setStorePic(rs.getString("storePic"));
+				vo.setStoreLoc(rs.getString("storeLoc"));
+				vo.setStoreTel(rs.getString("storeTel"));
+				vo.setOpenHour(rs.getString("openHour"));
+				list.add(vo);
+			}
+			
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return list;
+	}
+
+	public StoreVO getAdminStoreModify(String name) throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		StoreVO vo = new StoreVO();
+		
+		try {
+			con = getConnection();
+			String sql = "SELECT S.* FROM("
+					+ "SELECT row_number() over(order by storeName asc) rnum,"
+					+ "storeName,storePic,storeLoc,storeTel,openHour "
+					+ "from store) S where storeName=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, name);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				vo.setRnum(rs.getInt("rnum"));
+				vo.setStoreName(rs.getString("storeName"));
+				vo.setStorePic(rs.getString("storePic"));
+				vo.setStoreLoc(rs.getString("storeLoc"));
+				vo.setStoreTel(rs.getString("storeTel"));
+				vo.setOpenHour(rs.getString("openHour"));
+			}
+		} finally {
+			closeAll(rs, psmt, con);
+		}
+		
+		return vo;
+	}
+
+	public void editStoreInfo(String name, String loc, String time, String tel, String pic) throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		System.out.println(name+">>"+loc+">>"+pic+">>"+time+">>"+tel);
+		
+		try {
+			con = getConnection();
+			String sql = "update store set storeName=?,storeLoc=?, storePic=?,openHour=?  where storeTel=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.setString(2, loc);
+			psmt.setString(3, pic);
+			psmt.setString(4, time);
+			psmt.setString(5, tel);
+			psmt.executeQuery();
+			
+			
+		} finally {
+			closeAll(rs, psmt, con);
+		}
+		
+	}
+
+	public void adminStoreDelete(String storeName) throws SQLException {
+		Connection con = null;
+	      PreparedStatement psmt =null;
+	      ResultSet rs = null;
+	      
+	      try {
+	         con = getConnection();
+	         String sql ="delete store where storename=?";
+	         psmt = con.prepareStatement(sql);
+	         psmt.setString(1, storeName);
+	         psmt.executeUpdate();
+	         
+	      } finally {
+	         closeAll(rs, psmt, con);
+	      }
+	}
+
 }

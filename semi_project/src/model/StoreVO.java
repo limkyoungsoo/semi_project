@@ -7,6 +7,7 @@ public class StoreVO {
 	private String storePic;
 	private String openHour;
 	private MenuVO menuVO;
+	private int rnum;
 
 	public StoreVO() {
 		super();
@@ -28,6 +29,15 @@ public class StoreVO {
 		this.storeName = storeName;
 		this.storeLoc = storeLoc;
 		this.storePic = storePic;
+	}
+	
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public String getStoreName() {

@@ -157,4 +157,17 @@ SELECT r.* FROM(
 			from menureview) r 
 			where rnum between 1 and 10
 
+			
+/*menu , msgmember 메뉴 관리자 페이지 때문에 수정할께요!!*/
+ALTER TABLE menu
+DROP CONSTRAINT fk_storeName;
+
+alter table MENU
+add  constraint fk_storeName foreign key(storeName) references store(storeName) on delete cascade;
+
+ALTER TABLE msgMemberMenu
+DROP CONSTRAINT fk_menuNo_2;
+
+alter table msgMemberMenu
+add  constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo) on delete cascade;
 					
