@@ -22,9 +22,14 @@
 			<a href="${pageContext.request.contextPath}/board/register.jsp"><font
 				color="white">회원가입</font></a>
 		</c:when>
+		<c:when test="${sessionScope.member.mId=='admin' }">
+			${sessionScope.member.mNick}
+			&nbsp<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminMember"><font color="white">회원관리</font></a>
+			&nbsp<a href="#" onclick="logoutCheck()"><font color="white">로그아웃</font></a>
+		</c:when>
 		<c:otherwise>
 			${sessionScope.member.mNick}
-			&nbsp<a href="#"><font color="white">즐겨찾기</font></a>
+			&nbsp<a href="${pageContext.request.contextPath}/DispatcherServlet?command=markList"><font color="white">즐겨찾기</font></a>
 			&nbsp<a href="${pageContext.request.contextPath }/board/updateMemberInfo.jsp"><font color="white">회원정보수정 </font></a>
 			&nbsp<a href="#" onclick="logoutCheck()"><font color="white">로그아웃</font></a>
 		</c:otherwise>

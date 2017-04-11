@@ -47,6 +47,12 @@ public class HandlerMapping {
 	         c = new MarkInsertController();
 		} else if (command.equals("writeReview")) {
 			c = new WriteReviewController();
+		} else if(command.equals("MarkDelete")){
+			c = new MarkDeleteController();
+		} else if(command.equals("adminMember")){
+			c = new AdminMemberController();
+		} else if(command.equals("deleteMember")){
+			c = new DeleteMemberController();
 		}
 		return c;
 	}

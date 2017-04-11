@@ -62,12 +62,6 @@ img.img-responsive.img-border-left{
 				dataType:"json",
 				data:"command=detailOtherMenu&menuNo="+$(this).next().next().val(),
 				success:function(data){
-					/* var info="";
-					info+="<td>"+data.menuVO.menuNo+"</td><br>";
-					info+="<td>"+data.menuVO.menuName+"</td><br>";
-					info+="<td>"+data.menuVO.menuPrice+"원"+"</td><br>";
-					info+="<td>"+data.storeName+"</td><br>";
-					$("#result").html(info); */
 					var menuNo=data.menuVO.menuNo;
 					$("#menuNo").text(menuNo);
 					var menuName=data.menuVO.menuName;
@@ -81,11 +75,11 @@ img.img-responsive.img-border-left{
 			});//ajax
 		});//click
 		$("#markNo").click(function(){
-			//alert($("#hidden").val());
+			//alert($("#menuInfo").val());
 			 $.ajax({
 				type:"get",
 				url:"DispatcherServlet",
-				data:"command=markInsert&menuno="+$("#hidden").val(),
+				data:"command=markInsert&menuno="+$("#menuNo").text(),
 				success:function(){
 					alert("찜 목록에 추가되었습니다");
 				}//success
@@ -130,7 +124,6 @@ img.img-responsive.img-border-left{
 						alt="" width="304" height="236" id="changeImg">
 				</div>
 				<div class="col-md-6 menuInfo">
-					<input type="hidden" id="hidden" value="${requestScope.menuList.menuVO.menuNo}"> 
 					<p>
 					<h3>메뉴번호</h3>
 					<h3><span id="menuNo">${requestScope.menuList.menuVO.menuNo}</span></h3>
@@ -175,7 +168,6 @@ img.img-responsive.img-border-left{
 							<h3>
 								${menuImgList.menuName} <small>메뉴번호:${menuImgList.menuNo}</small>
 							</h3>
-
 							<input type="hidden" value="${menuImgList.menuNo}">
 					</div>
 				</c:forEach>

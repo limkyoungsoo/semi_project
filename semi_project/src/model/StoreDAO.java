@@ -347,4 +347,21 @@ public class StoreDAO {
       
    }
 
+	   public void deleteMenumark(int menuNo) throws SQLException {
+		      Connection con = null;
+		         PreparedStatement psmt =null;
+		         ResultSet rs = null;
+		         
+		         try {
+		            con = getConnection();
+		            String sql ="delete msgMemberMenu where menuNo=?";
+		            psmt = con.prepareStatement(sql);
+		            psmt.setInt(1, menuNo);
+		            psmt.executeUpdate();
+		            
+		         } finally {
+		            closeAll(rs, psmt, con);
+		         }
+		   }
+
 }

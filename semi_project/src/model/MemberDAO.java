@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -133,6 +134,48 @@ public class MemberDAO {
 		}finally{
 			closeAll(pstmt, con);
 		}
+		
+	}
+
+	public ArrayList<MemberVO> getAllMembers() throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ArrayList<MemberVO> memberList=new ArrayList<MemberVO>();
+		try{
+			con=getConnection();
+			String sql="select mId,mPass,mNick from msgMember";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				MemberVO vo=new MemberVO();
+				vo.setmId(rs.getString(1));
+				vo.setmPass(rs.getString(2));
+				vo.setmNick(rs.getString(3));
+				memberList.add(vo);
+			}
+		}finally{
+			closeAll(rs, pstmt, con);
+		}
+		
+		return memberList;
+	}
+
+	public int deleteMemberInfo(String mId) throws SQLException {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int result=-2;
+		try{
+			con=getConnection();
+			String sql="delete from msgMember where mId=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			result=pstmt.executeUpdate();
+		}finally{
+			closeAll(pstmt, con);
+		}
+		
+		return result;
 		
 	}
 
