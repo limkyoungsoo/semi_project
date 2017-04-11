@@ -16,7 +16,7 @@
                 <div class="col-lg-12">
                     <hr>
                     <h2 class="intro-text text-center">
-                    <strong>${loc}</strong>
+                    	   <strong>${loc}</strong>
                     </h2>
                     <hr>
                 </div>

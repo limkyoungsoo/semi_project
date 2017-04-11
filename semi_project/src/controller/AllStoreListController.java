@@ -30,7 +30,7 @@ public class AllStoreListController implements Controller {
 		System.out.println(list);
 		ListVO listVO = new ListVO(list, pagingBean);
 		request.setAttribute("listVo", listVO);
-		/*request.setAttribute("loc", loc);*/
+		request.setAttribute("loc", "전체 레스토랑");
 		return "/board/list.jsp";
 	}
 

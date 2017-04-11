@@ -33,6 +33,13 @@ create table store(
  openHour varchar2(100) not null
 );
 
+ALTER TABLE store modify storePla varchar2(100) not null;
+
+ALTER TABLE [TABLE_NAME] MODIFY ( [COLUMN_NAME] [DATA_TYPE] [NULL|NOT NULL] );
+
+ALTER TABLE store DROP COLUMN storePla ;
+
+
 -- 메뉴 테이블
 create table menu(
  menuNo number primary key,
@@ -143,7 +150,15 @@ FROM (SELECT *
         FROM store
         ORDER BY DBMS_RANDOM.RANDOM()
     )
+<<<<<<< HEAD
 WHERE ROWNUM <=1
+			
+					
+commit
+
+=======
+WHERE ROWNUM <=1
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 
 
 select count(*) 

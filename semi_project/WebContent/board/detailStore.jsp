@@ -75,7 +75,7 @@ img.img-responsive.img-border-left{
 			});//ajax
 		});//click
 		$("#markNo").click(function(){
-			//alert($("#menuInfo").val());
+			//alert($("#hidden").val());
 			 $.ajax({
 				type:"get",
 				url:"DispatcherServlet",
