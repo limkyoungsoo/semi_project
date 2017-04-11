@@ -110,8 +110,9 @@ public class MemberDAO {
 		} finally {
 			closeAll(rs, psmt, con);
 		}
-
 		return vo;
+	}
+
 
 
 	public void updateMemberInfo(String mId, String mPass, String mNick) throws SQLException {
