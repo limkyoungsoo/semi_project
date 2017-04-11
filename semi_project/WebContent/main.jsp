@@ -4,5 +4,4 @@
 
 <jsp:forward page="${pageContext.request.contentType}/DispatcherServlet">
 	<jsp:param value="storeShow" name="command"/>
-	dd
 </jsp:forward>
