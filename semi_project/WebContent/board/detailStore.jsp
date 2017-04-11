@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="/template/starCss.html"/>
 <c:import url="/template/straplink.html"></c:import>
 <style type="text/css">
 img.img-responsive.img-border-left{
@@ -144,14 +145,20 @@ img.img-responsive.img-border-left{
 	</div>
 	<!-- review include -->
 
-
-
-	<c:import url="/template/footer.jsp"></c:import>
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
+	
+<!-- jQuery -->
+	<script src="bootstrap/js/jquery.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 
+	<!-- Script to Activate the Carousel
+	<script>
+		$('.carousel').carousel({
+			interval : 5000
+		//changes the speed
+		})
+	</script> -->
+<c:import url="/template/footer.jsp"></c:import>
 </body>
 </html>

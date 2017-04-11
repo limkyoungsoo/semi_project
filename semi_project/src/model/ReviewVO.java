@@ -17,12 +17,17 @@ public class ReviewVO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public ReviewVO(float grade) {
 		super();
 		this.grade = grade;
 	}
-	
+	//reviewDAO  avgGrade 에서 사용 
+	public ReviewVO(int avgGrade) {
+		super();
+		this.avgGrade = avgGrade;
+	}
+
 	public ReviewVO(float grade, String review, String mid, int menuNo) {
 		super();
 		this.grade = grade;
@@ -70,6 +75,16 @@ public class ReviewVO {
 		this.mid = mid;
 		this.timePosted = timePosted;
 		this.menuNo = menuNo;
+		this.menuName = menuName;
+	}
+	
+	public ReviewVO(int reviewNo, float grade, String review, String mid, String timePosted, String menuName) {
+		super();
+		this.reviewNo = reviewNo;
+		this.grade = grade;
+		this.review = review;
+		this.mid = mid;
+		this.timePosted = timePosted;
 		this.menuName = menuName;
 	}
 

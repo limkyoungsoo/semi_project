@@ -36,15 +36,6 @@ public class StoreVO {
 		this.storeLoc = storeLoc;
 		this.storePic = storePic;
 	}
-	
-
-	public int getRnum() {
-		return rnum;
-	}
-
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
-	}
 
 	public String getStoreName() {
 		return storeName;
@@ -86,14 +77,6 @@ public class StoreVO {
 		this.openHour = openHour;
 	}
 
-	public MenuVO getMenuVO() {
-		return menuVO;
-	}
-
-	public void setMenuVO(MenuVO menuVO) {
-		this.menuVO = menuVO;
-	}
-
 	public String getStorePla() {
 		return storePla;
 	}
@@ -102,11 +85,27 @@ public class StoreVO {
 		this.storePla = storePla;
 	}
 
+	public MenuVO getMenuVO() {
+		return menuVO;
+	}
+
+	public void setMenuVO(MenuVO menuVO) {
+		this.menuVO = menuVO;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 	@Override
 	public String toString() {
 		return "StoreVO [storeName=" + storeName + ", storeLoc=" + storeLoc + ", storeTel=" + storeTel + ", storePic="
-				+ storePic + ", openHour=" + openHour + ", storePla=" + storePla + ", menuVO=" + menuVO + "]";
+				+ storePic + ", openHour=" + openHour + ", storePla=" + storePla + ", menuVO=" + menuVO + ", rnum="
+				+ rnum + "]";
 	}
 
- 
 }

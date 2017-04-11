@@ -14,7 +14,7 @@
 					class="icon-bar"></span>
 			</button>
 			<!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-			<a class="navbar-brand" href="/main.jsp">Menu Selector Guide</a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath }/main.jsp">Menu Selector Guide</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"

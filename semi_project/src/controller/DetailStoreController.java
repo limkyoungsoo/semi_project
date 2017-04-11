@@ -26,7 +26,6 @@ public class DetailStoreController implements Controller {
 			return "/board/detailShowFail.jsp";
 		}
 
-
 		String storeName = request.getParameter("storeName");
 		// 강정호. storeName을 이용해서 store, menu 정보를 가져오는 메서드입니다
 
@@ -35,25 +34,52 @@ public class DetailStoreController implements Controller {
 
 		// menuList : list page 의 전체 식당 보여줌
 
-
 		// 강정호. storeName을 이용해서 메뉴 사진 3개를 불러오는 메서드입니다
 		ArrayList<MenuVO> menuImgList = StoreDAO.getInstance().getMenuImgByStoreName(storeName);
-
-
 		request.setAttribute("menuList", storeVO);
 
-
+		/*
+		 * /////////////////////////////////////////////////////////////////////
+		 * ///////// // paging bean int totalCount =
+		 * ReviewDAO.getInstance().getTotalReivewCount(storeName);
+		 * 
+		 * System.out.println("총 리뷰 수 : "+totalCount); PagingBean pagingBean =
+		 * new PagingBean(totalCount);
+		 * 
+		 * ArrayList<ReviewVO> list =
+		 * ReviewDAO.getInstance().getAllReviewList(pagingBean); ReviewListVO
+		 * listVO = new ReviewListVO(list, pagingBean);
+		 * request.setAttribute("rlistVo", listVO);
+		 * 
+		 * 
+		 * ArrayList<ReviewVO> reviewList =
+		 * ReviewDAO.getInstance().getReviewList(storeName); // reviewList :
+		 * 해당식당의 전체 review 보여줌 request.setAttribute("reviewList", reviewList);
+		 * // storeMenuName : reviewList 의 조건 설정의 menuName 보여줌
+		 * 
+		 * request.setAttribute("menuImgList", menuImgList);
+		 * 
+		 * 
+		 * 
+		 * //detailStore 에 딱 들어간다. //딱 보여지는 가게의 총 별점 int totalAvg = new
+		 * ReviewVO().calAvg(reviewList); request.setAttribute("totalAvg",
+		 * totalAvg);
+		 */
 		//////////////////////////////////////////////////////////////////////////////
 		// paging bean
 		int totalCount = ReviewDAO.getInstance().getTotalReivewCount(storeName);
-	
-		System.out.println("총 리뷰 수 : "+totalCount);
-		PagingBean pagingBean = new PagingBean(totalCount);
-		
-		ArrayList<ReviewVO> list = ReviewDAO.getInstance().getAllReviewList(pagingBean);
+
+		String pno = request.getParameter("pageNo");
+		PagingBean pagingBean = null;
+		if (pno == null) {
+			pagingBean = new PagingBean(totalCount);
+		} else {
+			pagingBean = new PagingBean(totalCount, Integer.parseInt(pno));
+		}
+
+		ArrayList<ReviewVO> list = ReviewDAO.getInstance().getAllReviewList(pagingBean, storeName);
 		ReviewListVO listVO = new ReviewListVO(list, pagingBean);
-		request.setAttribute("rlistVo", listVO);
-		
+		request.setAttribute("rlistVO", listVO);
 
 		ArrayList<ReviewVO> reviewList = ReviewDAO.getInstance().getReviewList(storeName);
 		// reviewList : 해당식당의 전체 review 보여줌
@@ -61,15 +87,12 @@ public class DetailStoreController implements Controller {
 		// storeMenuName : reviewList 의 조건 설정의 menuName 보여줌
 
 		request.setAttribute("menuImgList", menuImgList);
-		
-		
 
-		//detailStore 에 딱 들어간다.
-				//딱 보여지는 가게의 총 별점
+		// detailStore 에 딱 들어간다.
+		// 딱 보여지는 가게의 총 별점
 		int totalAvg = new ReviewVO().calAvg(reviewList);
+		System.out.println("총 평점 : "+ totalAvg);
 		request.setAttribute("totalAvg", totalAvg);
-
 		return "/board/detailStore.jsp";
 	}
-
 }
