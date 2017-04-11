@@ -23,13 +23,33 @@ public class StoreDAO {
 	public Connection getConnection() throws SQLException {
 		return dataSource.getConnection();
 	}
+	public ArrayList<StoreVO> getStoreNameList() throws SQLException {
+		ArrayList<StoreVO> storeList = new ArrayList<StoreVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = getConnection();
+			String sql = "select distinct storePla from store order by storePla";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				storeList.add(new StoreVO(rs.getString(1)));
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+		return storeList;
+	}
+	
+	
 
 	public ArrayList<StoreVO> getStoreShowList() throws SQLException {
 		ArrayList<StoreVO> storeList = new ArrayList<StoreVO>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
 		try {
 			con = getConnection();
 			String sql = "select storeName, storeLoc, storePic from (select * from store order by DBMS_RANDOM.RANDOM()) where rownum<=6";
@@ -44,6 +64,7 @@ public class StoreDAO {
 		}
 		return storeList;
 	}
+
 
 	public String getRandStore() throws SQLException {
 		String storeName = "";
@@ -170,9 +191,9 @@ public class StoreDAO {
 		int totalCount = 0;
 		try {
 			con = getConnection();
-			String sql = "select count(*) from store where storeLoc like ?";
+			String sql = "select count(*) from store where storePla=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + storeLoc + "%");
+			pstmt.setString(1, storeLoc);
 			rs = pstmt.executeQuery();
 			if (rs.next())
 				totalCount = rs.getInt(1);
@@ -211,10 +232,10 @@ public class StoreDAO {
 			sql.append("SELECT S.* FROM(");
 			sql.append("SELECT row_number() over(order by storename asc) rnum,");
 			sql.append("storename,storepic ");
-			sql.append("from store where  storeLoc like ?) S ");
+			sql.append("from store where  storePla=?) S ");
 			sql.append("where rnum between ? and ?");
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, "%" + loc + "%");
+			pstmt.setString(1, loc);
 			pstmt.setInt(2, pagingBean.getStartRowNumber());
 			pstmt.setInt(3, pagingBean.getEndRowNumber());
 			System.out.println("startRowNum " + pagingBean.getStartRowNumber());
@@ -329,7 +350,7 @@ public class StoreDAO {
 			sql.append("m.menuPic,s.storeLoc,s.storeTel,s.openHour ");
 			sql.append("from MSGMEMBERMENU msg, MENU m,");
 			sql.append("STORE s where s.storeName=m.storeName ");
-			sql.append("and m.menuNo=msg.menuNo and mId=? ");
+			sql.append("and m.menuNo=msg.menuNo and mId=?");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, memId);
 			rs = pstmt.executeQuery();
@@ -373,44 +394,64 @@ public class StoreDAO {
       }
       
    }
-
-	public ArrayList<StoreVO>  getAdminStoreList() throws SQLException {
-		Connection con = null;
-		PreparedStatement psmt = null;
-		ResultSet rs =null;
-		StoreVO vo = null;
-		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
-		
-		try {
-			con = getConnection();
-			
-			String sql ="SELECT S.* FROM("
-					+ "SELECT row_number() over(order by storeName asc) rnum,"
-					+ "storeName,storePic,storeLoc,storeTel,openHour "
-					+ "from store) S";
-			
-			psmt = con.prepareStatement(sql);
-			rs = psmt.executeQuery();
-			
-			while(rs.next()){
-				int rnum = rs.getInt(1);
-				String name = rs.getString(2);
-				String pic_addr = rs.getString(3);
-				String loc = rs.getString(4);
-				String tel = rs.getString(5);
-				String openHour = rs.getString(6);
-				
-				vo = new StoreVO(rnum,name, loc, tel, pic_addr, openHour);
-				list.add(vo);
-				System.out.println(">>>>>"+vo);
-			}
-			
-		} finally {
-			closeAll(rs, psmt, con);
+	 
+	 public void deleteMenumark(int menuNo) throws SQLException {
+			Connection con = null;
+		      PreparedStatement psmt =null;
+		      ResultSet rs = null;
+		      
+		      try {
+		         con = getConnection();
+		         String sql ="delete msgMemberMenu where menuNo=?";
+		         psmt = con.prepareStatement(sql);
+		         psmt.setInt(1, menuNo);
+		         psmt.executeUpdate();
+		         
+		      } finally {
+		         closeAll(rs, psmt, con);
+		      }
 		}
-		return list;
-		
-	}
+
+	 public ArrayList<StoreVO>  getAdminStoreList(PagingBean pagingBean) throws SQLException {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs =null;
+			
+			ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+			
+			try {
+				con = getConnection();
+				StringBuilder sql = new StringBuilder();
+				sql.append("SELECT S.* FROM(");
+				sql.append("SELECT row_number() over(order by storeName asc) rnum,");
+				sql.append("storeName,storePic,storeLoc,storeTel,openHour ");
+				sql.append("from store) S ");
+				sql.append("where rnum between ? and ?");
+				pstmt = con.prepareStatement(sql.toString());
+				pstmt.setInt(1, pagingBean.getStartRowNumber());
+				pstmt.setInt(2, pagingBean.getEndRowNumber());
+				System.out.println("startRowNum " + pagingBean.getStartRowNumber());
+				System.out.println("endRowNum " + pagingBean.getEndRowNumber());
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					StoreVO vo = new StoreVO();
+					vo.setRnum(rs.getInt("rnum"));
+					vo.setStoreName(rs.getString("storeName"));
+					vo.setStorePic(rs.getString("storePic"));
+					vo.setStoreLoc(rs.getString("storeLoc"));
+					vo.setStoreTel(rs.getString("storeTel"));
+					vo.setOpenHour(rs.getString("openHour"));
+					list.add(vo);
+				}
+				
+			} finally {
+				closeAll(rs, pstmt, con);
+			}
+			return list;
+		}
+
 
 	public StoreVO getAdminStoreModify(String name) throws SQLException {
 		Connection con = null;
@@ -429,15 +470,12 @@ public class StoreDAO {
 			rs = psmt.executeQuery();
 			
 			if(rs.next()){
-				int no = rs.getInt(1);
-				String loc = rs.getString(4);
-				String tel = rs.getString(5);
-				String pic_addr = rs.getString(3);
-				String openHour = rs.getString(6);
-				
-				vo = new StoreVO(no,name, loc, tel, pic_addr, openHour);
-				
-				System.out.println("======vo==========="+vo);
+				vo.setRnum(rs.getInt("rnum"));
+				vo.setStoreName(rs.getString("storeName"));
+				vo.setStorePic(rs.getString("storePic"));
+				vo.setStoreLoc(rs.getString("storeLoc"));
+				vo.setStoreTel(rs.getString("storeTel"));
+				vo.setOpenHour(rs.getString("openHour"));
 			}
 		} finally {
 			closeAll(rs, psmt, con);
@@ -450,7 +488,6 @@ public class StoreDAO {
 		Connection con = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-		System.out.println(name+">>"+loc+">>"+pic+">>"+time+">>"+tel);
 		
 		try {
 			con = getConnection();
@@ -462,40 +499,26 @@ public class StoreDAO {
 			psmt.setString(4, tel);
 			psmt.setString(5, name);
 			int result = psmt.executeUpdate();
-			System.out.println("결과 업데이트가 안되네:: 1 트루"+result);
 			
 		} finally {
 			closeAll(rs, psmt, con);
 		}
 		
 	}
-
-	public int insertStore(String name, String loc, String tel, String time, String saveName) throws SQLException {
+	
+	public void adminStoreDelete(String storeName) throws SQLException {
 		Connection con = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
-		int result = 0;
-		
-		System.out.println(name+loc+tel+saveName+time);
-		
-		try {
-			con = getConnection();
-			String sql = "insert into store(storeName,storeLoc,storeTel,openHour,storePic) values(?,?,?,?,?)";
-			psmt = con.prepareStatement(sql);
-			psmt.setString(1, name);
-			psmt.setString(2, loc);
-			psmt.setString(3, tel);
-			psmt.setString(4, time);
-			psmt.setString(5, saveName);
-			result= psmt.executeUpdate();
-			
-			System.out.println("result"+result);
-			
-		} finally {
-			closeAll(rs, psmt, con);
-		}
-		return result;
-		
+	      PreparedStatement psmt =null;
+	      ResultSet rs = null;
+	      
+	      try {
+	         con = getConnection();
+	         String sql ="delete store where storename=?";
+	         psmt = con.prepareStatement(sql);
+	         psmt.setString(1, storeName);
+	         psmt.executeUpdate();
+	         
+	      } finally {
+	         closeAll(rs, psmt, con);
+	      }
 	}
-
-}
