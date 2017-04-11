@@ -10,13 +10,11 @@ public class AdminStoreModifyController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url ="/board/admin_store_modify.jsp";
+		String url ="board/admin_store_modify.jsp";
 		String no = request.getParameter("no");
 		String name = request.getParameter("name");
 		
-		
 		StoreVO vo = StoreDAO.getInstance().getAdminStoreModify(name);
-		System.out.println("이름12324:vo~~~~~~~~"+vo);
 		request.setAttribute("vo", vo);
 		
 		
