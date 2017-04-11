@@ -189,9 +189,9 @@ public class StoreDAO {
 		int totalCount = 0;
 		try {
 			con = getConnection();
-			String sql = "select count(*) from store where storeLoc like ?";
+			String sql = "select count(*) from store where storePla=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + storeLoc + "%");
+			pstmt.setString(1, storeLoc);
 			rs = pstmt.executeQuery();
 			if (rs.next())
 				totalCount = rs.getInt(1);
@@ -230,10 +230,10 @@ public class StoreDAO {
 			sql.append("SELECT S.* FROM(");
 			sql.append("SELECT row_number() over(order by storename asc) rnum,");
 			sql.append("storename,storepic ");
-			sql.append("from store where  storeLoc like ?) S ");
+			sql.append("from store where  storePla=?) S ");
 			sql.append("where rnum between ? and ?");
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setString(1, "%" + loc + "%");
+			pstmt.setString(1, loc);
 			pstmt.setInt(2, pagingBean.getStartRowNumber());
 			pstmt.setInt(3, pagingBean.getEndRowNumber());
 			System.out.println("startRowNum " + pagingBean.getStartRowNumber());
