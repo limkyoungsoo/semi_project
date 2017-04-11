@@ -20,7 +20,8 @@ delete store where storetel like '%031%'
 create table msgMember(
  mId varchar2(100) primary key,
  mPass varchar2(100) not null,
- mNick varchar2(100) not null
+ mNick varchar2(100) not null,
+ mGrant varchar2(100) default '준회원'
 );
 
 
@@ -123,6 +124,7 @@ select * from msgMember
 select mid,mpass,mnick from msgMember		
 
 insert into msgMember(mid,mpass,mnick) values('java','1234','자바')
+insert into msgMember(mid,mpass,mnick, mgrant) values('admin','1234','임경수','정회원'); 
 
 select mid from msgMember where mid='java'
 
