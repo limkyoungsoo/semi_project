@@ -16,6 +16,9 @@
                 <div class="col-lg-12">
                     <hr>
                     <h2 class="intro-text text-center">
+                    <c:if test="${empty loc}">
+                    	<strong>전체레스토랑</strong>
+                    </c:if>
                     	   <strong>${loc}</strong>
                     </h2>
                     <hr>
