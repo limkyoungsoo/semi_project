@@ -48,7 +48,7 @@ create table menu(
  menuName varchar2(100) not null,
  menuPrice number not null,
  menuPic varchar2(200) not null,
- constraint fk_storeName foreign key(storeName) references store(storeName)
+ constraint fk_storeName foreign key(storeName) references store(storeName) on delete cascade
 );
 
 -- 메뉴 번호 시퀀스
@@ -73,7 +73,7 @@ create sequence reNo_seq;
 create table msgMemberMenu(
  menuNo number not null,
  mId varchar2(100) not null,
- constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo),
+ constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo) on delete cascade,
  constraint fk_mId_2 foreign key(mId) references msgMember(mId),
  constraint pk_menuNo_mId primary key(menuNo,mId)
 );
@@ -156,13 +156,6 @@ FROM (SELECT *
         FROM store
         ORDER BY DBMS_RANDOM.RANDOM()
     )
-<<<<<<< HEAD
-WHERE ROWNUM <=1
-			
-					
-commit
-
-=======
 WHERE ROWNUM <=1
 >>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 
@@ -178,4 +171,17 @@ SELECT r.* FROM(
 			from menureview) r 
 			where rnum between 1 and 10
 
+			
+/*menu , msgmember 메뉴 관리자 페이지 때문에 수정할께요!!*/
+ALTER TABLE menu
+DROP CONSTRAINT fk_storeName;
+
+alter table MENU
+add  constraint fk_storeName foreign key(storeName) references store(storeName) on delete cascade;
+
+ALTER TABLE msgMemberMenu
+DROP CONSTRAINT fk_menuNo_2;
+
+alter table msgMemberMenu
+add  constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo) on delete cascade;
 					
