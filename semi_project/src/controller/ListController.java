@@ -14,7 +14,6 @@ public class ListController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String loc=request.getParameter("loc");
-		System.out.println("ListController "+loc);
 		int totalCount=StoreDAO.getInstance().getTotalContentCount(loc);
 		String pno=request.getParameter("pageNo");
 		PagingBean pagingBean=null;
