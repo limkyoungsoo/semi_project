@@ -28,7 +28,7 @@
           &nbsp|<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminStore"><font color="white">가게관리</font></a>
       </c:when>
 
-			${sessionScope.member.mNick}
+		<c:when test="${sessionScope.member.mNick=='admin' }">
 			&nbsp<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminMember"><font color="white">회원관리</font></a>
 			&nbsp<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminStore"><font color="white">가게관리</font></a>
 			&nbsp<a href="#" onclick="logoutCheck()"><font color="white">로그아웃</font></a>
