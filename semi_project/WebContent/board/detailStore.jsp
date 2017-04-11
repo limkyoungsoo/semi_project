@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="${pageContex.request.contextPath}/template/straplink.html"></c:import>
+<c:import url="/template/straplink.html"></c:import>
 <style type="text/css">
 img.img-responsive.img-border-left{
 	margin: auto;

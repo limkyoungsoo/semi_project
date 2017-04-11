@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>가게 관리</title>
 <c:import
-	url="${pageContex.request.contextPath}/template/straplink.html"></c:import>
+	url="/template/straplink.html"></c:import>
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
