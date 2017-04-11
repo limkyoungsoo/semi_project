@@ -11,7 +11,7 @@
 <title>회원가입</title>
 
 <!-- Bootstrap -->
-<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.register.css" rel="stylesheet">
 <!-- font awesome -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/font-awesome.min.css"
 	media="screen" title="no title" charset="utf-8">
@@ -27,14 +27,22 @@
     <![endif]-->
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
+var newWindow;
+
+function openNewWindow(){
+    newWindow = window.open("agreement.jsp", "newWindow", "height=650, width=750, resizable=yes");        
+}
 	$(document).ready(function(){
+		$('input:checkbox[id="agree"]').val();
+		
 		$("#userId").keyup(function(){
 			var id = $("#userId").val();
+			
 			if(id.length == 0){
 				$("#idCheckResult").html("");
 			}
 			else if(id.length < 4 || id.length > 10){
-				$("#idCheckResult").html("아이디는 4자 이상 10자 이하입니다!");
+				$("#idCheckResult").html("아이디는 4자 이상 10자 이하입니다!").css('color', 'red');
 			}
 			else{
 				$.ajax({
@@ -43,10 +51,10 @@
 					data:{"id":id},
 					success:function(flag){
 						if(flag == "ok"){
-							$("#idCheckResult").html("사용가능한 아이디입니다!");
+							$('#idCheckResult').html("사용가능한 아이디입니다!");
 						}
 						else{
-							$("#idCheckResult").html(id+"는 사용불가능한 아이디입니다!");
+							$('#idCheckResult').html(id+"는 사용불가능한 아이디입니다!").css('color', 'red');
 						}
 					}
 				});
@@ -69,8 +77,13 @@
 			var pass1 = 	$("#InputPassword1").val();		  
 			var pass2 = 	$("#InputPassword2").val();		  
 			var nick = 	$("#username").val();		  
-			var chkAgree = 	$("#agree").val();		  
-			  
+			var chkAgree = $('#agree').is(":checked");	
+			alert(chkAgree);
+			
+			  if(! chkAgree){
+				  alert('회원약관에 동의해주세요. check 필수');
+				  return false;
+			  }
 			  if(id == ""){
 				  alert('아이디를 입력해주세요');
 				  return false;
@@ -87,20 +100,18 @@
 				  alert('닉네임을 입력해주세요');
 				  return false;
 			  }
-			  if(chkAgree != "on"){
-				  alert('회원약관에 동의해주세요. check 필수');
-				  return false;
-			  }
+
 			  
 			  $('#idForm').submit();
 		})
 		$("#cancelBtn").click(function () {
 			location.href = '${pageContext.request.contextPath}/main.jsp';
 		})
+		
 	}); //ready
 </script>
 </head>
-<body>
+<body background="${pageContext.request.contextPath}/bootstrap/img/bg.jpg">
 	<div class="container">
 	<article class="container">
 		<div class="page-header">
@@ -110,13 +121,12 @@
 		</div>
 		<div class="col-md-6 col-md-offset-3">
 			<form role="form" id="idForm" action="${pageContext.request.contextPath}/DispatcherServlet">
-
 				<div class="form-group">
 					<label for="userid" name="id" id="id">아이디</label>
 					<div class="input-group">
 						<input type="text" class="form-control" id="userId" required="required" name="nameId">
+						<span id="idCheckResult"></span> 
 					</div>
-					<span id="idCheckResult"></span> 
 				</div>
 
 
@@ -127,21 +137,19 @@
 				<div class="form-group">
 					<label for="InputPassword2">비밀번호 확인</label> <input type="password"
 						class="form-control" id="InputPassword2" placeholder="비밀번호 확인" required="required">
-					<p class="help-block">비밀번호 확인을 위해 다시한번 입력 해 주세요</p>
+					<p class="message-block">비밀번호 확인을 위해 다시한번 입력 해 주세요</p>
 				</div>
 				<div class="form-group">
 					<label for="username">닉네임</label> <input type="text"
 						class="form-control" id="username" placeholder="닉네임을 입력해 주세요" required="required" name="nameNick">
 				</div>
+				
 				<div class="form-group">
 					<label>약관 동의</label>
-					<div data-toggle="buttons">
-						<label class="btn btn-primary active"> <span
-							class="fa fa-check"></span> <input id="agree" type="checkbox"
-							autocomplete="off" checked>
-						</label> <a href="#">이용약관</a>에 동의합니다.
-					</div>
+				<div class="checkbox"> <label> <input type="checkbox" id="agree" value=""> 
+				<a href="#" onclick="openNewWindow()">이용약관</a><b>에 동의합니다.</b> </div>
 				</div>
+				
 				<div class="form-group text-center">
 					<button type="submit" class="btn btn-info" id="registerBtn">
 						회원가입<i class="fa fa-check spaceLeft"></i>

@@ -43,6 +43,16 @@ public class HandlerMapping {
 			c = new MarkInsertController();
 		}else if (command.equals("writeReview")) {
 			c = new WriteReviewController();
+		}else if (command.equals("adminStore")) {
+			c = new AdminStoreListController();
+		}else if (command.equals("modify")) {
+			c = new AdminStoreModifyController();
+		}else if (command.equals("edit")) {
+			c = new AdminStoreEditController();
+		}else if (command.equals("delete")) {
+			c = new AdminStoreDeleteController();
+		}else if (command.equals("insertStore")) {
+			c = new AdminStoreInsertController();
 		}
 		
 		

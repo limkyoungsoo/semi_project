@@ -29,6 +29,7 @@ public class StoreDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
 			con = getConnection();
 			String sql = "select storeName, storeLoc, storePic from (select * from store order by DBMS_RANDOM.RANDOM()) where rownum<=6";
@@ -328,7 +329,7 @@ public class StoreDAO {
 			sql.append("m.menuPic,s.storeLoc,s.storeTel,s.openHour ");
 			sql.append("from MSGMEMBERMENU msg, MENU m,");
 			sql.append("STORE s where s.storeName=m.storeName ");
-			sql.append("and m.menuNo=msg.menuNo and mId=?");
+			sql.append("and m.menuNo=msg.menuNo and mId=? ");
 			pstmt = con.prepareStatement(sql.toString());
 			pstmt.setString(1, memId);
 			rs = pstmt.executeQuery();
@@ -372,5 +373,129 @@ public class StoreDAO {
       }
       
    }
+
+	public ArrayList<StoreVO>  getAdminStoreList() throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs =null;
+		StoreVO vo = null;
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		
+		try {
+			con = getConnection();
+			
+			String sql ="SELECT S.* FROM("
+					+ "SELECT row_number() over(order by storeName asc) rnum,"
+					+ "storeName,storePic,storeLoc,storeTel,openHour "
+					+ "from store) S";
+			
+			psmt = con.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()){
+				int rnum = rs.getInt(1);
+				String name = rs.getString(2);
+				String pic_addr = rs.getString(3);
+				String loc = rs.getString(4);
+				String tel = rs.getString(5);
+				String openHour = rs.getString(6);
+				
+				vo = new StoreVO(rnum,name, loc, tel, pic_addr, openHour);
+				list.add(vo);
+				System.out.println(">>>>>"+vo);
+			}
+			
+		} finally {
+			closeAll(rs, psmt, con);
+		}
+		return list;
+		
+	}
+
+	public StoreVO getAdminStoreModify(String name) throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		StoreVO vo = new StoreVO();
+		
+		try {
+			con = getConnection();
+			String sql = "SELECT S.* FROM("
+					+ "SELECT row_number() over(order by storeName asc) rnum,"
+					+ "storeName,storePic,storeLoc,storeTel,openHour "
+					+ "from store) S where storeName=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, name);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				int no = rs.getInt(1);
+				String loc = rs.getString(4);
+				String tel = rs.getString(5);
+				String pic_addr = rs.getString(3);
+				String openHour = rs.getString(6);
+				
+				vo = new StoreVO(no,name, loc, tel, pic_addr, openHour);
+				
+				System.out.println("======vo==========="+vo);
+			}
+		} finally {
+			closeAll(rs, psmt, con);
+		}
+		
+		return vo;
+	}
+
+	public void editStoreInfo(String name, String loc, String time, String tel, String pic) throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		System.out.println(name+">>"+loc+">>"+pic+">>"+time+">>"+tel);
+		
+		try {
+			con = getConnection();
+			String sql = "update store set storeTel=?,storeLoc=?, storePic=?,openHour=?  where storeName=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, time);
+			psmt.setString(2, loc);
+			psmt.setString(3, pic);
+			psmt.setString(4, tel);
+			psmt.setString(5, name);
+			int result = psmt.executeUpdate();
+			System.out.println("결과 업데이트가 안되네:: 1 트루"+result);
+			
+		} finally {
+			closeAll(rs, psmt, con);
+		}
+		
+	}
+
+	public int insertStore(String name, String loc, String tel, String time, String saveName) throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		System.out.println(name+loc+tel+saveName+time);
+		
+		try {
+			con = getConnection();
+			String sql = "insert into store(storeName,storeLoc,storeTel,openHour,storePic) values(?,?,?,?,?)";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.setString(2, loc);
+			psmt.setString(3, tel);
+			psmt.setString(4, time);
+			psmt.setString(5, saveName);
+			result= psmt.executeUpdate();
+			
+			System.out.println("result"+result);
+			
+		} finally {
+			closeAll(rs, psmt, con);
+		}
+		return result;
+		
+	}
 
 }

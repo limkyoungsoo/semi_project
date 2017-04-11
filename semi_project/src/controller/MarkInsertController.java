@@ -24,14 +24,18 @@ public class MarkInsertController implements Controller {
 			// member, store 각자 두번 넣어주기...
 			boolean flag =  StoreDAO.getInstance().findMenuNo(menuNo);
 			
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			
 			if(flag != true){
+				// findMenuNo가 false 일때 들어감
 				StoreDAO.getInstance().insertMenumark(memId, menuNo);
+				System.out.println("findMenuNo::::"+flag);
+				out.println("찜 등록 완료되었습니다.");
 			}else{
-				response.setContentType("text/html;charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.print("이미 등록된 메뉴입니다");
-				out.close();
+				out.println("이미 등록된 메뉴입니다.");
 			}
+			out.close();
 			
 		}
 		return "AjaxView";

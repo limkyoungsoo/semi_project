@@ -86,12 +86,9 @@ img.img-responsive.img-border-left{
 				type:"get",
 				url:"DispatcherServlet",
 				data:"command=markInsert&menuno="+$("#hidden").val(),
-				success:function(){
-					alert('찜 목록에 추가되었습니다');
-				},
-				error: function () {
-					alert('이미 등록되어 있는 메뉴입니다. ');
-					return false;
+				success:function(data){
+					// false일때 등록됨
+					// MarkInsertController에서 out.print 로 처리함
 				}
 			});//ajax
 		});//markBtn Click

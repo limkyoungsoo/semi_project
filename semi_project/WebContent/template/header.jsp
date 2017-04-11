@@ -4,7 +4,7 @@
 <script type="text/javascript">
 	function openPopup() {
 		open("${pageContext.request.contextPath}/board/login.jsp", "mypopup",
-				"width=220, height=220, top=150, left=650");
+				"width=220, height=300, top=150, left=650");
 	}
 	function logoutCheck() {
 		if (confirm("로그아웃 하시겠습니까 ? ")) {
@@ -22,6 +22,11 @@
 			<a href="${pageContext.request.contextPath}/board/register.jsp"><font
 				color="white">회원가입</font></a>
 		</c:when>
+		<c:when test="${sessionScope.member.mId=='admin' }">
+         ${sessionScope.member.mNick}
+         &nbsp<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminMember"><font color="white">회원관리</font></a>
+          &nbsp|<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminStore"><font color="white">가게관리</font></a>
+      </c:when>
 		<c:otherwise>
 			${sessionScope.member.mNick}
 			&nbsp<a href="#"><font color="white">즐겨찾기</font></a>
