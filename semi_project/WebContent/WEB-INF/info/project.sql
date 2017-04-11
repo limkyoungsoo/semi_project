@@ -30,7 +30,8 @@ create table store(
  storeLoc varchar2(100) not null,
  storeTel varchar2(100) not null,
  storePic varchar2(100) not null,
- openHour varchar2(100) not null
+ openHour varchar2(100) not null,
+ storePla varchar2(100) not null
 );
 
 ALTER TABLE store modify storePla varchar2(100) not null;
@@ -38,8 +39,8 @@ ALTER TABLE store modify storePla varchar2(100) not null;
 ALTER TABLE [TABLE_NAME] MODIFY ( [COLUMN_NAME] [DATA_TYPE] [NULL|NOT NULL] );
 
 ALTER TABLE store DROP COLUMN storePla ;
-
-
+--ALTER TABLE dept ADD ( address varchar2(100) default '' );
+alter table store add (storePla varchar2(100));
 -- 메뉴 테이블
 create table menu(
  menuNo number primary key,
@@ -78,6 +79,11 @@ create table msgMemberMenu(
 );
 
 insert into msgMember(mId,mPass,mNick)values('java',1234,'코스타');
+insert into msgMember(mId,mPass,mNick)values('admin',1234,'관리자');
+insert into msgMember(mId,mPass,mNick)values('java2',1234,'코스타');
+insert into msgMember(mId,mPass,mNick)values('java3',1234,'코스타');
+insert into msgMember(mId,mPass,mNick)values('java4',1234,'코스타');
+
 delete msgMember where mId='java'
 select * from msgMember;
 

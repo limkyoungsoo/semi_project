@@ -4,7 +4,7 @@
     <!DOCTYPE html>
 <html>
 <head>
-<c:import url="${pageContex.request.contextPath}/template/straplink.html"></c:import>
+<c:import url="/template/straplink.html"></c:import>
 </head>
 <body>
 	<c:import url="/template/header.jsp"></c:import>

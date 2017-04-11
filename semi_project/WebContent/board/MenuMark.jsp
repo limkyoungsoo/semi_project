@@ -5,7 +5,7 @@
 <html>
 <head>
 <c:import
-   url="${pageContex.request.contextPath}/template/straplink.html"></c:import>
+   url="/template/straplink.html"></c:import>
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
