@@ -111,7 +111,7 @@ public class MemberDAO {
 		}
 
 		return vo;
-	}
+
 
 	public void updateMemberInfo(String mId, String mPass, String mNick) throws SQLException {
 		Connection con = null;
