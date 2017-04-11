@@ -23,7 +23,8 @@ delete store where storetel like '%031%'
 create table msgMember(
  mId varchar2(100) primary key,
  mPass varchar2(100) not null,
- mNick varchar2(100) not null
+ mNick varchar2(100) not null,
+ mGrant varchar2(100) default '준회원'
 );
 
 insert into msgMember(mId,mPass,mNick) values('admin','1234','어드민')
@@ -35,7 +36,8 @@ create table store(
  storeLoc varchar2(100) not null,
  storeTel varchar2(100) not null,
  storePic varchar2(100) not null,
- openHour varchar2(100) not null
+ openHour varchar2(100) not null,
+ storePla varchar2(100) not null
 );
 
 
@@ -57,6 +59,13 @@ storePic='go1.jpg',openHour='매일 11:31~00:00 연중무휴'  where storeTel='0
 
 select * from store
 
+ALTER TABLE store modify storePla varchar2(100) not null;
+
+ALTER TABLE [TABLE_NAME] MODIFY ( [COLUMN_NAME] [DATA_TYPE] [NULL|NOT NULL] );
+
+ALTER TABLE store DROP COLUMN storePla ;
+--ALTER TABLE dept ADD ( address varchar2(100) default '' );
+alter table store add (storePla varchar2(100));
 -- 메뉴 테이블
 create table menu(
  menuNo number primary key,
@@ -64,7 +73,7 @@ create table menu(
  menuName varchar2(100) not null,
  menuPrice number not null,
  menuPic varchar2(200) not null,
- constraint fk_storeName foreign key(storeName) references store(storeName)
+ constraint fk_storeName foreign key(storeName) references store(storeName) on delete cascade
 );
 
 -- 메뉴 번호 시퀀스
@@ -97,12 +106,17 @@ create sequence reNo_seq;
 create table msgMemberMenu(
  menuNo number not null,
  mId varchar2(100) not null,
- constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo),
+ constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo) on delete cascade,
  constraint fk_mId_2 foreign key(mId) references msgMember(mId),
  constraint pk_menuNo_mId primary key(menuNo,mId)
 );
 
 insert into msgMember(mId,mPass,mNick)values('java',1234,'코스타');
+insert into msgMember(mId,mPass,mNick)values('admin',1234,'관리자');
+insert into msgMember(mId,mPass,mNick)values('java2',1234,'코스타');
+insert into msgMember(mId,mPass,mNick)values('java3',1234,'코스타');
+insert into msgMember(mId,mPass,mNick)values('java4',1234,'코스타');
+
 delete msgMember where mId='java'
 select * from msgMember;
 
@@ -147,6 +161,7 @@ select * from msgMember
 select mid,mpass,mnick from msgMember		
 
 insert into msgMember(mid,mpass,mnick) values('java','1234','자바')
+insert into msgMember(mid,mpass,mnick, mgrant) values('admin','1234','임경수','정회원'); 
 
 select mid from msgMember where mid='java'
 
@@ -181,6 +196,7 @@ FROM (SELECT *
         ORDER BY DBMS_RANDOM.RANDOM()
     )
 WHERE ROWNUM <=1
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 
 
 select count(*) 
@@ -193,10 +209,27 @@ SELECT r.* FROM(
 			reNo,menuNo,mId,review,grade,time_posted 
 			from menureview) r 
 			where rnum between 1 and 10
+<<<<<<< HEAD
 			
 			select * from msgMemberMenu;
 			
 			delete msgMemberMenu where menuno like '%'
 			
 			
+=======
+
+			
+/*menu , msgmember 메뉴 관리자 페이지 때문에 수정할께요!!*/
+ALTER TABLE menu
+DROP CONSTRAINT fk_storeName;
+
+alter table MENU
+add  constraint fk_storeName foreign key(storeName) references store(storeName) on delete cascade;
+
+ALTER TABLE msgMemberMenu
+DROP CONSTRAINT fk_menuNo_2;
+
+alter table msgMemberMenu
+add  constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo) on delete cascade;
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 					

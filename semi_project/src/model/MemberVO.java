@@ -4,22 +4,27 @@ public class MemberVO {
 	private String mId;
 	private String mPass;
 	private String mNick;
+	private String mGrant;
 
 	public MemberVO(MemberVO memberVO) {
 		super();
 	}
 
-	public MemberVO(String mId, String mNick) {
+	public MemberVO() {
+	}
+
+	public MemberVO(String mId, String mNick, String mGrant) {
 		super();
 		this.mId = mId;
 		this.mNick = mNick;
+		this.mGrant = mGrant;
 	}
 
-	public MemberVO(String mId, String mPass, String mNick) {
-		super();
+	public MemberVO(String mId, String mPass, String mNick, String mGrant) {
 		this.mId = mId;
 		this.mPass = mPass;
 		this.mNick = mNick;
+		this.mGrant = mGrant;
 	}
 
 	public String getmId() {
@@ -46,9 +51,17 @@ public class MemberVO {
 		this.mNick = mNick;
 	}
 
+	public String getmGrant() {
+		return mGrant;
+	}
+
+	public void setmGrant(String mGrant) {
+		this.mGrant = mGrant;
+	}
+
 	@Override
 	public String toString() {
-		return "MemberVO [mId=" + mId + ", mPass=" + mPass + ", mNick=" + mNick + "]";
+		return "MemberVO [mId=" + mId + ", mPass=" + mPass + ", mNick=" + mNick + ", mGrant=" + mGrant + "]";
 	}
 
 }

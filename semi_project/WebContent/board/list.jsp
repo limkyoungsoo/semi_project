@@ -4,7 +4,7 @@
     <!DOCTYPE html>
 <html>
 <head>
-<c:import url="${pageContex.request.contextPath}/template/straplink.html"></c:import>
+<c:import url="/template/straplink.html"></c:import>
 </head>
 <body>
 	<c:import url="/template/header.jsp"></c:import>
@@ -16,7 +16,10 @@
                 <div class="col-lg-12">
                     <hr>
                     <h2 class="intro-text text-center">
-                    <strong>${loc}</strong>
+                    <c:if test="${empty loc}">
+                    	<strong>전체레스토랑</strong>
+                    </c:if>
+                    	   <strong>${loc}</strong>
                     </h2>
                     <hr>
                 </div>
@@ -33,6 +36,29 @@
                 </c:forEach>
                 
                 <div class="clearfix"></div>
+                <c:if test="${empty loc}">
+				<p class="paging">
+					<c:set var="pb" value="${requestScope.listVo.pagingBean}"></c:set>
+					
+					<c:if test="${pb.previousPageGroup}">
+						<a href="DispatcherServlet?command=storeAllList&pageNo=${pb.startPageOfPageGroup-1}">◀&nbsp;
+						</a>
+					</c:if>
+					<c:forEach var="pageNo" begin="${pb.startPageOfPageGroup}"
+						end="${pb.endPageOfPageGroup}">
+						<c:choose>
+							<c:when test="${pb.nowPage!=pageNo}">
+								<a href="DispatcherServlet?command=storeAllList&pageNo=${pageNo}">${pageNo}</a>
+							</c:when>
+							<c:otherwise>${pageNo}</c:otherwise>
+						</c:choose>&nbsp;
+						</c:forEach>
+					<c:if test="${pb.nextPageGroup}">
+						<a href="DispatcherServlet?command=storeAllList&pageNo=${pb.endPageOfPageGroup+1}">▶</a>
+					</c:if>
+				</p>
+				</c:if>
+				<c:if test="${!empty loc}">
 				<p class="paging">
 					<c:set var="pb" value="${requestScope.listVo.pagingBean}"></c:set>
 					
@@ -53,6 +79,7 @@
 						<a href="DispatcherServlet?command=storeList&pageNo=${pb.endPageOfPageGroup+1}&loc=${loc}">▶</a>
 					</c:if>
 				</p>
+				</c:if>
 			</div>
    	     </div>
     </div>

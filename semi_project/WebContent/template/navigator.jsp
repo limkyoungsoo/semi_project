@@ -14,7 +14,7 @@
 					class="icon-bar"></span>
 			</button>
 			<!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-			<a class="navbar-brand" href="/main.jsp">Menu Selector Guide</a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath }/main.jsp">Menu Selector Guide</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
@@ -31,20 +31,13 @@
 								추천</a></li>
 					</c:when>
 				</c:choose>
-
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#" role="button" aria-expanded="false">검색할 장소를 눌러주세요 ! <span
 						class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a
-							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=유스페이스">유스페이스</a></li>
-						<li><li><a
-							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=유스페이스2">유스페이스2</a></li>
-						<li>
-						<a
-							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=H스퀘어">H스퀘어</a></li>
-						<li><a
-							href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=삼환하이펙스">삼환하이펙스</a></li>
+						<c:forEach items="${sessionScope.storeLocList }" var="storeLocList">
+							<li><a href="${pageContext.request.contextPath}/DispatcherServlet?command=storeList&loc=${storeLocList.storePla }">${storeLocList.storePla }</a></li>
+						</c:forEach>
 					</ul></li>
 			</ul>
 		</div>

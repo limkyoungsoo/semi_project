@@ -4,48 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<title>About - Business Casual - Start Bootstrap Theme</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- Bootstrap Core CSS -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Custom CSS -->
-<link
-	href="${pageContext.request.contextPath}/bootstrap/css/business-casual.css"
-	rel="stylesheet">
-
-<!-- Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-	rel="stylesheet" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
-	rel="stylesheet" type="text/css">
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery.min.js"></script>
-
+<jsp:include page="/template/starCss.html"/>
+<c:import url="/template/straplink.html"></c:import>
 <style type="text/css">
 img.img-responsive.img-border-left{
 	margin: auto;
@@ -62,12 +22,6 @@ img.img-responsive.img-border-left{
 				dataType:"json",
 				data:"command=detailOtherMenu&menuNo="+$(this).next().next().val(),
 				success:function(data){
-					/* var info="";
-					info+="<td>"+data.menuVO.menuNo+"</td><br>";
-					info+="<td>"+data.menuVO.menuName+"</td><br>";
-					info+="<td>"+data.menuVO.menuPrice+"원"+"</td><br>";
-					info+="<td>"+data.storeName+"</td><br>";
-					$("#result").html(info); */
 					var menuNo=data.menuVO.menuNo;
 					$("#menuNo").text(menuNo);
 					var menuName=data.menuVO.menuName;
@@ -81,16 +35,23 @@ img.img-responsive.img-border-left{
 			});//ajax
 		});//click
 		$("#markNo").click(function(){
-			//alert($("#hidden").val());
-			 $.ajax({
+			$.ajax({
 				type:"get",
 				url:"DispatcherServlet",
+<<<<<<< HEAD
 				data:"command=markInsert&menuno="+$("#hidden").val(),
 				success:function(data){
 					// false일때 등록됨
 					// MarkInsertController에서 out.print 로 처리함
 				}
 			});//ajax
+=======
+				data:"command=markInsert&menuno="+$("#menuNo").text(),
+				success:function(){
+					alert("찜 목록에 추가되었습니다");
+				}//success
+			});//ajax 
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 		});//markBtn Click
 	});//ready
 </script>
@@ -131,7 +92,6 @@ img.img-responsive.img-border-left{
 						alt="" width="304" height="236" id="changeImg">
 				</div>
 				<div class="col-md-6 menuInfo">
-					<input type="hidden" id="hidden" value="${requestScope.menuList.menuVO.menuNo}"> 
 					<p>
 					<h3>메뉴번호</h3>
 					<h3><span id="menuNo">${requestScope.menuList.menuVO.menuNo}</span></h3>
@@ -176,7 +136,6 @@ img.img-responsive.img-border-left{
 							<h3>
 								${menuImgList.menuName} <small>메뉴번호:${menuImgList.menuNo}</small>
 							</h3>
-
 							<input type="hidden" value="${menuImgList.menuNo}">
 					</div>
 				</c:forEach>
@@ -195,14 +154,20 @@ img.img-responsive.img-border-left{
 	</div>
 	<!-- review include -->
 
-
-
-	<c:import url="/template/footer.jsp"></c:import>
-	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
+	
+<!-- jQuery -->
+	<script src="bootstrap/js/jquery.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 
+	<!-- Script to Activate the Carousel
+	<script>
+		$('.carousel').carousel({
+			interval : 5000
+		//changes the speed
+		})
+	</script> -->
+<c:import url="/template/footer.jsp"></c:import>
 </body>
 </html>

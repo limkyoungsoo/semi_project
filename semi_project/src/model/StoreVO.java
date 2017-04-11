@@ -13,7 +13,7 @@ public class StoreVO {
 	public StoreVO() {
 		super();
 	}
-	
+
 	public StoreVO(String storePla) {
 		super();
 		this.storePla = storePla;
@@ -65,14 +65,6 @@ public class StoreVO {
 		this.openHour = openHour;
 	}
 
-	public int getRnum() {
-		return rnum;
-	}
-
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
-	}
-
 	public String getStoreName() {
 		return storeName;
 	}
@@ -113,6 +105,14 @@ public class StoreVO {
 		this.openHour = openHour;
 	}
 
+	public String getStorePla() {
+		return storePla;
+	}
+
+	public void setStorePla(String storePla) {
+		this.storePla = storePla;
+	}
+
 	public MenuVO getMenuVO() {
 		return menuVO;
 	}
@@ -121,11 +121,18 @@ public class StoreVO {
 		this.menuVO = menuVO;
 	}
 
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 	@Override
 	public String toString() {
 		return "StoreVO [storeName=" + storeName + ", storeLoc=" + storeLoc + ", storeTel=" + storeTel + ", storePic="
 				+ storePic + ", openHour=" + openHour + ", storePla=" + storePla + ", menuVO=" + menuVO + ", rnum="
 				+ rnum + "]";
 	}
-	
 }

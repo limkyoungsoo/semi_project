@@ -16,6 +16,8 @@ public class MenuVO {
 		this.menuPrice = menuPrice;
 		this.menuPic = menuPic;
 	}
+	
+	
 	public int getMenuNo() {
 		return menuNo;
 	}
@@ -40,6 +42,7 @@ public class MenuVO {
 	public void setMenuPic(String menuPic) {
 		this.menuPic = menuPic;
 	}
+	
 	@Override
 	public String toString() {
 		return "MenuVO [menuNo=" + menuNo + ", menuName=" + menuName + ", menuPrice=" + menuPrice + ", menuPic="

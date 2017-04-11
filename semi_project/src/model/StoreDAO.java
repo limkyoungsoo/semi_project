@@ -23,6 +23,7 @@ public class StoreDAO {
 	public Connection getConnection() throws SQLException {
 		return dataSource.getConnection();
 	}
+	
 	public ArrayList<StoreVO> getStoreNameList() throws SQLException {
 		ArrayList<StoreVO> storeList = new ArrayList<StoreVO>();
 		Connection con = null;
@@ -42,8 +43,6 @@ public class StoreDAO {
 		}
 		return storeList;
 	}
-	
-	
 
 	public ArrayList<StoreVO> getStoreShowList() throws SQLException {
 		ArrayList<StoreVO> storeList = new ArrayList<StoreVO>();
@@ -395,63 +394,61 @@ public class StoreDAO {
       
    }
 	 
-	 public void deleteMenumark(int menuNo) throws SQLException {
-			Connection con = null;
-		      PreparedStatement psmt =null;
-		      ResultSet rs = null;
-		      
-		      try {
-		         con = getConnection();
-		         String sql ="delete msgMemberMenu where menuNo=?";
-		         psmt = con.prepareStatement(sql);
-		         psmt.setInt(1, menuNo);
-		         psmt.executeUpdate();
-		         
-		      } finally {
-		         closeAll(rs, psmt, con);
-		      }
-		}
-
-	 public ArrayList<StoreVO>  getAdminStoreList(PagingBean pagingBean) throws SQLException {
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs =null;
+	public void deleteMenumark(int menuNo) throws SQLException {
+		Connection con = null;
+	      PreparedStatement psmt =null;
+	      ResultSet rs = null;
+	      
+	      try {
+	         con = getConnection();
+	         String sql ="delete msgMemberMenu where menuNo=?";
+	         psmt = con.prepareStatement(sql);
+	         psmt.setInt(1, menuNo);
+	         psmt.executeUpdate();
+	         
+	      } finally {
+	         closeAll(rs, psmt, con);
+	      }
+	}
+	public ArrayList<StoreVO>  getAdminStoreList(PagingBean pagingBean) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		
+		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+		
+		try {
+			con = getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT S.* FROM(");
+			sql.append("SELECT row_number() over(order by storeName asc) rnum,");
+			sql.append("storeName,storePic,storeLoc,storeTel,openHour ");
+			sql.append("from store) S ");
+			sql.append("where rnum between ? and ?");
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, pagingBean.getStartRowNumber());
+			pstmt.setInt(2, pagingBean.getEndRowNumber());
+			System.out.println("startRowNum " + pagingBean.getStartRowNumber());
+			System.out.println("endRowNum " + pagingBean.getEndRowNumber());
 			
-			ArrayList<StoreVO> list = new ArrayList<StoreVO>();
+			rs = pstmt.executeQuery();
 			
-			try {
-				con = getConnection();
-				StringBuilder sql = new StringBuilder();
-				sql.append("SELECT S.* FROM(");
-				sql.append("SELECT row_number() over(order by storeName asc) rnum,");
-				sql.append("storeName,storePic,storeLoc,storeTel,openHour ");
-				sql.append("from store) S ");
-				sql.append("where rnum between ? and ?");
-				pstmt = con.prepareStatement(sql.toString());
-				pstmt.setInt(1, pagingBean.getStartRowNumber());
-				pstmt.setInt(2, pagingBean.getEndRowNumber());
-				System.out.println("startRowNum " + pagingBean.getStartRowNumber());
-				System.out.println("endRowNum " + pagingBean.getEndRowNumber());
-				
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()){
-					StoreVO vo = new StoreVO();
-					vo.setRnum(rs.getInt("rnum"));
-					vo.setStoreName(rs.getString("storeName"));
-					vo.setStorePic(rs.getString("storePic"));
-					vo.setStoreLoc(rs.getString("storeLoc"));
-					vo.setStoreTel(rs.getString("storeTel"));
-					vo.setOpenHour(rs.getString("openHour"));
-					list.add(vo);
-				}
-				
-			} finally {
-				closeAll(rs, pstmt, con);
+			while(rs.next()){
+				StoreVO vo = new StoreVO();
+				vo.setRnum(rs.getInt("rnum"));
+				vo.setStoreName(rs.getString("storeName"));
+				vo.setStorePic(rs.getString("storePic"));
+				vo.setStoreLoc(rs.getString("storeLoc"));
+				vo.setStoreTel(rs.getString("storeTel"));
+				vo.setOpenHour(rs.getString("openHour"));
+				list.add(vo);
 			}
-			return list;
+			
+		} finally {
+			closeAll(rs, pstmt, con);
 		}
-
+		return list;
+	}
 
 	public StoreVO getAdminStoreModify(String name) throws SQLException {
 		Connection con = null;
@@ -488,24 +485,26 @@ public class StoreDAO {
 		Connection con = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
+		System.out.println(name+">>"+loc+">>"+pic+">>"+time+">>"+tel);
 		
 		try {
 			con = getConnection();
-			String sql = "update store set storeTel=?,storeLoc=?, storePic=?,openHour=?  where storeName=?";
+			String sql = "update store set storeName=?,storeLoc=?, storePic=?,openHour=?  where storeTel=?";
 			psmt = con.prepareStatement(sql);
-			psmt.setString(1, time);
+			psmt.setString(1, name);
 			psmt.setString(2, loc);
 			psmt.setString(3, pic);
-			psmt.setString(4, tel);
-			psmt.setString(5, name);
-			int result = psmt.executeUpdate();
+			psmt.setString(4, time);
+			psmt.setString(5, tel);
+			psmt.executeQuery();
+			
 			
 		} finally {
 			closeAll(rs, psmt, con);
 		}
 		
 	}
-	
+
 	public void adminStoreDelete(String storeName) throws SQLException {
 		Connection con = null;
 	      PreparedStatement psmt =null;
@@ -522,3 +521,34 @@ public class StoreDAO {
 	         closeAll(rs, psmt, con);
 	      }
 	}
+
+	public int insertStore(String name, String loc, String tel, String time, String saveName) throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		System.out.println(name+loc+tel+saveName+time);
+		
+		try {
+			con = getConnection();
+			String sql = "insert into store(storeName,storeLoc,storeTel,openHour,storePic) values(?,?,?,?,?)";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.setString(2, loc);
+			psmt.setString(3, tel);
+			psmt.setString(4, time);
+			psmt.setString(5, saveName);
+			result= psmt.executeUpdate();
+			
+			System.out.println("result"+result);
+			
+		} finally {
+			closeAll(rs, psmt, con);
+		}
+		return result;
+		
+	}
+
+
+}

@@ -32,7 +32,8 @@ public class MemberDAO {
 		if (con != null)
 			con.close();
 	}
-	public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException{
+
+	public void closeAll(PreparedStatement pstmt, Connection con) throws SQLException {
 		if (pstmt != null)
 			pstmt.close();
 		if (con != null)
@@ -135,56 +136,82 @@ public class MemberDAO {
 		}
 	}
 
-	// Member 승인
-		public int updateMember(String mId) throws SQLException {
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			String grant ="";
-			int result = -1;
-			try {
-				con = getConnection();
-				String sql = "select mGrant from msgMember where mId =?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, mId);
-				rs = pstmt.executeQuery();
-				
-				if(rs.next()){
-					grant = rs.getString(1);
-				}
-				
-				if(grant.equals("정회원")){
-					grant = "준회원";
-				}
-				else if(grant.equals("준회원")){
-					grant="정회원";
-				}
-				pstmt.close();
-				sql = "update msgMember set mGrant=? where mId=?";
-				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, grant);
-				pstmt.setString(2, mId);
-				result = pstmt.executeUpdate();
-				if (result == 1) {
-					System.out.println("회원정보 변경여부:true");
-				} else if (result == 0) {
-					System.out.println("회원정보 변경여부:false");
-				}
-			} finally {
-				closeAll(rs,pstmt, con);
+	public int updateMember(String mId) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String grant ="";
+		int result = -1;
+		try {
+			con = getConnection();
+			String sql = "select mGrant from msgMember where mId =?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()){
+				grant = rs.getString(1);
 			}
-			return result;
+			
+			if(grant.equals("정회원")){
+				grant = "준회원";
+			}
+			else if(grant.equals("준회원")){
+				grant="정회원";
+			}
+			pstmt.close();
+			sql = "update msgMember set mGrant=? where mId=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, grant);
+			pstmt.setString(2, mId);
+			result = pstmt.executeUpdate();
+			if (result == 1) {
+				System.out.println("회원정보 변경여부:true");
+			} else if (result == 0) {
+				System.out.println("회원정보 변경여부:false");
+			}
+		} finally {
+			closeAll(rs,pstmt, con);
 		}
-
-
-	public ArrayList<MemberVO> getAllMembers() {
-		// TODO Auto-generated method stub
-		return null;
+		return result;
 	}
 
-	public int deleteMemberInfo(String mId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public ArrayList<MemberVO> getAllMembers() throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<MemberVO> memberList = new ArrayList<MemberVO>();
+		try {
+			con = getConnection();
+			String sql = "select mId,mPass,mNick, mGrant from msgMember";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				memberList.add(new MemberVO(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+			}
+		} finally {
+			closeAll(rs, pstmt, con);
+		}
+
+		return memberList;
+	}
+
+	public int deleteMemberInfo(String mId) throws SQLException {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int result = -2;
+		try {
+			con = getConnection();
+			String sql = "delete from msgMember where mId=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mId);
+			result = pstmt.executeUpdate();
+		} finally {
+			closeAll(pstmt, con);
+		}
+
+		return result;
+
 	}
 
 }

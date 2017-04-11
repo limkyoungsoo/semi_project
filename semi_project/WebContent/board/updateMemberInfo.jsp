@@ -32,12 +32,8 @@
 			alert("회원정보 수정 페이지로 이동합니다");
 		});//submit
 		$("#cancelBtn").click(function(){
-			$.ajax({
-				type:"post",
-				url:"DispatcherServlet",
-				data:"command=storeShow",
-				success:function(){}
-			});// ajax
+			alert("메인페이지로 돌아갑니다");
+			location.href="${pageContext.request.contextPath}/main.jsp";
 		});//click
 	});// ready
 </script>
@@ -52,6 +48,8 @@
 		</div>
 
 		<!-- 세션이 있을 떄, 없을 때로 나눠서 하기 -->
+		<c:choose>
+		<c:when test="${sessionScope.member.mId!=null }">
 		<div class="col-md-6 col-md-offset-3">
 			<form role="form" id="idForm" action="${pageContext.request.contextPath}/DispatcherServlet">
 				<div class="form-group">
@@ -83,6 +81,13 @@
 				</div>
 			</form>
 		</div>
+		</c:when>
+		<c:otherwise>
+			<c:redirect url="/DispatcherServlet">
+				<c:param value="storeShow" name="command"/>
+			</c:redirect>
+		</c:otherwise>
+		</c:choose>
 
 
 	</article>
