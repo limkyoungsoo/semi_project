@@ -21,12 +21,6 @@ img.img-responsive.img-border-left{
 				dataType:"json",
 				data:"command=detailOtherMenu&menuNo="+$(this).next().next().val(),
 				success:function(data){
-					/* var info="";
-					info+="<td>"+data.menuVO.menuNo+"</td><br>";
-					info+="<td>"+data.menuVO.menuName+"</td><br>";
-					info+="<td>"+data.menuVO.menuPrice+"원"+"</td><br>";
-					info+="<td>"+data.storeName+"</td><br>";
-					$("#result").html(info); */
 					var menuNo=data.menuVO.menuNo;
 					$("#menuNo").text(menuNo);
 					var menuName=data.menuVO.menuName;
@@ -40,15 +34,14 @@ img.img-responsive.img-border-left{
 			});//ajax
 		});//click
 		$("#markNo").click(function(){
-			//alert($("#menuNo").text());
-			 $.ajax({
+			$.ajax({
 				type:"get",
 				url:"DispatcherServlet",
 				data:"command=markInsert&menuno="+$("#menuNo").text(),
 				success:function(){
 					alert("찜 목록에 추가되었습니다");
 				}//success
-			});//ajax
+			});//ajax 
 		});//markBtn Click
 	});//ready
 </script>
@@ -133,7 +126,6 @@ img.img-responsive.img-border-left{
 							<h3>
 								${menuImgList.menuName} <small>메뉴번호:${menuImgList.menuNo}</small>
 							</h3>
-
 							<input type="hidden" value="${menuImgList.menuNo}">
 					</div>
 				</c:forEach>

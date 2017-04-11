@@ -30,8 +30,16 @@ create table store(
  storeLoc varchar2(100) not null,
  storeTel varchar2(100) not null,
  storePic varchar2(100) not null,
- openHour varchar2(100) not null
+ openHour varchar2(100) not null,
+ storePla varchar2(100) not null
 );
+
+ALTER TABLE store modify storePla varchar2(100) not null;
+
+ALTER TABLE [TABLE_NAME] MODIFY ( [COLUMN_NAME] [DATA_TYPE] [NULL|NOT NULL] );
+
+ALTER TABLE store DROP COLUMN storePla ;
+
 
 -- 메뉴 테이블
 create table menu(
@@ -40,7 +48,7 @@ create table menu(
  menuName varchar2(100) not null,
  menuPrice number not null,
  menuPic varchar2(200) not null,
- constraint fk_storeName foreign key(storeName) references store(storeName)
+ constraint fk_storeName foreign key(storeName) references store(storeName) on delete cascade
 );
 
 -- 메뉴 번호 시퀀스
@@ -65,7 +73,7 @@ create sequence reNo_seq;
 create table msgMemberMenu(
  menuNo number not null,
  mId varchar2(100) not null,
- constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo),
+ constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo) on delete cascade,
  constraint fk_mId_2 foreign key(mId) references msgMember(mId),
  constraint pk_menuNo_mId primary key(menuNo,mId)
 );
@@ -144,6 +152,7 @@ FROM (SELECT *
         ORDER BY DBMS_RANDOM.RANDOM()
     )
 WHERE ROWNUM <=1
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 
 
 select count(*) 

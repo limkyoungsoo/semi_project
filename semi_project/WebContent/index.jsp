@@ -7,18 +7,16 @@
 <c:import url="/template/straplink.html"></c:import>
 
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$(".item")
-								.on(
-										"click",
-										"img",
-										function() {
-											location.href = "${pageContext.request.contextPath}/DispatcherServlet?command=detailStore&storeName="
+	$(document).ready(function() {
+		$(".item").on("click","img",function() {
+			if(${sessionScope.member == null}){
+				alert("로그인 후 사용 가능한 페이지 입니다.");
+				return;
+			}
+			location.href = "${pageContext.request.contextPath}/DispatcherServlet?command=detailStore&storeName="
 													 + $(this).attr('alt') ;
-										});
-					});
+			});
+		});
 </script>
 </head>
 <body>

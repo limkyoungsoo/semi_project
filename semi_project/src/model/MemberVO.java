@@ -8,6 +8,12 @@ public class MemberVO {
 	public MemberVO(MemberVO memberVO) {
 		super();
 	}
+	
+
+	public MemberVO() {
+		super();
+	}
+
 
 	public MemberVO(String mId, String mNick) {
 		super();
