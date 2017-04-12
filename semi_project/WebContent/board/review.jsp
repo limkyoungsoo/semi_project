@@ -24,7 +24,7 @@
 						$("#write")
 								.click(
 										function() { // 리뷰 등록
-											alert($("#reviewForm").serialize());
+											
 											$
 													.ajax({
 														type : "get",
@@ -96,10 +96,10 @@
 
 						////////////////////////////////////////////////////////////////
 
-						$("#menuOption").change(function() {
+						/* $("#menuOption").change(function() {
 							var menuOption = $(this).val();
 							alert(menuOption);
-						});
+						}); */
 
 						////////////////////////////////////////////////////////////////
 
@@ -140,7 +140,7 @@
 								.change(
 										function() {
 											selectMenuName=$(this).val();
-											alert(selectMenuName);
+											
 											if ($("#sel1").val() == ""
 													|| $("#sel1").val() == null) {
 												$("#avgStar").hide();
@@ -159,7 +159,7 @@
 															var info = "";
 															var info2 = "";
 															for (var i = 0; i < data["avgList"].list.length; i++) {
-																alert(data["avgList"].list[0].avgGrade);
+																
 																var grade = data["avgList"].list[i].avgGrade;
 																if (grade == "1") {
 																	info += '<i class="fa fa-star" style="font-size: 24px; color: red">'
@@ -236,7 +236,7 @@
 										
 										//////////////////////////
 						 $(".paging").on("click",".pageNum",function(){
-							 //alert($(this).val());
+							 
 							 var nextPage="";
 							 if($(this).val()==""){
 								 nextPage=$(this).next().val();
@@ -244,7 +244,7 @@
 							 else{
 								 nextPage=$(this).val();
 							 }
-								alert(nextPage);
+								
 							 $.ajax({
 								type:"get",
 								url:"DispatcherServlet",
