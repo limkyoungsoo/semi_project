@@ -35,11 +35,14 @@
                  <table class="table table-hover" border="1" bgcolor="white">
                    <thead>
                      <tr>
-                        
                         </th>
-                        <th>이름</th>
+                        <th>가게이름</th>
                          <th><input type="text" name="name" ></th>
-
+                     </tr>
+                     <tr>
+                        </th>
+                        <th>건물명</th>
+                         <th><input type="text" name="storeName" ></th>
                      </tr>
                      <tr>
                        <th>위치</th>

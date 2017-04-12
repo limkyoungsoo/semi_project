@@ -46,6 +46,7 @@ String dir = application.getRealPath("/storeImg");
  String pic="";
  String filename="";
  String saveName="";
+ String storeName="";
  
  
  try{
@@ -61,6 +62,7 @@ String dir = application.getRealPath("/storeImg");
   tel = multi.getParameter("tel");
   time = multi.getParameter("time");
   filename = multi.getParameter("filename");
+  storeName = multi.getParameter("storeName");
   
 // 업로드한 파일들을 Enumeration 타입으로 반환
 // Enumeration형은 데이터를 뽑아올때 유용한 인터페이스 Enumeration객체는 java.util 팩키지에 정의 되어있으므로
@@ -71,7 +73,6 @@ String dir = application.getRealPath("/storeImg");
   // 업로드한 파일들의 이름을 얻어옴
   String file = (String)files.nextElement();
   filename = multi.getFilesystemName(file);
- 
  
  }catch(Exception e){
   // 예외처리
@@ -97,8 +98,12 @@ String dir = application.getRealPath("/storeImg");
 				입력내용입니다.
 			</tr>
 			<tr>
-				<th>작성자 </th>
+				<th>가게이름 </th>
 				<td><%=name %> </td>
+			</tr>
+			<tr>
+				<th>건물명 </th>
+				<td><%=storeName %> </td>
 			</tr>
 			<tr>
 				<th>주소  </th>
@@ -131,6 +136,7 @@ String dir = application.getRealPath("/storeImg");
 	<input type="hidden" name="time" value="<%=time %> ">
 	<input type="hidden" name="dir" value="<%=dir %> ">
 	<input type="hidden" name="saveName" value="<%=saveName %> ">
+	<input type="hidden" name="storeName" value="<%=storeName %> ">
 	<input type="hidden" name="command" value="insertStore">
 	<input type="submit" name="saveBtn" value="저장">
 </form>

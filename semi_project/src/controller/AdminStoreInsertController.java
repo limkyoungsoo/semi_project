@@ -19,6 +19,7 @@ public class AdminStoreInsertController implements Controller {
 		String tel = request.getParameter("tel");
 		String time = request.getParameter("time");
 		String saveName = request.getParameter("saveName");
+		String storeName = request.getParameter("storeName");
 		String url = "";
 
 		StoreVO vo  =   StoreDAO.getInstance().getAdminStoreModify(saveName);
@@ -26,7 +27,7 @@ public class AdminStoreInsertController implements Controller {
 		if(vo.getStoreName() != null){
 			System.out.println("무결성 제약 조건");
 		}
-			int result = StoreDAO.getInstance().insertStore(name,loc,tel,time,saveName);
+			int result = StoreDAO.getInstance().insertStore(name,loc,tel,time,saveName,storeName);
 			url ="redirect:DispatcherServlet?command=adminStore";
 		
 		return url;
