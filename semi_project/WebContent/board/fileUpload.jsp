@@ -46,6 +46,7 @@ String dir = application.getRealPath("/storeImg");
  String pic="";
  String filename="";
  String saveName="";
+ String storeName="";
  
  
  try{
@@ -61,28 +62,29 @@ String dir = application.getRealPath("/storeImg");
   tel = multi.getParameter("tel");
   time = multi.getParameter("time");
   filename = multi.getParameter("filename");
+  storeName = multi.getParameter("storeName");
   
 // 업로드한 파일들을 Enumeration 타입으로 반환
 // Enumeration형은 데이터를 뽑아올때 유용한 인터페이스 Enumeration객체는 java.util 팩키지에 정의 되어있으므로
 // java.util.Enumeration을 import 시켜야 한다.
   Enumeration files = multi.getFileNames();
  
-  
   // 업로드한 파일들의 이름을 얻어옴
   String file = (String)files.nextElement();
+  out.println("업로드한 파일들의 이름을 얻어옴"+file);
+  
   filename = multi.getFilesystemName(file);
- 
  
  }catch(Exception e){
   // 예외처리
   e.printStackTrace();
  }
  
- saveName = today+filename;
+ //saveName = today+filename;
+ saveName = filename;
  
 %>
   
-<html>
 <body onload="javascript:window_onload()">
 <div class="row">
 <div class="box">
@@ -90,15 +92,17 @@ String dir = application.getRealPath("/storeImg");
 </div>
 </div>
 </div>
+
 <table>
 	<tr>
 		<thead>
 			<tr>
-				입력내용입니다.
+				<th>가게이름 </th>
+				<td><%=name %> </td>
 			</tr>
 			<tr>
-				<th>작성자 </th>
-				<td><%=name %> </td>
+				<th>건물명 </th>
+				<td><%=storeName %> </td>
 			</tr>
 			<tr>
 				<th>주소  </th>
@@ -121,16 +125,16 @@ String dir = application.getRealPath("/storeImg");
 				<td><%=saveName %> </td>
 			</tr>
 		</thead>
-	</tr>
 </table>
 
-<form action="${pageContext.request.contextPath}/DispatcherServlet">
+<form action="${pageContext.request.contextPath}/DispatcherServlet" method="post">
 	<input type="hidden" name="name" value="<%=name %> ">
 	<input type="hidden" name="loc" value="<%=loc %> ">
 	<input type="hidden" name="tel" value="<%=tel %> ">
 	<input type="hidden" name="time" value="<%=time %> ">
 	<input type="hidden" name="dir" value="<%=dir %> ">
 	<input type="hidden" name="saveName" value="<%=saveName %> ">
+	<input type="hidden" name="storeName" value="<%=storeName %> ">
 	<input type="hidden" name="command" value="insertStore">
 	<input type="submit" name="saveBtn" value="저장">
 </form>

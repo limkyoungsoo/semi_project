@@ -25,7 +25,7 @@ public class AdminStoreListController implements Controller {
 			pagingBean = new PagingBean(totalCount, Integer.parseInt(pno));
 		}
 		ArrayList<StoreVO> list = StoreDAO.getInstance().getAdminStoreList(pagingBean);
-		System.out.println(list);
+		System.out.println("인풋가게:::::::"+list);
 		ListVO listVO = new ListVO(list, pagingBean);
 		request.setAttribute("listVo", listVO);
 		return "/board/admin_store.jsp";

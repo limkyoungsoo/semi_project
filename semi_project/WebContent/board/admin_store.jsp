@@ -11,6 +11,10 @@
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
+   $(".insertBtn").click(function () {
+      location.href = '${pageContext.request.contextPath}/board/admin_store_insert.jsp';
+   })
+
    $("#adminList td .deleteBtn").click(function(){
       var tr = $(this).parent().parent();
          $.ajax({
@@ -18,7 +22,7 @@ $(document).ready(function(){
          url:"DispatcherServlet",
          data:"command=adminStoredelete&storeName="+$(this).next().val(),
          success:function(){
-            alert("찜 목록에서 삭제되었습니다");
+            alert("삭제되었습니다");
             tr.remove();
          }
       });//ajax
@@ -33,6 +37,7 @@ $(document).ready(function(){
       <div class="row">
          <div class="box">
             <h3>가게 전체 목록</h3>
+            <input type="button" value="가게등록" class="insertBtn">
             <table class="table table-hover">
                <thead>
                   <tr>
@@ -40,6 +45,7 @@ $(document).ready(function(){
                      <th>No.</th>
                      <th>이름</th>
                      <th>사진이름</th>
+                     <th>건물명</th>
                      <th>위치</th>
                      <th>전화번호</th>
                      <th>영업시간</th>
@@ -52,8 +58,9 @@ $(document).ready(function(){
                         <td><input type="checkbox" class="checkbox"></td>
                         <td>${allStoreList.rnum}</td>
                         <td><a
-                           href="${pageContext.request.contextPath}/DispatcherServlet?command=modify&name=${allStoreList.storeName }">${allStoreList.storeName }</a></td>
+                           href="${pageContext.request.contextPath}/DispatcherServlet?command=modify&name=${allStoreList.storeName }&bname=${allStoreList.storePla }">${allStoreList.storeName }</a></td>
                         <td>${allStoreList.storePic }</td>
+                        <td>${allStoreList.storePla }</td>
                         <td>${allStoreList.storeLoc }</td>
                         <td>${allStoreList.storeTel }</td>
                         <td>${allStoreList.openHour }</td>
@@ -86,5 +93,10 @@ $(document).ready(function(){
          </div>
       </div>
    </div>
+   	<!-- jQuery -->
+	<script src="bootstrap/js/jquery.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

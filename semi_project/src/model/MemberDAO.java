@@ -83,11 +83,9 @@ public class MemberDAO {
 		return flag;
 	}
 
-	public MemberVO register(String id, String password, String nick) throws SQLException {
+	public void register(String id, String password, String nick) throws SQLException {
 		Connection con = null;
 		PreparedStatement psmt = null;
-		ResultSet rs = null;
-		MemberVO vo = null;
 
 		try {
 			con = getConnection();
@@ -101,16 +99,11 @@ public class MemberDAO {
 			System.out.println("패스워드" + password);
 			System.out.println("닉네임" + nick);
 
-			rs = psmt.executeQuery();
-			System.out.println(rs);
-			if (rs.next()) {
-				vo = new MemberVO(id, password, nick);
-			}
+			psmt.executeUpdate();
 
 		} finally {
-			closeAll(rs, psmt, con);
+			closeAll(psmt, con);
 		}
-		return vo;
 	}
 
 

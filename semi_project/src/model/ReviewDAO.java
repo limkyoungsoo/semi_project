@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.sql.DataSource;
 
 public class ReviewDAO {
@@ -254,7 +253,7 @@ public class ReviewDAO {
          closeAll(rs, pstmt, con);
       }
       return list;
-   }
+   }///////////////////////////////////////////////
 
    // 리뷰 작성 메소드
    public void writeReview(ReviewVO rvo) throws SQLException {
@@ -264,7 +263,6 @@ public class ReviewDAO {
 
       try {
          con = getConnection();
-
          String sql = "insert into menuReview(reNo,menuNo,mId,review,grade,time_posted) values(reNo_seq.nextval,?,?,?,?,sysdate)";
          pstmt = con.prepareStatement(sql);
          pstmt.setInt(1, rvo.getMenuNo()); // menu id review grade
@@ -272,13 +270,10 @@ public class ReviewDAO {
          pstmt.setString(3, rvo.getReview());
          pstmt.setFloat(4, rvo.getGrade());
          pstmt.executeUpdate();
-
       } catch (SQLException e) {
          e.printStackTrace();
       } finally {
          closeAll(rs, pstmt, con);
       }
-
    }
-
 }
