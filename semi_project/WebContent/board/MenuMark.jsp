@@ -11,6 +11,7 @@
 			.ready(
 					function() {
 						$("#mm td .deleteBtn").click(function() {
+							alert("확인");
 							var mmno = $(this).next().val();
 							var tr = $(this).parent().parent();
 							$.ajax({
