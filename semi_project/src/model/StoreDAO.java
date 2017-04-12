@@ -444,6 +444,10 @@ public class StoreDAO {
 				list.add(vo);
 			}
 			
+			for(int i=0; i<list.size();i++){
+				System.out.println("test"+list.get(i).toString());
+			}
+			
 		} finally {
 			closeAll(rs, pstmt, con);
 		}
@@ -525,7 +529,6 @@ public class StoreDAO {
 	public int insertStore(String name, String loc, String tel, String time, String saveName) throws SQLException {
 		Connection con = null;
 		PreparedStatement psmt = null;
-		ResultSet rs = null;
 		int result = 0;
 		
 		System.out.println(name+loc+tel+saveName+time);
@@ -544,7 +547,7 @@ public class StoreDAO {
 			System.out.println("result"+result);
 			
 		} finally {
-			closeAll(rs, psmt, con);
+			closeAll(psmt, con);
 		}
 		return result;
 		
