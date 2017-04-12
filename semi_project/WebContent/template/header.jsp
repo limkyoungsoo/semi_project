@@ -4,7 +4,7 @@
 <script type="text/javascript">
 	function openPopup() {
 		open("${pageContext.request.contextPath}/board/login.jsp", "mypopup",
-				"width=300, height=350, top=150, left=650");
+				"width=470, height=250, top=150, left=650");
 	}
 	function logoutCheck() {
 		if (confirm("로그아웃 하시겠습니까 ? ")) {
