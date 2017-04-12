@@ -5,11 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.sql.DataSource;
-
-import com.sun.javafx.collections.MappingChange.Map;
 
 public class ReviewDAO {
 	private static ReviewDAO dao = new ReviewDAO();

@@ -24,9 +24,9 @@
 		</c:when>
 		<c:when test="${sessionScope.member.mId=='admin' }">
 			${sessionScope.member.mNick}
-			&nbsp<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminMember"><font color="white">회원관리</font></a>
-			&nbsp<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminStore"><font color="white">가게관리</font></a>
-			&nbsp<a href="#" onclick="logoutCheck()"><font color="white">로그아웃</font></a>
+			&nbsp;<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminMember"><font color="white">회원관리</font></a>
+			&nbsp;<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminStore"><font color="white">가게관리</font></a>
+			&nbsp;<a href="#" onclick="logoutCheck()"><font color="white">로그아웃</font></a>
 		</c:when>
 		<c:otherwise>
 			${sessionScope.member.mNick}
