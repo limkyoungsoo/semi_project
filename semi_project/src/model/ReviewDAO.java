@@ -221,7 +221,6 @@ public class ReviewDAO {
       Connection con = null;
       PreparedStatement pstmt = null;
       ResultSet rs = null;
-      // ReviewVO vo=new ReviewVO();
       ArrayList<ReviewVO> list = new ArrayList<ReviewVO>();
       try {
          con = getConnection();
@@ -264,17 +263,6 @@ public class ReviewDAO {
 
       try {
          con = getConnection();
-
-         // create table menuReview(
-         // reNo number primary key,
-         // menuNo number not null,
-         // mId varchar2(100) not null,
-         // review clob not null,
-         // grade number not null,
-         // time_posted date not null
-         // );
-         // insert into typetest(name,money) values('강정호',200);
-
          String sql = "insert into menuReview(reNo,menuNo,mId,review,grade,time_posted) values(reNo_seq.nextval,?,?,?,?,sysdate)";
          pstmt = con.prepareStatement(sql);
          pstmt.setInt(1, rvo.getMenuNo()); // menu id review grade
@@ -282,13 +270,10 @@ public class ReviewDAO {
          pstmt.setString(3, rvo.getReview());
          pstmt.setFloat(4, rvo.getGrade());
          pstmt.executeUpdate();
-
       } catch (SQLException e) {
          e.printStackTrace();
       } finally {
          closeAll(rs, pstmt, con);
       }
-
    }
-
 }

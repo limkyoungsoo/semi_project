@@ -31,7 +31,7 @@ public class StoreVO {
 		super();
 		this.storePla = storePla;
 	}
-	
+
 	public StoreVO(String storeName, String storeLoc, String storeTel, String storePic, String openHour, MenuVO menuVO,
 			int rnum) {
 		super();
@@ -43,8 +43,6 @@ public class StoreVO {
 		this.menuVO = menuVO;
 		this.rnum = rnum;
 	}
-
-
 
 	public StoreVO(String storeName, String storePla, String storeLoc, String storeTel, String storePic, String openHour,
 			MenuVO menuVO) {
@@ -145,5 +143,4 @@ public class StoreVO {
 				+ storePic + ", openHour=" + openHour + ", storePla=" + storePla + ", menuVO=" + menuVO + ", rnum="
 				+ rnum + "]";
 	}
-	
 }

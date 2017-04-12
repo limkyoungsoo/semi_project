@@ -12,6 +12,15 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!-- Bootstrap -->
+<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- font awesome -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/font-awesome.min.css"
+	media="screen" title="no title" charset="utf-8">
+<!-- Custom style -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/style.css" media="screen"
+	title="no title" charset="utf-8">
 
 <script type="text/javascript">
 	$(document).ready(
@@ -39,7 +48,9 @@
 							});//ajax
 						});// loginId
 						$("#loginCancel").click(function(){
-							self.close();
+							if(confirm("취소 하시겠습니까?")){
+								self.close();
+							}
 						});//loginCancel
 			});// document
 </script>
@@ -48,7 +59,7 @@
 
 <body>
 	<div class="container">
-		<h2>로그인</h2>
+		<div align="center">	<h2>로그인</h2></div>
 		<form class="form-horizontal">
 			<div class="form-group">
 				<label class="control-label col-sm-2" >Id:</label>

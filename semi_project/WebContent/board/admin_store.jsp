@@ -1,24 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+   pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>가게 관리- 어드민</title>
-<link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.register.css" rel="stylesheet">
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function () {
-	$(".insertBtn").click(function () {
-		//alert('가게등록');
-		location.href='${pageContext.request.contextPath}/board/admin_store_insert.jsp';
-	})
-})
-</script>
+<title>가게 관리</title>
+<c:import
+   url="/template/straplink.html"></c:import>
 </head>
+<script type="text/javascript">
+$(document).ready(function(){
+   $("#adminList td .deleteBtn").click(function(){
+      var tr = $(this).parent().parent();
+         $.ajax({
+         type:"post",
+         url:"DispatcherServlet",
+         data:"command=adminStoredelete&storeName="+$(this).next().val(),
+         success:function(){
+            alert("찜 목록에서 삭제되었습니다");
+            tr.remove();
+         }
+      });//ajax
+   });//삭제button click
+});//ready
+</script>
 <body>
-
+   <c:import url="/template/header.jsp"></c:import>
+   <c:import url="/template/navigator.jsp"></c:import>
 
 <div class="container">     
 				<input type="button" value="가게등록" class="insertBtn">
@@ -41,18 +50,40 @@ $(document).ready(function () {
                    <c:forEach items="${requestScope.list }" var="allStoreList">
                      <tr>
                         <td><input type="checkbox" class="checkbox"></td>
-                        <td>${allStoreList.rnum }</td>
-                       <td><a href="${pageContext.request.contextPath}/DispatcherServlet?command=modify&name=${allStoreList.storeName }&no=${allStoreList.rnum }">${allStoreList.storeName }</a></td>
-                       <td>${allStoreList.storePla }</td>
-                       <td>${allStoreList.storePic }</td>
-                       <td>${allStoreList.storeLoc }</td>
-                       <td>${allStoreList.storeTel }</td>
-                       <td>${allStoreList.openHour }</td>
-                       <td><input type="button" value="삭제" class="deleteBtn"></td>
+                        <td>${allStoreList.rnum}</td>
+                        <td><a
+                           href="${pageContext.request.contextPath}/DispatcherServlet?command=modify&name=${allStoreList.storeName }">${allStoreList.storeName }</a></td>
+                        <td>${allStoreList.storePic }</td>
+                        <td>${allStoreList.storeLoc }</td>
+                        <td>${allStoreList.storeTel }</td>
+                        <td>${allStoreList.openHour }</td>
+                        <td><input type="button" value="삭제" class="deleteBtn">
+                        <input type="hidden" value="${allStoreList.storeName}"></td>
                      </tr>
-                    </c:forEach>
-                   </tbody>
-                 </table>
-               </div>
+                  </c:forEach>
+               </tbody>
+            </table>
+            <p class="paging">
+               <c:set var="pb" value="${requestScope.listVo.pagingBean}"></c:set>
+               
+               <c:if test="${pb.previousPageGroup}">
+                  <a href="DispatcherServlet?command=adminStore&pageNo=${pb.startPageOfPageGroup-1}">◀&nbsp;
+                  </a>
+               </c:if>
+               <c:forEach var="pageNo" begin="${pb.startPageOfPageGroup}"
+                  end="${pb.endPageOfPageGroup}">
+                  <c:choose>
+                     <c:when test="${pb.nowPage!=pageNo}">
+                        <a href="DispatcherServlet?command=adminStore&pageNo=${pageNo}">${pageNo}</a>
+                     </c:when>
+                     <c:otherwise>${pageNo}</c:otherwise>
+                  </c:choose>&nbsp;
+                  </c:forEach>
+               <c:if test="${pb.nextPageGroup}">
+                  <a href="DispatcherServlet?command=adminStore&pageNo=${pb.endPageOfPageGroup+1}">▶</a>
+               </c:if>
+            </p>
+         </div>
+         
 </body>
 </html>

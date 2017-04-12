@@ -27,7 +27,8 @@ public class AdminStoreInsertController implements Controller {
 		if(vo.getStoreName() != null){
 			System.out.println("무결성 제약 조건");
 		}
-			int result = StoreDAO.getInstance().insertStore(name,loc,tel,time,saveName,storeName);
+	
+		    StoreDAO.getInstance().insertStore(name,loc,tel,time,saveName,storeName);
 			url ="redirect:DispatcherServlet?command=adminStore";
 		
 		return url;

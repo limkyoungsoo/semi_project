@@ -194,7 +194,6 @@ FROM (SELECT *
         ORDER BY DBMS_RANDOM.RANDOM()
     )
 WHERE ROWNUM <=1
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 
 
 select count(*) 
@@ -207,14 +206,12 @@ SELECT r.* FROM(
 			reNo,menuNo,mId,review,grade,time_posted 
 			from menureview) r 
 			where rnum between 1 and 10
-<<<<<<< HEAD
 			
 			select * from msgMemberMenu;
 			
 			delete msgMemberMenu where menuno like '%'
 			
 			
-=======
 
 			
 /*menu , msgmember 메뉴 관리자 페이지 때문에 수정할께요!!*/
@@ -239,3 +236,13 @@ select * from store
 
 insert into store(storeName,storeLoc,storeTel,storePic,openHour,storePla) 
 values(가게이름,경기도 성남시 분당구 삼평동 679-10 B106,031-696-7490,20170412105803msg.jpg,매일 10:05~21:00 일요일 휴무,)
+add  constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo) on delete cascade;
+
+
+
+
+SELECT S.* FROM(
+	SELECT row_number() over(order by storeName asc) rnum,
+			storeName,storePic,storeLoc,storeTel,openHour
+	from store) S 
+			where rnum between 1 and 5

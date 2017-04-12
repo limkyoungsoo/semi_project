@@ -12,6 +12,5 @@
 	location.href="${pageContext.request.contextPath}/main.jsp";
 </script>
 <body>
-
 </body>
 </html>
