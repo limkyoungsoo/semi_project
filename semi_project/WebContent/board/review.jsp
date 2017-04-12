@@ -33,6 +33,7 @@
 														data : $("#reviewForm").serialize(), // form은 serializable 로 처리하자
 														success : function(data) {
 															var renew = "";
+															 
 															for (var i = 0; i < data.list.length; i++) {
 																renew += "<tr>";
 																renew += "<td>"
@@ -54,13 +55,18 @@
 																		+ "</td>";
 																renew += "</tr>";
 															}
-															  $(".reviewInfo").empty();
+															//href = detailController / storeName 
+															$("#sel1 option:selected").text("");
+															location.reload();
+															
+															 $(".reviewInfo").empty();								
 															$(".reviewInfo")
 																	.html(renew);
 															alert("리뷰가 등록되었습니다");
 															$("#comment").val("");
 															
-															$(".pageNom").empty();				
+														
+																
 															var pbtn ="";
 															
 															// 이전 페이지 존재 하면 ◀
@@ -89,7 +95,7 @@
 															$(".pageNom").html(pbtn);		
 															$("#review").hide();
 															$("#writeBtn").text("리뷰 작성창 열기");
-														
+												
 														} // success
 													}); // ajax						
 										}); // click

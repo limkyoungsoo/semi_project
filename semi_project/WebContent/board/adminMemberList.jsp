@@ -69,8 +69,16 @@ img.img-responsive.img-border-left{
 		}); // click
 		
 		$(".grantBtn").click(function(){
-			//alert($(this).next().val());
-			if(confirm($(this).next().val()+" 님을 승인하시겠습니까?"))
+			// 승인, 강등 메시지 뜰 수 있도록 만들어 놓기
+			var grant="";
+			var tmp=$(this).next().next().val();
+			if(tmp =="정회원"){
+				grant ="강등";
+			}
+			else if(tmp =="준회원"){
+				grant ="승인";
+			}  
+			if(confirm($(this).next().val()+" 님을 "+grant+ " 하시겠습니까?"))
 				$.ajax({
 				type:"post",
 				url:"DispatcherServlet",
@@ -128,6 +136,7 @@ img.img-responsive.img-border-left{
 					        <td>
 					        <input type="button" value="승인" class="grantBtn">
 					        <input type="hidden" value="${allMemberList.mId }">
+					        <input type="hidden" value="${allMemberList.mGrant }">
 					        </td>
 					      </tr>
 					     </c:forEach>

@@ -280,5 +280,81 @@ public class ReviewDAO {
       }
 
    }
-
+   
+   //mid 에 따른 MyReview 보기 
+   public ArrayList<ReviewVO> showMyReview(PagingBean pagingBean, String mid) throws SQLException {
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      ArrayList<ReviewVO> list=new ArrayList<ReviewVO>();
+	      
+	      try {
+	         con = getConnection();
+	         StringBuilder sql = new StringBuilder();
+	         sql.append("select c.* from (select row_number() over(order by r.reNo desc)  ");
+	         sql.append("rnum, r.reNo, r.review, r.grade, r.time_posted, r.mid, r.menuNo, m.menuName,m.storeName ");
+	         sql.append("from (select reNo, review, grade, time_posted, mid, menuNo ");
+	         sql.append("from menureview where mid=?) r, menu m ");
+	         sql.append("where r.menuNo=m.menuNo) c where rnum between ? and ?");
+	         pstmt = con.prepareStatement(sql.toString());
+	         pstmt.setString(1, mid);
+	         pstmt.setInt(2, pagingBean.getStartRowNumber());
+	         pstmt.setInt(3, pagingBean.getEndRowNumber());
+	         rs=pstmt.executeQuery();
+	         while(rs.next()){
+	        	 ReviewVO vo=new ReviewVO();
+	        	 vo.setReviewNo(rs.getInt("reNo"));
+	        	 vo.setGrade(rs.getInt("grade"));
+	        	 vo.setMenuName(rs.getString("menuName"));
+	        	 vo.setMenuNo(rs.getInt("menuNo"));
+	        	 vo.setMid(rs.getString("mid"));
+	        	 vo.setReview(rs.getString("review"));
+	        	 vo.setTimePosted(rs.getString("time_posted"));
+	        	 MyReviewVO mvo=new MyReviewVO(vo, rs.getString("storeName"));
+	        	 list.add(mvo);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         closeAll(rs, pstmt, con);
+	      }
+	      return list;
+	   }
+   	
+   //id당 review 수
+   public int getTotalMyReivewCount(String mid) throws SQLException {
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      int totalCount = 0;
+	      try {
+	         con = getConnection();
+	         String sql = "select count(*) from MENUREVIEW where mid=?";
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setString(1, mid);
+	         rs = pstmt.executeQuery();
+	         if (rs.next())
+	            totalCount = rs.getInt(1);
+	      } finally {
+	         closeAll(rs, pstmt, con);
+	      }
+	      return totalCount;
+	   }
+   
+   //myReviewDelete
+   public void myReviewDelete(int reviewNo) throws SQLException {
+	   Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      try {
+	         con = getConnection();
+	         String sql = "delete from MENUREVIEW where reNo=?";
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setInt(1, reviewNo);
+	         rs = pstmt.executeQuery();
+	      } finally {
+	         closeAll(rs, pstmt, con);
+	      }
+	
+   }
 }

@@ -242,9 +242,28 @@ SELECT S.* FROM(
 	from store) S 
 			where rnum between 1 and 5
 
+-- 가게이름 , 메뉴이름 , 리뷰 , 별점 , 작성시간 
+select reNo, menuNo, mid, review, grade, to_char(time_posted,'YYYY.MM.DD') as time_posted, a.menuName 
+from (select m.menuNo, m.menuName, s.storeName 
+from store s, menu m where s.storeName=m.storeName) a, menureview b 
+where a.menuNo=b.menuNo
 
 
+select c.* from (select row_number() over(order by r.reNo desc) 
+rnum, r.reNo, r.review, r.grade, r.time_posted, r.mid, r.menuNo, m.menuName,m.storeName
+from (select reNo, review, grade, time_posted, mid, menuNo
+from menureview where mid='qweqwe') r, menu m
+where r.menuNo=m.menuNo) c where rnum between 7and 12
 
+select storeName,menuName
+from store s, menu m, menureview where store s, menu m, menureview r 
+and 
+
+select * from menureview where mid='qweqwe'
+
+select count(*) from MENUREVIEW where mid='qweqwe';
+
+delete from MENUREVIEW where reNo=18
 
 
 
