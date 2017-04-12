@@ -11,10 +11,17 @@
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
+<<<<<<< HEAD
    $(".insertBtn").click(function () {
       location.href = '${pageContext.request.contextPath}/board/admin_store_insert.jsp';
    })
    
+=======
+	$(".insertBtn").click(function () {
+		location.href = '${pageContext.request.contextPath}/board/admin_store_insert.jsp';
+	})
+	
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
    $("#adminList td .deleteBtn").click(function(){
       var tr = $(this).parent().parent();
          $.ajax({
@@ -45,6 +52,7 @@ $(document).ready(function(){
                      <th>No.</th>
                      <th>이름</th>
                      <th>사진이름</th>
+                     <th>건물명</th>
                      <th>위치</th>
                      <th>전화번호</th>
                      <th>영업시간</th>
@@ -57,8 +65,9 @@ $(document).ready(function(){
                         <td><input type="checkbox" class="checkbox"></td>
                         <td>${allStoreList.rnum}</td>
                         <td><a
-                           href="${pageContext.request.contextPath}/DispatcherServlet?command=modify&name=${allStoreList.storeName }">${allStoreList.storeName }</a></td>
+                           href="${pageContext.request.contextPath}/DispatcherServlet?command=modify&name=${allStoreList.storeName }&bname=${allStoreList.storePla }">${allStoreList.storeName }</a></td>
                         <td>${allStoreList.storePic }</td>
+                        <td>${allStoreList.storePla }</td>
                         <td>${allStoreList.storeLoc }</td>
                         <td>${allStoreList.storeTel }</td>
                         <td>${allStoreList.openHour }</td>

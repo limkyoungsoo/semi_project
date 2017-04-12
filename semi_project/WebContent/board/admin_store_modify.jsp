@@ -4,8 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>가게 정보 수정</title>
+<<<<<<< HEAD
 <link
 	href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.register.css"
 	rel="stylesheet">
@@ -25,7 +25,11 @@
 <link
 	href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
+=======
+<c:import url="/template/straplink.html"></c:import>
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 
+<<<<<<< HEAD
 <!-- Custom CSS -->
 <link
 	href="${pageContext.request.contextPath}/bootstrap/css/business-casual.css"
@@ -38,16 +42,27 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
 	rel="stylesheet" type="text/css">
+=======
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 
 <script type="text/javascript">
+<<<<<<< HEAD
 	function editItem() {
 		var frm = document.getElementsByName("frmItem");
 		alert('${requestScope.vo.storeName}');
 		frm.submit();
 	}
+=======
+function editItem() {
+	var frm  = document.getElementsByName("frmItem");
+	alert("수정");
+	frm.submit();
+}
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 </script>
 </head>
 <body>
+<<<<<<< HEAD
 </head>
 <body>
 
@@ -94,5 +109,63 @@
 			</table>
 		</div>
 	</form>
+=======
+<c:import url="/template/header.jsp"></c:import>
+<c:import url="/template/navigator.jsp"></c:import>
+
+<form name="frmItem" method="post" action="${pageContext.request.contextPath}/DispatcherServlet"> 
+		<div class="row">
+			<div class="box">
+				<div class="col-lg-12"> 
+<div class="container" >    
+                 <table class="table table-hover" >
+                   <thead>
+                     <tr>
+                        <th rowspan="6">
+                        <img src="${pageContext.request.contextPath}/storeImg/${requestScope.vo.storePic}" width="150" height="100">
+                        <input type="hidden" name="picname" value="${requestScope.vo.storePic}">
+                        
+                        </th>
+                        <th>이름</th>
+                         <th>${requestScope.vo.storeName}</th>
+
+                     </tr>
+                     <tr>
+                       <th>건물명</th>
+                       <th><input type="text" name="storeName"  value="${param.bname}"></th>
+                     </tr>
+                     <tr>
+                       <th>위치</th>
+                       <th><input type="text" name="loc" size="50"  value="${requestScope.vo.storeLoc}"></th>
+                     </tr>
+                     <tr>
+                       <th>전화번호</th>
+                       <th><input type="text" name="tel"  size="50" value="${requestScope.vo.storeTel}"></th>
+                     </tr>
+                     <tr>
+                       <th>영업시간</th>
+                       <th><input type="text" name="time"  size="50"   value="${requestScope.vo.openHour}"></th>
+                     </tr>
+                     
+                   </thead>
+                   <tbody>
+                     <tr>
+                       <td>
+                         <input type="hidden" name="command" value="edit">
+                        <input type="hidden" name="name" value="${requestScope.vo.storeName}">
+                        <input type="hidden" name="no" value="${requestScope.vo.rnum}">
+                       </td>
+                       <td><input type="submit" value="수정" class="modifyBtn" onclick="editItem()"></td>
+                       <td><input type="button" value="삭제" class="deleteBtn"></td>
+                       </tr>
+                       </tbody>
+                       </table>
+                       </div>
+                       </div>
+                       </div>
+                       </div>
+                       </form>
+
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 </body>
 </html>

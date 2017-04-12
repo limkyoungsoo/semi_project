@@ -126,6 +126,7 @@ margin: auto;
 									type="file" name="menuPic3" required="required"></td>
 							</tr>
 
+<<<<<<< HEAD
 						</thead>
 					</table>
 					<div class="form-group text-center">
@@ -142,5 +143,50 @@ margin: auto;
 			</div>
 		</article>
 	</div>
+=======
+<!-- enctype="multipart/form-data" 파일이나 대용량 데이터 보낼때 데이터 전송 방식 -->
+<form name="fileForm" method="post" enctype="multipart/form-data" action="fileUpload.jsp"> 
+<div class="container" style="background-color: white;">    
+                 <table class="table table-hover" border="1" bgcolor="white">
+                   <thead>
+                     <tr>
+                        <th>가게이름</th>
+                         <th><input type="text" name="name" ></th>
+                     </tr>
+                     <tr>
+                        <th>건물명</th>
+                         <th><input type="text" name="storeName" ></th>
+                     </tr>
+                     <tr>
+                       <th>위치</th>
+                       <th><input type="text" name="loc"  ></th>
+                     </tr>
+                     <tr>
+                       <th>전화번호</th>
+                       <th><input type="text" name="tel" ></th>
+                     </tr>
+                     <tr>
+                       <th>영업시간</th>
+                       <th><input type="text" name="time"  size="50" ></th>
+                     </tr>
+                     <tr>
+                       <th>파일 업로드</th>
+                       <th>
+ 파일명 : <input type="file" name="filename"><br>
+                       </th>
+                     </tr>
+                   </thead>
+                   
+                   <tbody>
+                     <tr>
+
+                     </tr>
+                   </tbody>
+                 </table>
+                 
+                  <input type="submit" value="파일올리기"><br>
+               </div>
+                 </form>
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 </body>
 </html>
