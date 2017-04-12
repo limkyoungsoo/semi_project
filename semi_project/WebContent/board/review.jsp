@@ -23,8 +23,15 @@
 
 						$("#write")
 								.click(
-										function() { // 리뷰 등록
-											
+										function() { // 리뷰 등록											
+											if($("#starScore").text()==0){
+												alert("별점을 입력해 주세요");
+												return;
+											}
+											if($("#comment").val()==""){
+												alert("리뷰 내용을 입력해 주세요");
+												return;
+											}
 											$
 													.ajax({
 														type : "get",
@@ -417,7 +424,7 @@
 									type="radio" name="star-input" id="p8" value="4"><label
 									for="p8">4</label> <input type="radio" name="star-input"
 									id="p10" value="5"><label for="p10">5</label>
-							</span> <output for="star-input"> <b>0</b>점 </output>
+							</span> <output for="star-input"> <b id="starScore">0</b>점 </output>
 							</span>
 							<div class="col-sm-12">
 
