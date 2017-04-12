@@ -5,9 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
 <title>회원가입</title>
 
 <!-- Bootstrap -->
@@ -19,12 +17,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/bootstrap/css/style.css" media="screen"
 	title="no title" charset="utf-8">
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 var newWindow;
@@ -110,10 +102,22 @@ function openNewWindow(){
 		
 	}); //ready
 </script>
+
+<style type="text/css">
+#divArea {
+	background-color: white;
+	border: 1px solid #000;
+}
+#idForm{
+	margin:10px; 
+  padding: 0 5px;
+}
+</style>
 </head>
 <body background="${pageContext.request.contextPath}/bootstrap/img/bg.jpg">
+	<br><br><br><br><br><br><br>
 	<div class="container">
-	<article class="container">
+	<article class="container"  id="divArea">
 		<div class="page-header">
 			<h1>
 				회원가입 <small>MSG form</small>
