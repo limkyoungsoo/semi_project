@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.StoreDAO;
-import model.StoreVO;
 
 public class AdminStoreEditController implements Controller {
 
@@ -15,7 +14,6 @@ public class AdminStoreEditController implements Controller {
 		String tel  = request.getParameter("tel");
 		String time  = request.getParameter("time");
 		String pic  = request.getParameter("pic");
-		String no  = request.getParameter("no");
 		
 		StoreDAO.getInstance().editStoreInfo(name,loc,tel,time,pic);
 		

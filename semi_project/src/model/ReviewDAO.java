@@ -5,11 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.sql.DataSource;
-
-import com.sun.javafx.collections.MappingChange.Map;
 
 public class ReviewDAO {
    private static ReviewDAO dao = new ReviewDAO();
@@ -225,7 +222,6 @@ public class ReviewDAO {
       Connection con = null;
       PreparedStatement pstmt = null;
       ResultSet rs = null;
-      // ReviewVO vo=new ReviewVO();
       ArrayList<ReviewVO> list = new ArrayList<ReviewVO>();
       try {
          con = getConnection();
@@ -258,7 +254,7 @@ public class ReviewDAO {
          closeAll(rs, pstmt, con);
       }
       return list;
-   }///////////////////////////////////////////////
+   }
 
    // 리뷰 작성 메소드
    public void writeReview(ReviewVO rvo) throws SQLException {
@@ -268,16 +264,6 @@ public class ReviewDAO {
 
       try {
          con = getConnection();
-
-         // create table menuReview(
-         // reNo number primary key,
-         // menuNo number not null,
-         // mId varchar2(100) not null,
-         // review clob not null,
-         // grade number not null,
-         // time_posted date not null
-         // );
-         // insert into typetest(name,money) values('강정호',200);
 
          String sql = "insert into menuReview(reNo,menuNo,mId,review,grade,time_posted) values(reNo_seq.nextval,?,?,?,?,sysdate)";
          pstmt = con.prepareStatement(sql);

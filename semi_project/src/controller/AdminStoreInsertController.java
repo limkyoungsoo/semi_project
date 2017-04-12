@@ -20,13 +20,8 @@ public class AdminStoreInsertController implements Controller {
 		String time = request.getParameter("time");
 		String saveName = request.getParameter("saveName");
 		String url = "";
-
-		StoreVO vo  =   StoreDAO.getInstance().getAdminStoreModify(saveName);
-		
-		if(vo.getStoreName() != null){
-			System.out.println("무결성 제약 조건");
-		}
-			int result = StoreDAO.getInstance().insertStore(name,loc,tel,time,saveName);
+	
+		StoreDAO.getInstance().insertStore(name,loc,tel,time,saveName);
 			url ="redirect:DispatcherServlet?command=adminStore";
 		
 		return url;
