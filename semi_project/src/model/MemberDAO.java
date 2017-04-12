@@ -102,7 +102,7 @@ public class MemberDAO {
 			System.out.println("닉네임" + nick);
 
 			rs = psmt.executeQuery();
-
+			System.out.println(rs);
 			if (rs.next()) {
 				vo = new MemberVO(id, password, nick);
 			}
