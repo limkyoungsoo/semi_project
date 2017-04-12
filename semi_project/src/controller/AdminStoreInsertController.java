@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.StoreDAO;
-import model.StoreVO;
 
 public class AdminStoreInsertController implements Controller {
 

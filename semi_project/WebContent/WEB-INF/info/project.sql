@@ -232,4 +232,23 @@ DROP CONSTRAINT fk_menuNo_2;
 alter table msgMemberMenu
 add  constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo) on delete cascade;
 >>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
+
+
+
+
+SELECT S.* FROM(
+	SELECT row_number() over(order by storeName asc) rnum,
+			storeName,storePic,storeLoc,storeTel,openHour
+	from store) S 
+			where rnum between 1 and 5
+
+
+
+
+
+
+
+
+
+
 					
