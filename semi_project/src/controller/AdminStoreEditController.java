@@ -15,14 +15,16 @@ public class AdminStoreEditController implements Controller {
 		String tel  = request.getParameter("tel");
 		String time  = request.getParameter("time");
 		String pic  = request.getParameter("pic");
+		String no  = request.getParameter("no");
 		
 		StoreDAO.getInstance().editStoreInfo(name,loc,tel,time,pic);
-		String message = "수정이 완료되었습니다.";
-		request.setAttribute("msg", message);
 		
-		System.out.println(message);
+		System.out.println("수정이 완료되었습니다.");
 		
-		return message;
+		request.setCharacterEncoding("utf-8");
+		System.out.println("name"+name);
+		return "DispatcherServlet?command=adminStore";
+		
 	}
 
 }

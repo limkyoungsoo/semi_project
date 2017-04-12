@@ -2,6 +2,7 @@ package controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.MemberDAO;
 import model.MemberVO;
@@ -20,7 +21,7 @@ public class RegisterController implements Controller {
 		
 		MemberVO vo = new MemberVO(MemberDAO.getInstance().register(id,pass,nick));
 		
-		String url = "board/register_ok.jsp";
+		String url = "board/register_ok.jsp?id="+id;
 		
 		return url;
 	}

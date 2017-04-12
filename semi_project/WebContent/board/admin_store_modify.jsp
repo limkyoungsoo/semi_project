@@ -29,6 +29,57 @@
 <script type="text/javascript">
 function editItem() {
 	var frm  = document.getElementsByName("frmItem");
+<<<<<<< HEAD
+	alert('${requestScope.vo.storeName}');
+	frm.submit();
+}
+</script>
+</head>
+<body>
+
+<form name="frmItem" action="${pageContext.request.contextPath}/DispatcherServlet">       
+<div class="container" style="background-color: white;">    
+                 <table class="table table-hover" border="1" bgcolor="white">
+                   <thead>
+                     <tr>
+                        <th rowspan="5">
+                        <img src="${pageContext.request.contextPath}/storeImg/${requestScope.vo.storePic}" width="150" height="100">
+                        <input type="hidden" name="pic" value="${requestScope.vo.storePic}">
+                        
+                        </th>
+                        <th>이름</th>
+                         <th>${requestScope.vo.storeName}</th>
+
+                     </tr>
+                     <tr>
+                       <th>위치</th>
+                       <th><input type="text" name="loc"  value="${requestScope.vo.storeLoc}"></th>
+                     </tr>
+                     <tr>
+                       <th>전화번호</th>
+                       <th><input type="text" name="tel"  value="${requestScope.vo.storeTel}"></th>
+                     </tr>
+                     <tr>
+                       <th>영업시간</th>
+                       <th><input type="text" name="time"  size="50"   value="${requestScope.vo.openHour}"></th>
+                     </tr>
+                     <tr>
+                       <th>사진위치</th>
+                       <th><input type="text" name="pic"  value="${requestScope.vo.storePic}"></th>
+                     </tr>
+                     
+                   </thead>
+                   <tbody>
+                     <tr>
+                       <td>
+                         <input type="hidden" name="command" value="edit">
+                        <input type="hidden" name="name" value="${requestScope.vo.storeName}">
+                        <input type="hidden" name="no" value="${requestScope.vo.rnum}">
+                       </td>
+                       <td><input type="submit" value="수정" class="modifyBtn" onclick="editItem()"></td>
+                       <td><input type="button" value="삭제" class="deleteBtn"></td>
+
+=======
 	frm.submit();
 }
 </script>
@@ -69,6 +120,7 @@ function editItem() {
                        <td><input type="submit" value="수정" class="modifyBtn" onclick="editItem()"></td>
                        <td><input type="button" value="삭제" class="deleteBtn"></td>
                        <input type="hidden" name="command" value="edit">
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
                      </tr>
                    </tbody>
                  </table>
