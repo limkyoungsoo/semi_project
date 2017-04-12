@@ -40,7 +40,12 @@ img.img-responsive.img-border-left{
 				url:"DispatcherServlet",
 				data:"command=markInsert&menuno="+$("#menuNo").text(),
 				success:function(){
-					alert("찜 목록에 추가되었습니다");
+					if(confirm("찜 목록에 추가되었습니다 이동하시겠습니까?")){
+						location.href="${pageContext.request.contextPath }/DispatcherServlet?command=markList";
+					}
+					else{
+						return;
+					}
 				}//success
 			});//ajax 
 		});//markBtn Click
