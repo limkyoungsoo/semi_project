@@ -32,7 +32,6 @@
 		</c:when>
 
 		<c:otherwise>
-
 			${sessionScope.member.mNick}
 			&nbsp;<a href="${pageContext.request.contextPath }/DispatcherServlet?command=markList"><font color="white">즐겨찾기</font></a>
 			&nbsp;<a href="${pageContext.request.contextPath }/board/updateMemberInfo.jsp"><font color="white">회원정보수정 </font></a>
