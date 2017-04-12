@@ -11,17 +11,10 @@
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
-<<<<<<< HEAD
    $(".insertBtn").click(function () {
       location.href = '${pageContext.request.contextPath}/board/admin_store_insert.jsp';
    })
-   
-=======
-	$(".insertBtn").click(function () {
-		location.href = '${pageContext.request.contextPath}/board/admin_store_insert.jsp';
-	})
-	
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
+
    $("#adminList td .deleteBtn").click(function(){
       var tr = $(this).parent().parent();
          $.ajax({
@@ -100,5 +93,10 @@ $(document).ready(function(){
          </div>
       </div>
    </div>
+   	<!-- jQuery -->
+	<script src="bootstrap/js/jquery.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

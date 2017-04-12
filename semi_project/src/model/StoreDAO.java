@@ -311,6 +311,31 @@ public class StoreDAO {
 		return storeVO;
 	}
 	
+	public boolean findStoreByStoreName(String storeName) throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt =null;
+		ResultSet rs = null;
+		String sql ="";
+		boolean flag = false;
+		try {
+			con = getConnection();
+			sql = "select * from store where storeName=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, storeName);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				flag = true;
+			}
+		} finally {
+			closeAll(rs, psmt, con);
+		}
+		return flag;
+	}
+	
+	
+	
+	
 	public boolean findMenuNo(String menuNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement psmt =null;
@@ -328,8 +353,6 @@ public class StoreDAO {
 			if(rs.next()){
 				flag = true;
 			}
-			
-			
 		} finally {
 			closeAll(rs, psmt, con);
 		}

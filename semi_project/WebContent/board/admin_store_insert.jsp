@@ -27,21 +27,35 @@
 }
 
 #idForm {
-	margin: 10px;
-	padding: 0 5px;
-}
-
-#tableCss{
-margin: auto;
-	padding: 0 5px;
-	border-spacing: 5px;
-	bottom-padding: 5px;
+	margin: auto;
+	padding: 5px;
 }
 </style>
 
 <script type="text/javascript">
+	$(document).ready(function(){
+		$("#sName").keyup(function(){
+			var textId =$("#sName");
+			//alert(textId.val());
+				$.ajax({
+					type : "get",
+					url : "${pageContext.request.contextPath}/DispatcherServlet?command=storeNameCheck",
+					data : "storeName="+textId.val(),
+					success : function(userData) {
+						//alert(userData);
+						if(userData =="false"){
+							$("#checkResult").html("<font color='red'>사용 가능</font>");
+						}
+						else if(userData=="true"){
+							$("#checkResult").html("<font color='red'>사용 불가능</font>");
+						} 
+					}
+			});
+		});
+	});
+	
 	function cancel() {
-		location.href = "${pageContext.request.contextPath}/DispatcherServlet?command=storeShow"
+		location.href = "${pageContext.request.contextPath}/DispatcherServlet?command=adminStore";
 	}
 </script>
 </head>
@@ -60,7 +74,7 @@ margin: auto;
 				</h1>
 			</div>
 			<!-- 세션이 있을 떄, 없을 때로 나눠서 하기 -->
-			<div class="col-lg-7 col-lg-offset-5">
+			<div class="col-lg-8 col-lg-offset-2">
 				<form role="form" id="idForm"
 					action="${pageContext.request.contextPath}/DispatcherServlet?command=insertStore"
 					enctype="multipart/form-data" method="post">
@@ -69,6 +83,7 @@ margin: auto;
 						<div class="input-group">
 							<input type="text" class="form-control" id="sName"
 								required="required" name="storeName" placeholder="이름">
+								<span id="checkResult"></span>
 						</div>
 					</div>
 					<div class="form-group">
@@ -96,38 +111,35 @@ margin: auto;
 							class="glyphicons glyphicons-file-plus"></span><input type="file"
 							name="attachedFile" required="required">
 					</div>
-					<table class="table table-bordered">
-						<thead>
+					<!-- <table class="table table-bordered"> -->
+					<table class="table table-bordered" >
 							<tr>
-								<th>메뉴1</th>
-								<td>메뉴이름  <input type="text" class="form-control"
+								<td>메뉴<input type="text"  placeholder="1"readonly="readonly" class="form-control"></td>
+								<td>메뉴이름 <input type="text" class="form-control"
 									required="required" name="menuName1" placeholder="메뉴"></td>
-								<td>메뉴가격  <input type="text" class="form-control"
+								<td>메뉴가격 <input type="text" class="form-control"
 									required="required" name="menuPrice1" placeholder="가격"></td>
-								<td>메뉴사진  <span class="glyphicons glyphicons-file-plus"></span><input
+								<td>메뉴사진 <span class="glyphicons glyphicons-file-plus"></span><input
 									type="file" name="menuPic1" required="required"></td>
 							</tr>
 							<tr>
-								<th>메뉴2</th>
-								<td>메뉴이름  <input type="text" class="form-control"
+								<td>메뉴<input type="text"  placeholder="2" readonly="readonly" class="form-control"></td>
+								<td>메뉴이름 <input type="text" class="form-control"
 									required="required" name="menuName2" placeholder="메뉴"></td>
 								<td>메뉴가격 <input type="text" class="form-control"
 									required="required" name="menuPrice2" placeholder="가격"></td>
-								<td>메뉴사진  <span class="glyphicons glyphicons-file-plus"></span><input
+								<td>메뉴사진 <span class="glyphicons glyphicons-file-plus"></span><input
 									type="file" name="menuPic2" required="required"></td>
 							</tr>
 							<tr>
-								<th>메뉴3</th>
-								<td>메뉴이름  <input type="text" class="form-control"
+								<td>메뉴<input type="text"  placeholder="3" readonly="readonly" class="form-control"></td>
+								<td>메뉴이름 <input type="text" class="form-control"
 									required="required" name="menuName3" placeholder="메뉴"></td>
-								<td>메뉴가격  <input type="text" class="form-control"
+								<td>메뉴가격 <input type="text" class="form-control"
 									required="required" name="menuPrice3" placeholder="가격"></td>
-								<td>메뉴사진  <span class="glyphicons glyphicons-file-plus"></span><input
+								<td>메뉴사진 <span class="glyphicons glyphicons-file-plus"></span><input
 									type="file" name="menuPic3" required="required"></td>
 							</tr>
-
-<<<<<<< HEAD
-						</thead>
 					</table>
 					<div class="form-group text-center">
 						<button type="submit" class="btn btn-info">
@@ -143,50 +155,5 @@ margin: auto;
 			</div>
 		</article>
 	</div>
-=======
-<!-- enctype="multipart/form-data" 파일이나 대용량 데이터 보낼때 데이터 전송 방식 -->
-<form name="fileForm" method="post" enctype="multipart/form-data" action="fileUpload.jsp"> 
-<div class="container" style="background-color: white;">    
-                 <table class="table table-hover" border="1" bgcolor="white">
-                   <thead>
-                     <tr>
-                        <th>가게이름</th>
-                         <th><input type="text" name="name" ></th>
-                     </tr>
-                     <tr>
-                        <th>건물명</th>
-                         <th><input type="text" name="storeName" ></th>
-                     </tr>
-                     <tr>
-                       <th>위치</th>
-                       <th><input type="text" name="loc"  ></th>
-                     </tr>
-                     <tr>
-                       <th>전화번호</th>
-                       <th><input type="text" name="tel" ></th>
-                     </tr>
-                     <tr>
-                       <th>영업시간</th>
-                       <th><input type="text" name="time"  size="50" ></th>
-                     </tr>
-                     <tr>
-                       <th>파일 업로드</th>
-                       <th>
- 파일명 : <input type="file" name="filename"><br>
-                       </th>
-                     </tr>
-                   </thead>
-                   
-                   <tbody>
-                     <tr>
-
-                     </tr>
-                   </tbody>
-                 </table>
-                 
-                  <input type="submit" value="파일올리기"><br>
-               </div>
-                 </form>
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 </body>
 </html>

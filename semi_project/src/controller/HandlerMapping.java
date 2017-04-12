@@ -65,6 +65,8 @@ public class HandlerMapping {
 			c = new GrantMemberController();
 		} else if (command.equals("insertStore")) {
 			c = new AdminStoreInsertController();
+		}else if(command.equals("storeNameCheck")){
+			c = new StoreNameCheckController();
 		}
 		return c;
 	}

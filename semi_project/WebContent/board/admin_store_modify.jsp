@@ -5,7 +5,6 @@
 <html>
 <head>
 <title>가게 정보 수정</title>
-<<<<<<< HEAD
 <link
 	href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.register.css"
 	rel="stylesheet">
@@ -25,11 +24,7 @@
 <link
 	href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
-=======
 <c:import url="/template/straplink.html"></c:import>
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
-
-<<<<<<< HEAD
 <!-- Custom CSS -->
 <link
 	href="${pageContext.request.contextPath}/bootstrap/css/business-casual.css"
@@ -42,130 +37,75 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic"
 	rel="stylesheet" type="text/css">
-=======
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 
 <script type="text/javascript">
-<<<<<<< HEAD
 	function editItem() {
 		var frm = document.getElementsByName("frmItem");
-		alert('${requestScope.vo.storeName}');
+		alert("수정");
 		frm.submit();
 	}
-=======
-function editItem() {
-	var frm  = document.getElementsByName("frmItem");
-	alert("수정");
-	frm.submit();
-}
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 </script>
 </head>
 <body>
-<<<<<<< HEAD
-</head>
-<body>
+	<c:import url="/template/header.jsp"></c:import>
+	<c:import url="/template/navigator.jsp"></c:import>
 
-	<form name="frmItem"
+	<form name="frmItem" method="post"
 		action="${pageContext.request.contextPath}/DispatcherServlet">
-		<div class="container">
-			<table class="table table-hover" border="1">
-				<thead>
-					<tr>
-						<th rowspan="4"><img
-							src="${pageContext.request.contextPath}/storeImg/${requestScope.vo.storePic}"
-							width="150" height="100"> <input type="hidden" name="pic"
-							value="${requestScope.vo.storePic}"></th>
-						<th>이름</th>
-						<th><input type="text" name="name"
-							value="${requestScope.vo.storeName}"></th>
-					</tr>
-					<tr>
-						<th>위치</th>
-						<th><input type="text" name="loc"
-							value="${requestScope.vo.storeLoc}"></th>
-					</tr>
-					<tr>
-						<th>전화번호</th>
-						<th>${requestScope.vo.storeTel}</th>
-						<input type="hidden" name="tel"
-							value="${requestScope.vo.storeTel}">
-					</tr>
-					<tr>
-						<th>영업시간</th>
-						<th><input type="text" name="time"
-							value="${requestScope.vo.openHour}"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td></td>
-						<td><input type="submit" value="수정" class="modifyBtn"
-							onclick="editItem()"></td>
-						<td><input type="button" value="삭제" class="deleteBtn"></td>
-						<input type="hidden" name="command" value="edit">
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</form>
-=======
-<c:import url="/template/header.jsp"></c:import>
-<c:import url="/template/navigator.jsp"></c:import>
-
-<form name="frmItem" method="post" action="${pageContext.request.contextPath}/DispatcherServlet"> 
 		<div class="row">
 			<div class="box">
-				<div class="col-lg-12"> 
-<div class="container" >    
-                 <table class="table table-hover" >
-                   <thead>
-                     <tr>
-                        <th rowspan="6">
-                        <img src="${pageContext.request.contextPath}/storeImg/${requestScope.vo.storePic}" width="150" height="100">
-                        <input type="hidden" name="picname" value="${requestScope.vo.storePic}">
-                        
-                        </th>
-                        <th>이름</th>
-                         <th>${requestScope.vo.storeName}</th>
+				<div class="col-lg-12">
+					<div class="container">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th rowspan="6"><img
+										src="${pageContext.request.contextPath}/storeImg/${requestScope.vo.storePic}"
+										width="150" height="100"> <input type="hidden"
+										name="picname" value="${requestScope.vo.storePic}"></th>
+									<th>이름</th>
+									<th>${requestScope.vo.storeName}</th>
 
-                     </tr>
-                     <tr>
-                       <th>건물명</th>
-                       <th><input type="text" name="storeName"  value="${param.bname}"></th>
-                     </tr>
-                     <tr>
-                       <th>위치</th>
-                       <th><input type="text" name="loc" size="50"  value="${requestScope.vo.storeLoc}"></th>
-                     </tr>
-                     <tr>
-                       <th>전화번호</th>
-                       <th><input type="text" name="tel"  size="50" value="${requestScope.vo.storeTel}"></th>
-                     </tr>
-                     <tr>
-                       <th>영업시간</th>
-                       <th><input type="text" name="time"  size="50"   value="${requestScope.vo.openHour}"></th>
-                     </tr>
-                     
-                   </thead>
-                   <tbody>
-                     <tr>
-                       <td>
-                         <input type="hidden" name="command" value="edit">
-                        <input type="hidden" name="name" value="${requestScope.vo.storeName}">
-                        <input type="hidden" name="no" value="${requestScope.vo.rnum}">
-                       </td>
-                       <td><input type="submit" value="수정" class="modifyBtn" onclick="editItem()"></td>
-                       <td><input type="button" value="삭제" class="deleteBtn"></td>
-                       </tr>
-                       </tbody>
-                       </table>
-                       </div>
-                       </div>
-                       </div>
-                       </div>
-                       </form>
+								</tr>
+								<tr>
+									<th>건물명</th>
+									<th><input type="text" name="storeName"
+										value="${param.bname}"></th>
+								</tr>
+								<tr>
+									<th>위치</th>
+									<th><input type="text" name="loc" size="50"
+										value="${requestScope.vo.storeLoc}"></th>
+								</tr>
+								<tr>
+									<th>전화번호</th>
+									<th><input type="text" name="tel" size="50"
+										value="${requestScope.vo.storeTel}"></th>
+								</tr>
+								<tr>
+									<th>영업시간</th>
+									<th><input type="text" name="time" size="50"
+										value="${requestScope.vo.openHour}"></th>
+								</tr>
 
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
+							</thead>
+							<tbody>
+								<tr>
+									<td><input type="hidden" name="command" value="edit">
+										<input type="hidden" name="name"
+										value="${requestScope.vo.storeName}"> <input
+										type="hidden" name="no" value="${requestScope.vo.rnum}">
+									</td>
+									<td><input type="submit" value="수정" class="modifyBtn"
+										onclick="editItem()"></td>
+									<td><input type="button" value="삭제" class="deleteBtn" ></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
 </body>
 </html>
