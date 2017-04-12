@@ -35,12 +35,10 @@
                  <table class="table table-hover" border="1" bgcolor="white">
                    <thead>
                      <tr>
-                        </th>
                         <th>가게이름</th>
                          <th><input type="text" name="name" ></th>
                      </tr>
                      <tr>
-                        </th>
                         <th>건물명</th>
                          <th><input type="text" name="storeName" ></th>
                      </tr>
@@ -60,11 +58,10 @@
                        <th>파일 업로드</th>
                        <th>
  파일명 : <input type="file" name="filename"><br>
-</form>
                        </th>
                      </tr>
-                     
                    </thead>
+                   
                    <tbody>
                      <tr>
 

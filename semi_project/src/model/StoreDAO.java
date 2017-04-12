@@ -487,22 +487,24 @@ public class StoreDAO {
 		return vo;
 	}
 
-	public void editStoreInfo(String name, String loc, String time, String tel, String pic) throws SQLException {
+	public void editStoreInfo(String name, String loc, String time, String tel, String pic,String storename) throws SQLException {
 		Connection con = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-		System.out.println(name+">>"+loc+">>"+pic+">>"+time+">>"+tel);
+		System.out.println(name+">>"+loc+">>"+tel+">>"+time+">>"+pic+">>"+storename);
 		
 		try {
 			con = getConnection();
-			String sql = "update store set storeName=?,storeLoc=?, storePic=?,openHour=?  where storeTel=?";
+			String sql = "update store set storeLoc=?,storeTel=?, storePic=?,openHour=?,storePla=?  where storeName=?";
+			
 			psmt = con.prepareStatement(sql);
-			psmt.setString(1, name);
-			psmt.setString(2, loc);
+			psmt.setString(1, loc);
+			psmt.setString(2, tel);
 			psmt.setString(3, pic);
 			psmt.setString(4, time);
-			psmt.setString(5, tel);
-			psmt.executeQuery();
+			psmt.setString(5, storename);
+			psmt.setString(6, name);
+			psmt.executeUpdate();
 			
 			
 		} finally {

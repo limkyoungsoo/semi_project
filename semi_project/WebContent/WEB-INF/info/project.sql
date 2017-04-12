@@ -40,6 +40,10 @@ create table store(
  storePla varchar2(100) not null
 );
 
+update store set 
+storeLoc=val1,storeTel=val1,storePic=val1,openHour=val1,storePla=val1 
+from store where storeName='조선허불백'
+
 
 insert into store(storeName,storeLoc,storeTel,storePic,openHour) values(val1,val2)
 

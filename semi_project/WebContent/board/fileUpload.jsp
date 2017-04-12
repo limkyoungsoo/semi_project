@@ -69,9 +69,10 @@ String dir = application.getRealPath("/storeImg");
 // java.util.Enumeration을 import 시켜야 한다.
   Enumeration files = multi.getFileNames();
  
-  
   // 업로드한 파일들의 이름을 얻어옴
   String file = (String)files.nextElement();
+  out.println("업로드한 파일들의 이름을 얻어옴"+file);
+  
   filename = multi.getFilesystemName(file);
  
  }catch(Exception e){
@@ -79,11 +80,11 @@ String dir = application.getRealPath("/storeImg");
   e.printStackTrace();
  }
  
- saveName = today+filename;
+ //saveName = today+filename;
+ saveName = filename;
  
 %>
   
-<html>
 <body onload="javascript:window_onload()">
 <div class="row">
 <div class="box">
@@ -91,12 +92,10 @@ String dir = application.getRealPath("/storeImg");
 </div>
 </div>
 </div>
+
 <table>
 	<tr>
 		<thead>
-			<tr>
-				입력내용입니다.
-			</tr>
 			<tr>
 				<th>가게이름 </th>
 				<td><%=name %> </td>
@@ -126,10 +125,9 @@ String dir = application.getRealPath("/storeImg");
 				<td><%=saveName %> </td>
 			</tr>
 		</thead>
-	</tr>
 </table>
 
-<form action="${pageContext.request.contextPath}/DispatcherServlet">
+<form action="${pageContext.request.contextPath}/DispatcherServlet" method="post">
 	<input type="hidden" name="name" value="<%=name %> ">
 	<input type="hidden" name="loc" value="<%=loc %> ">
 	<input type="hidden" name="tel" value="<%=tel %> ">
