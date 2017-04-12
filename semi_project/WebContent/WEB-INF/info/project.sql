@@ -11,7 +11,10 @@ select * from store;
 select * from menu;
 select * from msgMemberMenu;
 
+delete store where openHour like '2017%'
+
 insert into msgMemberMenu(menuno,mid) values(val1,val2)
+select * from msgMemberMenu where menuno=13
 
 delete store where storetel like '%031%'
 delete store where storetel like '%031%'
@@ -20,8 +23,11 @@ delete store where storetel like '%031%'
 create table msgMember(
  mId varchar2(100) primary key,
  mPass varchar2(100) not null,
- mNick varchar2(100) not null
+ mNick varchar2(100) not null,
+ mGrant varchar2(100) default '준회원'
 );
+
+insert into msgMember(mId,mPass,mNick) values('admin','1234','어드민')
 
 
 -- 음식점 테이블
@@ -33,6 +39,25 @@ create table store(
  openHour varchar2(100) not null,
  storePla varchar2(100) not null
 );
+
+
+insert into store(storeName,storeLoc,storeTel,storePic,openHour) values(val1,val2)
+
+
+SELECT S.* FROM(
+SELECT row_number() over(order by storeName asc) rnum,
+storeName,storePic,storeLoc,storeTel,openHour
+from store) S 
+
+select * from store
+
+update store set storeName=?,storeLoc=?, storePic=?,openHour=?  where storeTel=?
+update store set storeName='고메부인',storeLoc='경기 성남시 분당구 대왕판교로 670 유스페이스2 2층 224호', 
+storePic='go1.jpg',openHour='매일 11:31~00:00 연중무휴'  where storeTel='031-628-6979'
+
+
+
+select * from store
 
 ALTER TABLE store modify storePla varchar2(100) not null;
 
@@ -53,6 +78,14 @@ create table menu(
 
 -- 메뉴 번호 시퀀스
 create sequence menuNo_seq start with 90;
+
+
+SELECT S.* FROM(
+SELECT row_number() over(order by storeName asc) rnum,
+storeName,storePic,storeLoc,storeTel,openHour
+from store) S
+
+
 
 
 -- 메뉴 리뷰 테이블
@@ -97,6 +130,11 @@ select * from store;
 select storePic from store
 select distinct storeLoc from store;
 
+update store set 
+storeName='미쁜 선순대',storeLoc='경기도 성남시 분당구 삼평동 678 삼환하이펙스A동 1층', 
+storePic='Mi1.jpg',openHour='평일 19:30~21:30 주말 09:30~20:00'  
+where storeTel='031-698-3696'
+
 
 insert into store(storeName,storeLoc,storeTel,storePic,openHour)
 values('소바니','유스페이스1동',031,'/storeImg/so1.jpg','월요일~금요일 10시~8시');
@@ -123,6 +161,7 @@ select * from msgMember
 select mid,mpass,mnick from msgMember		
 
 insert into msgMember(mid,mpass,mnick) values('java','1234','자바')
+insert into msgMember(mid,mpass,mnick, mgrant) values('admin','1234','임경수','정회원'); 
 
 select mid from msgMember where mid='java'
 
@@ -170,6 +209,14 @@ SELECT r.* FROM(
 			reNo,menuNo,mId,review,grade,time_posted 
 			from menureview) r 
 			where rnum between 1 and 10
+<<<<<<< HEAD
+			
+			select * from msgMemberMenu;
+			
+			delete msgMemberMenu where menuno like '%'
+			
+			
+=======
 
 			
 /*menu , msgmember 메뉴 관리자 페이지 때문에 수정할께요!!*/
@@ -184,4 +231,5 @@ DROP CONSTRAINT fk_menuNo_2;
 
 alter table msgMemberMenu
 add  constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo) on delete cascade;
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 					

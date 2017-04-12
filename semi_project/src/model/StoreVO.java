@@ -9,7 +9,7 @@ public class StoreVO {
 	private String storePla;
 	private MenuVO menuVO;
 	private int rnum;
-
+	
 	public StoreVO() {
 		super();
 	}
@@ -18,6 +18,24 @@ public class StoreVO {
 		super();
 		this.storePla = storePla;
 	}
+	
+	
+	
+	
+
+	public StoreVO(String storeName, String storeLoc, String storeTel, String storePic, String openHour, MenuVO menuVO,
+			int rnum) {
+		super();
+		this.storeName = storeName;
+		this.storeLoc = storeLoc;
+		this.storeTel = storeTel;
+		this.storePic = storePic;
+		this.openHour = openHour;
+		this.menuVO = menuVO;
+		this.rnum = rnum;
+	}
+
+
 
 	public StoreVO(String storeName, String storeLoc, String storeTel, String storePic, String openHour,
 			MenuVO menuVO) {
@@ -37,11 +55,23 @@ public class StoreVO {
 		this.storePic = storePic;
 	}
 
+	public StoreVO(int rnum, String name, String loc, String tel, String pic_addr, String openHour) {
+		super();
+		this.rnum = rnum;
+		this.storeName = name;
+		this.storeLoc = loc;
+		this.storeTel = tel;
+		this.storePic = pic_addr;
+		this.openHour = openHour;
+	}
+
 	public String getStoreName() {
 		return storeName;
-	}	
+	}
+	
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
+
 	}
 
 	public String getStoreLoc() {
@@ -106,5 +136,4 @@ public class StoreVO {
 				+ storePic + ", openHour=" + openHour + ", storePla=" + storePla + ", menuVO=" + menuVO + ", rnum="
 				+ rnum + "]";
 	}
-
 }

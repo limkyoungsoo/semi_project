@@ -68,6 +68,18 @@ img.img-responsive.img-border-left{
 				});// ajax 
 		}); // click
 		
+		$(".grantBtn").click(function(){
+			//alert($(this).next().val());
+			if(confirm($(this).next().val()+" 님을 승인하시겠습니까?"))
+				$.ajax({
+				type:"post",
+				url:"DispatcherServlet",
+				data:"command=grantMember&mId="+$(this).next().val(),
+				success:function(data){
+					location.href="${pageContext.request.contextPath}/DispatcherServlet?command=adminMember";
+				}// success
+			});// ajax 
+		}); // click
 	});//ready
 </script>
 </head>
@@ -96,7 +108,9 @@ img.img-responsive.img-border-left{
 					        <th>아이디</th>
 					        <th>패스워드</th>
 					        <th>닉네임</th>
-					        <th>삭제여부</th>
+					        <th>등급</th>
+					        <th>삭제</th>
+					         <th>승인</th>
 					      </tr>
 					    </thead>
 					    <tbody id="deleteMember">
@@ -106,8 +120,13 @@ img.img-responsive.img-border-left{
 					        <td>${allMemberList.mId }</td>
 					        <td>${allMemberList.mPass }</td>
 					        <td>${allMemberList.mNick }</td>
+					        <td>${allMemberList.mGrant }</td>
 					        <td>
 					        <input type="button" value="삭제" class="deleteBtn">
+					        <input type="hidden" value="${allMemberList.mId }">
+					        </td>
+					        <td>
+					        <input type="button" value="승인" class="grantBtn">
 					        <input type="hidden" value="${allMemberList.mId }">
 					        </td>
 					      </tr>

@@ -38,11 +38,20 @@ img.img-responsive.img-border-left{
 			$.ajax({
 				type:"get",
 				url:"DispatcherServlet",
+<<<<<<< HEAD
+				data:"command=markInsert&menuno="+$("#hidden").val(),
+				success:function(data){
+					// false일때 등록됨
+					// MarkInsertController에서 out.print 로 처리함
+				}
+			});//ajax
+=======
 				data:"command=markInsert&menuno="+$("#menuNo").text(),
 				success:function(){
 					alert("찜 목록에 추가되었습니다");
 				}//success
 			});//ajax 
+>>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
 		});//markBtn Click
 	});//ready
 </script>

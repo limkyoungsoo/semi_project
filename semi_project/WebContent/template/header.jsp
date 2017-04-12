@@ -4,7 +4,7 @@
 <script type="text/javascript">
 	function openPopup() {
 		open("${pageContext.request.contextPath}/board/login.jsp", "mypopup",
-				"width=300, height=350, top=150, left=650");
+				"width=470, height=250, top=150, left=650");
 	}
 	function logoutCheck() {
 		if (confirm("로그아웃 하시겠습니까 ? ")) {
@@ -27,12 +27,13 @@
 			&nbsp;<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminMember"><font color="white">회원관리</font></a>
 			&nbsp;<a href="${pageContext.request.contextPath}/DispatcherServlet?command=adminStore"><font color="white">가게관리</font></a>
 			&nbsp;<a href="#" onclick="logoutCheck()"><font color="white">로그아웃</font></a>
-		</c:when>
+         </c:when>		
+
 		<c:otherwise>
 			${sessionScope.member.mNick}
-			&nbsp<a href="${pageContext.request.contextPath }/DispatcherServlet?command=markList"><font color="white">즐겨찾기</font></a>
-			&nbsp<a href="${pageContext.request.contextPath }/board/updateMemberInfo.jsp"><font color="white">회원정보수정 </font></a>
-			&nbsp<a href="#" onclick="logoutCheck()"><font color="white">로그아웃</font></a>
+			&nbsp;<a href="${pageContext.request.contextPath }/DispatcherServlet?command=markList"><font color="white">즐겨찾기</font></a>
+			&nbsp;<a href="${pageContext.request.contextPath }/board/updateMemberInfo.jsp"><font color="white">회원정보수정 </font></a>
+			&nbsp;<a href="#" onclick="logoutCheck()"><font color="white">로그아웃</font></a>
 		</c:otherwise>
 	</c:choose>
 

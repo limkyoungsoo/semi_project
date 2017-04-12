@@ -39,19 +39,19 @@ public class HandlerMapping {
 			c = new LogoutController();
 		} else if (command.equals("detailOtherMenu")) {
 			c = new DetailOtherMenuController();
-		} else if(command.equals("updateMemberInfo")){
-			c= new UpdateMemberInfoController();
+		} else if (command.equals("updateMemberInfo")) {
+			c = new UpdateMemberInfoController();
 		} else if (command.equals("markList")) {
 			c = new MarkListController();
-		}  else if (command.equals("markInsert")) {
-	         c = new MarkInsertController();
+		} else if (command.equals("markInsert")) {
+			c = new MarkInsertController();
 		} else if (command.equals("writeReview")) {
 			c = new WriteReviewController();
 		} else if (command.equals("MarkDelete")) {
 			c = new MarkDeleteController();
-		} else if(command.equals("adminMember")){
+		} else if (command.equals("adminMember")) {
 			c = new AdminMemberController();
-		} else if(command.equals("deleteMember")){
+		} else if (command.equals("deleteMember")) {
 			c = new DeleteMemberController();
 		} else if (command.equals("adminStore")) {
 			c = new AdminStoreListController();
@@ -61,6 +61,8 @@ public class HandlerMapping {
 			c = new AdminStoreEditController();
 		} else if (command.equals("adminStoredelete")) {
 			c = new AdminStoreDeleteController();
+		} else if (command.equals("grantMember")) {
+			c = new GrantMemberController();
 		}
 		return c;
 	}
