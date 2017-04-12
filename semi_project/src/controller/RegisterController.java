@@ -20,7 +20,7 @@ public class RegisterController implements Controller {
 		
 		MemberVO vo = new MemberVO(MemberDAO.getInstance().register(id,pass,nick));
 		
-		String url = "board/register_ok.jsp";
+		String url = "board/register_ok.jsp?id="+vo.getmId();
 		
 		return url;
 	}

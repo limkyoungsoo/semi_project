@@ -60,7 +60,7 @@ public class MemberDAO {
 		}
 		return member;
 	}
-
+	
 	public boolean searchId(String id) throws SQLException {
 		Connection con = null;
 		PreparedStatement psmt = null;
@@ -110,10 +110,10 @@ public class MemberDAO {
 		} finally {
 			closeAll(rs, psmt, con);
 		}
-
-		System.out.println("브잉ㅎ" + vo);
 		return vo;
 	}
+
+
 
 	public void updateMemberInfo(String mId, String mPass, String mNick) throws SQLException {
 		Connection con = null;
@@ -137,7 +137,6 @@ public class MemberDAO {
 		}
 	}
 
-	// Member 승인
 	public int updateMember(String mId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;

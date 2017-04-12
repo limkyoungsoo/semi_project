@@ -64,6 +64,7 @@ public class StoreDAO {
 		return storeList;
 	}
 
+
 	public String getRandStore() throws SQLException {
 		String storeName = "";
 		Connection con = null;
@@ -309,6 +310,32 @@ public class StoreDAO {
 		}
 		return storeVO;
 	}
+	
+	public boolean findMenuNo(String menuNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt =null;
+		ResultSet rs = null;
+		String sql ="";
+		boolean flag = false;
+		
+		try {
+			con = getConnection();
+			sql = "select * from msgMemberMenu where menuno=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, menuNo);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				flag = true;
+			}
+			
+			
+		} finally {
+			closeAll(rs, psmt, con);
+		}
+		
+		return flag;
+	}
 
 	public ArrayList<StoreVO> markList(String memId) throws SQLException {
 		ArrayList<StoreVO> list = new ArrayList<StoreVO>();
@@ -366,7 +393,7 @@ public class StoreDAO {
       }
       
    }
-
+	 
 	public void deleteMenumark(int menuNo) throws SQLException {
 		Connection con = null;
 	      PreparedStatement psmt =null;
@@ -415,6 +442,10 @@ public class StoreDAO {
 				vo.setStoreTel(rs.getString("storeTel"));
 				vo.setOpenHour(rs.getString("openHour"));
 				list.add(vo);
+			}
+			
+			for(int i=0; i<list.size();i++){
+				System.out.println("test"+list.get(i).toString());
 			}
 			
 		} finally {
@@ -493,6 +524,33 @@ public class StoreDAO {
 	      } finally {
 	         closeAll(rs, psmt, con);
 	      }
+	}
+
+	public int insertStore(String name, String loc, String tel, String time, String saveName) throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt = null;
+		int result = 0;
+		
+		System.out.println(name+loc+tel+saveName+time);
+		
+		try {
+			con = getConnection();
+			String sql = "insert into store(storeName,storeLoc,storeTel,openHour,storePic) values(?,?,?,?,?)";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.setString(2, loc);
+			psmt.setString(3, tel);
+			psmt.setString(4, time);
+			psmt.setString(5, saveName);
+			result= psmt.executeUpdate();
+			
+			System.out.println("result"+result);
+			
+		} finally {
+			closeAll(psmt, con);
+		}
+		return result;
+		
 	}
 
 

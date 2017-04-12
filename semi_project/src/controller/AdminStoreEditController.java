@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.StoreDAO;
-import model.StoreVO;
 
 public class AdminStoreEditController implements Controller {
 
@@ -17,12 +16,13 @@ public class AdminStoreEditController implements Controller {
 		String pic  = request.getParameter("pic");
 		
 		StoreDAO.getInstance().editStoreInfo(name,loc,tel,time,pic);
-		String message = "수정이 완료되었습니다.";
-		request.setAttribute("msg", message);
 		
-		System.out.println(message);
+		System.out.println("수정이 완료되었습니다.");
 		
-		return message;
+		request.setCharacterEncoding("utf-8");
+		System.out.println("name"+name);
+		return "DispatcherServlet?command=adminStore";
+		
 	}
 
 }
