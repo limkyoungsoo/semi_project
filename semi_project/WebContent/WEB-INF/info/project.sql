@@ -246,3 +246,11 @@ SELECT S.* FROM(
 			storeName,storePic,storeLoc,storeTel,openHour
 	from store) S 
 			where rnum between 1 and 5
+
+			
+			select * from msgMember;
+
+
+
+
+					

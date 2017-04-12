@@ -137,7 +137,7 @@ public class MemberDAO {
 		}
 	}
 
-	public int updateMember(String mId) throws SQLException {
+	public String updateMember(String mId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -169,12 +169,13 @@ public class MemberDAO {
 			if (result == 1) {
 				System.out.println("회원정보 변경여부:true");
 			} else if (result == 0) {
+				grant =null;
 				System.out.println("회원정보 변경여부:false");
 			}
 		} finally {
 			closeAll(rs,pstmt, con);
 		}
-		return result;
+		return grant;
 	}
 
 	public ArrayList<MemberVO> getAllMembers() throws SQLException {

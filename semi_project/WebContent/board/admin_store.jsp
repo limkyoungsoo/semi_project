@@ -1,13 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>가게 관리</title>
-<c:import
-   url="/template/straplink.html"></c:import>
+<c:import url="/template/straplink.html"></c:import>
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -29,26 +25,27 @@ $(document).ready(function(){
    <c:import url="/template/header.jsp"></c:import>
    <c:import url="/template/navigator.jsp"></c:import>
 
-<div class="container">     
-				<input type="button" value="가게등록" class="insertBtn">
-      
-                 <table class="table table-hover">
-                   <thead>
-                     <tr>
-                        <th>선택</th>
-                       <th>No.</th>
-                       <th>가게이름</th>
-                       <th>건물명</th>
-                       <th>사진이름</th>
-                       <th>위치</th>
-                       <th>전화번호</th>
-                       <th>영업시간</th>
-                       <th>삭제</th>
-                     </tr>
-                   </thead>
-                   <tbody>
-                   <c:forEach items="${requestScope.list }" var="allStoreList">
-                     <tr>
+   <div class="container">
+      <div class="row">
+         <div class="box">
+            <input type="button" value="가게등록" class="insertBtn">
+            <h3>가게 전체 목록</h3>
+            <table class="table table-hover">
+               <thead>
+                  <tr>
+                     <th>선택</th>
+                     <th>No.</th>
+                     <th>이름</th>
+                     <th>사진이름</th>
+                     <th>위치</th>
+                     <th>전화번호</th>
+                     <th>영업시간</th>
+                     <th>삭제</th>
+                  </tr>
+               </thead>
+               <tbody id="adminList">
+                  <c:forEach var="allStoreList" items="${requestScope.listVo.list}" >
+                     <tr id="trtr">
                         <td><input type="checkbox" class="checkbox"></td>
                         <td>${allStoreList.rnum}</td>
                         <td><a
@@ -84,6 +81,7 @@ $(document).ready(function(){
                </c:if>
             </p>
          </div>
-         
+      </div>
+   </div>
 </body>
 </html>
