@@ -11,6 +11,10 @@
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
+   $(".insertBtn").click(function () {
+      location.href = '${pageContext.request.contextPath}/board/admin_store_insert.jsp';
+   })
+   
    $("#adminList td .deleteBtn").click(function(){
       var tr = $(this).parent().parent();
          $.ajax({
@@ -18,7 +22,7 @@ $(document).ready(function(){
          url:"DispatcherServlet",
          data:"command=adminStoredelete&storeName="+$(this).next().val(),
          success:function(){
-            alert("찜 목록에서 삭제되었습니다");
+            alert("삭제되었습니다");
             tr.remove();
          }
       });//ajax
@@ -33,6 +37,7 @@ $(document).ready(function(){
       <div class="row">
          <div class="box">
             <h3>가게 전체 목록</h3>
+            <input type="button" value="가게등록" class="insertBtn">
             <table class="table table-hover">
                <thead>
                   <tr>

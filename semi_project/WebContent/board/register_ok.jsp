@@ -81,11 +81,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
 	</article>
 </div>
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

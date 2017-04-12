@@ -528,29 +528,44 @@ public class StoreDAO {
 	      }
 	}
 
-	public int insertStore(String name, String loc, String tel, String time, String saveName,String storeName) throws SQLException {
+	public int insertStore(StoreVO store,ArrayList<MenuVO> menu) throws SQLException {
 		Connection con = null;
 		PreparedStatement psmt = null;
-		int result = 0;
-		
-		System.out.println(name+loc+tel+saveName+time);
-		
+		int result = -1;
 		try {
 			con = getConnection();
 			String sql = "insert into store(storeName,storeLoc,storeTel,openHour,storePic,storePla) values(?,?,?,?,?,?)";
 			psmt = con.prepareStatement(sql);
-			psmt.setString(1, name);
-			psmt.setString(2, loc);
-			psmt.setString(3, tel);
-			psmt.setString(4, time);
-			psmt.setString(5, saveName);
-			psmt.setString(6, storeName);
+			psmt.setString(1, store.getStoreName());
+			psmt.setString(2, store.getStoreLoc());
+			psmt.setString(3, store.getStoreTel());
+			psmt.setString(4, store.getOpenHour());
+			psmt.setString(5, store.getStorePic());
+			psmt.setString(6, store.getStorePla());
 			result= psmt.executeUpdate();
+			psmt.close();
 			
-			System.out.println("storeName"+storeName);
-			
-			System.out.println("result"+result);
-			
+//			 menuNo number primary key,
+//			 storeName varchar2(100) not null,
+//			 menuName varchar2(100) not null,
+//			 menuPrice number not null,
+//			 menuPic varchar2(200) not null,
+			sql = "insert into menu(menuNo,storeName,menuName,menuPrice,menuPic) values(menuNo_seq.nextval,?,?,?,?)";
+			for(int i=0;i<menu.size();i++){
+				psmt = con.prepareStatement(sql);
+				psmt.setString(1, store.getStoreName());
+				psmt.setString(2, menu.get(i).getMenuName());
+				psmt.setInt(3, menu.get(i).getMenuPrice());
+				psmt.setString(4, menu.get(i).getMenuPic());
+				psmt.executeUpdate();
+				psmt.close();
+			}
+			if(result > 0){
+				System.out.println(store.toString());
+			}
+			else if(result <0){
+				System.out.println("가게 등록 실패");
+			}
 		} finally {
 			closeAll(psmt, con);
 		}

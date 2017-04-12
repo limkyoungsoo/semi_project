@@ -77,7 +77,7 @@ create table menu(
 );
 
 -- 메뉴 번호 시퀀스
-create sequence menuNo_seq start with 90;
+create sequence menuNo_seq start with 91;
 
 
 SELECT S.* FROM(
@@ -248,7 +248,7 @@ SELECT S.* FROM(
 			where rnum between 1 and 5
 
 			
-			select * from msgMember;
+			select * from store;
 
 
 

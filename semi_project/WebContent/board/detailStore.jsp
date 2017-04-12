@@ -30,7 +30,7 @@ img.img-responsive.img-border-left{
 					$("#menuPrice").text(menuPrice);
 					var openHour=data.openHour;
 					$("#openHour").text(openHour);
-					$("#changeImg").attr("src","${pageContext.request.contextPath }/menuImg/"+data.menuVO.menuPic);
+					$("#changeImg").attr("src","${pageContext.request.contextPath }/storeImg/"+data.menuVO.menuPic);
 				}//sucess
 			});//ajax
 		});//click
@@ -68,7 +68,7 @@ img.img-responsive.img-border-left{
 					<hr>
 					<img class="img-responsive img-border-left"
 						src="${pageContext.request.contextPath }/storeImg/${requestScope.menuList.storePic}"
-						alt="${requestScope.menuList.storeName}">
+						alt="${requestScope.menuList.storeName}" width="750"  height="450">
 				</div>
 			</div>
 		</div>
@@ -84,7 +84,7 @@ img.img-responsive.img-border-left{
 				</div>
 				<div class="col-md-6">
 					<img class="img-responsive img-border-left"
-						src="${pageContext.request.contextPath }/menuImg/${requestScope.menuList.menuVO.menuPic}"
+						src="${pageContext.request.contextPath }/storeImg/${requestScope.menuList.menuVO.menuPic}"
 						alt="" width="304" height="236" id="changeImg">
 				</div>
 				<div class="col-md-6 menuInfo">
@@ -127,8 +127,8 @@ img.img-responsive.img-border-left{
 				<c:forEach items="${requestScope.menuImgList }" var="menuImgList">
 					<div class="col-sm-4 text-center otherMenuInfo">
 						<img class="img-responsive"
-							src="${pageContext.request.contextPath}/menuImg/${menuImgList.menuPic}"
-							alt="">
+							src="${pageContext.request.contextPath}/storeImg/${menuImgList.menuPic}"
+							alt=""  width="750"  height="450">
 							<h3>
 								${menuImgList.menuName} <small>메뉴번호:${menuImgList.menuNo}</small>
 							</h3>

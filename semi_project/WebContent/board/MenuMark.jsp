@@ -54,7 +54,7 @@
 					<c:forEach items="${requestScope.markList}" var="mark">
 						<tr>
 							<td><img
-								src="${pageContext.request.contextPath}/menuImg/${mark.menuVO.menuPic}"
+								src="${pageContext.request.contextPath}/storeImg/${mark.menuVO.menuPic}"
 								class="img-rounded" alt="Cinque Terre" width="210" height="150"></td>
 							<td>
 								<h3>${mark.storeName}</h3>${mark.menuVO.menuName} <br>${mark.openHour}<br>${mark.menuVO.menuPrice}<br>
