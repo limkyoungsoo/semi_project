@@ -311,6 +311,31 @@ public class StoreDAO {
 		return storeVO;
 	}
 	
+	public boolean findStoreByStoreName(String storeName) throws SQLException {
+		Connection con = null;
+		PreparedStatement psmt =null;
+		ResultSet rs = null;
+		String sql ="";
+		boolean flag = false;
+		try {
+			con = getConnection();
+			sql = "select * from store where storeName=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, storeName);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				flag = true;
+			}
+		} finally {
+			closeAll(rs, psmt, con);
+		}
+		return flag;
+	}
+	
+	
+	
+	
 	public boolean findMenuNo(String menuNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement psmt =null;
@@ -328,8 +353,6 @@ public class StoreDAO {
 			if(rs.next()){
 				flag = true;
 			}
-			
-			
 		} finally {
 			closeAll(rs, psmt, con);
 		}
@@ -422,7 +445,7 @@ public class StoreDAO {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT S.* FROM(");
 			sql.append("SELECT row_number() over(order by storeName asc) rnum,");
-			sql.append("storeName,storePic,storeLoc,storeTel,openHour ");
+			sql.append("storeName,storePic,storeLoc,storeTel,openHour,storePla ");
 			sql.append("from store) S ");
 			sql.append("where rnum between ? and ?");
 			pstmt = con.prepareStatement(sql.toString());
@@ -441,7 +464,9 @@ public class StoreDAO {
 				vo.setStoreLoc(rs.getString("storeLoc"));
 				vo.setStoreTel(rs.getString("storeTel"));
 				vo.setOpenHour(rs.getString("openHour"));
+				vo.setStorePla(rs.getString("storePla"));
 				list.add(vo);
+				System.out.println("리스트>>>>>>"+list);
 			}
 			
 			for(int i=0; i<list.size();i++){
@@ -485,22 +510,24 @@ public class StoreDAO {
 		return vo;
 	}
 
-	public void editStoreInfo(String name, String loc, String time, String tel, String pic) throws SQLException {
+	public void editStoreInfo(String name, String loc, String time, String tel, String pic,String storename) throws SQLException {
 		Connection con = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
-		System.out.println(name+">>"+loc+">>"+pic+">>"+time+">>"+tel);
+		System.out.println(name+">>"+loc+">>"+tel+">>"+time+">>"+pic+">>"+storename);
 		
 		try {
 			con = getConnection();
-			String sql = "update store set storeName=?,storeLoc=?, storePic=?,openHour=?  where storeTel=?";
+			String sql = "update store set storeLoc=?,storeTel=?, storePic=?,openHour=?,storePla=?  where storeName=?";
+			
 			psmt = con.prepareStatement(sql);
-			psmt.setString(1, name);
-			psmt.setString(2, loc);
+			psmt.setString(1, loc);
+			psmt.setString(2, tel);
 			psmt.setString(3, pic);
 			psmt.setString(4, time);
-			psmt.setString(5, tel);
-			psmt.executeQuery();
+			psmt.setString(5, storename);
+			psmt.setString(6, name);
+			psmt.executeUpdate();
 			
 			
 		} finally {
@@ -526,26 +553,44 @@ public class StoreDAO {
 	      }
 	}
 
-	public int insertStore(String name, String loc, String tel, String time, String saveName) throws SQLException {
+	public int insertStore(StoreVO store,ArrayList<MenuVO> menu) throws SQLException {
 		Connection con = null;
 		PreparedStatement psmt = null;
-		int result = 0;
-		
-		System.out.println(name+loc+tel+saveName+time);
-		
+		int result = -1;
 		try {
 			con = getConnection();
-			String sql = "insert into store(storeName,storeLoc,storeTel,openHour,storePic) values(?,?,?,?,?)";
+			String sql = "insert into store(storeName,storeLoc,storeTel,openHour,storePic,storePla) values(?,?,?,?,?,?)";
 			psmt = con.prepareStatement(sql);
-			psmt.setString(1, name);
-			psmt.setString(2, loc);
-			psmt.setString(3, tel);
-			psmt.setString(4, time);
-			psmt.setString(5, saveName);
+			psmt.setString(1, store.getStoreName());
+			psmt.setString(2, store.getStoreLoc());
+			psmt.setString(3, store.getStoreTel());
+			psmt.setString(4, store.getOpenHour());
+			psmt.setString(5, store.getStorePic());
+			psmt.setString(6, store.getStorePla());
 			result= psmt.executeUpdate();
+			psmt.close();
 			
-			System.out.println("result"+result);
-			
+//			 menuNo number primary key,
+//			 storeName varchar2(100) not null,
+//			 menuName varchar2(100) not null,
+//			 menuPrice number not null,
+//			 menuPic varchar2(200) not null,
+			sql = "insert into menu(menuNo,storeName,menuName,menuPrice,menuPic) values(menuNo_seq.nextval,?,?,?,?)";
+			for(int i=0;i<menu.size();i++){
+				psmt = con.prepareStatement(sql);
+				psmt.setString(1, store.getStoreName());
+				psmt.setString(2, menu.get(i).getMenuName());
+				psmt.setInt(3, menu.get(i).getMenuPrice());
+				psmt.setString(4, menu.get(i).getMenuPic());
+				psmt.executeUpdate();
+				psmt.close();
+			}
+			if(result > 0){
+				System.out.println(store.toString());
+			}
+			else if(result <0){
+				System.out.println("가게 등록 실패");
+			}
 		} finally {
 			closeAll(psmt, con);
 		}

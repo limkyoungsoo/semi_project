@@ -67,6 +67,10 @@ public class HandlerMapping {
 			c = new ShowMyReviewController();
 		} else if (command.equals("myReviewDelete")) {
 			c = new MyReviewDeleteController();
+		} else if (command.equals("insertStore")) {
+			c = new AdminStoreInsertController();
+		}else if(command.equals("storeNameCheck")){
+			c = new StoreNameCheckController();
 		}
 		return c;
 	}
