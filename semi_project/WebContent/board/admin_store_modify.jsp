@@ -29,7 +29,6 @@
 <script type="text/javascript">
 function editItem() {
 	var frm  = document.getElementsByName("frmItem");
-<<<<<<< HEAD
 	alert('${requestScope.vo.storeName}');
 	frm.submit();
 }
@@ -79,9 +78,6 @@ function editItem() {
                        <td><input type="submit" value="수정" class="modifyBtn" onclick="editItem()"></td>
                        <td><input type="button" value="삭제" class="deleteBtn"></td>
 
-=======
-	frm.submit();
-}
 </script>
 </head>
 <body>
@@ -120,7 +116,6 @@ function editItem() {
                        <td><input type="submit" value="수정" class="modifyBtn" onclick="editItem()"></td>
                        <td><input type="button" value="삭제" class="deleteBtn"></td>
                        <input type="hidden" name="command" value="edit">
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
                      </tr>
                    </tbody>
                  </table>

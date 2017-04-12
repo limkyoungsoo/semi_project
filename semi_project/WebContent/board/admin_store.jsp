@@ -28,7 +28,8 @@ $(document).ready(function () {
                      <tr>
                         <th>선택</th>
                        <th>No.</th>
-                       <th>이름</th>
+                       <th>가게이름</th>
+                       <th>건물명</th>
                        <th>사진이름</th>
                        <th>위치</th>
                        <th>전화번호</th>
@@ -42,6 +43,7 @@ $(document).ready(function () {
                         <td><input type="checkbox" class="checkbox"></td>
                         <td>${allStoreList.rnum }</td>
                        <td><a href="${pageContext.request.contextPath}/DispatcherServlet?command=modify&name=${allStoreList.storeName }&no=${allStoreList.rnum }">${allStoreList.storeName }</a></td>
+                       <td>${allStoreList.storePla }</td>
                        <td>${allStoreList.storePic }</td>
                        <td>${allStoreList.storeLoc }</td>
                        <td>${allStoreList.storeTel }</td>

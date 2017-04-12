@@ -65,13 +65,6 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<div class="checkbox">
-						<label><span id="auto_login"><input type="checkbox" name="autologin" value="checked"> Remember me</span></label>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10" align="center">
 					<input type="button" class="btn btn-default" value="로그인"
 						id="loginId"> <input type="button" class="btn btn-default" id="loginCancel"

@@ -49,7 +49,7 @@ SELECT row_number() over(order by storeName asc) rnum,
 storeName,storePic,storeLoc,storeTel,openHour
 from store) S 
 
-select * from store
+select * from msgmember
 
 update store set storeName=?,storeLoc=?, storePic=?,openHour=?  where storeTel=?
 update store set storeName='고메부인',storeLoc='경기 성남시 분당구 대왕판교로 670 유스페이스2 2층 224호', 
@@ -84,8 +84,6 @@ SELECT S.* FROM(
 SELECT row_number() over(order by storeName asc) rnum,
 storeName,storePic,storeLoc,storeTel,openHour
 from store) S
-
-
 
 
 -- 메뉴 리뷰 테이블
@@ -125,7 +123,7 @@ values('소바니','유스페이스1동',03112345678,'/storeImg/so1.jpg','월요
 -- 위에 입력한 데이터 storeTel의 번호가 너무 길어서 '숫자 오버플로우' 라는 에러가 뜸
 -- 그래서 번호를 수정하려고 업데이트 하려고함. -강정호-
 
-select * from store;
+select * from menu;
 
 select storePic from store
 select distinct storeLoc from store;
@@ -231,5 +229,13 @@ DROP CONSTRAINT fk_menuNo_2;
 
 alter table msgMemberMenu
 add  constraint fk_menuNo_2 foreign key(menuNo) references menu(menuNo) on delete cascade;
->>>>>>> branch 'master' of https://github.com/limkyoungsoo/semi_project.git
+
+SELECT S.* FROM(
+SELECT row_number() over(order by storeName asc) rnum,
+storeName,storePic,storeLoc,storeTel,openHour,storePla 
+from store) S 
 					
+select * from store
+
+insert into store(storeName,storeLoc,storeTel,storePic,openHour,storePla) 
+values(가게이름,경기도 성남시 분당구 삼평동 679-10 B106,031-696-7490,20170412105803msg.jpg,매일 10:05~21:00 일요일 휴무,)

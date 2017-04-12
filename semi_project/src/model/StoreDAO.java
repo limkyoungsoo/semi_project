@@ -422,7 +422,7 @@ public class StoreDAO {
 			StringBuilder sql = new StringBuilder();
 			sql.append("SELECT S.* FROM(");
 			sql.append("SELECT row_number() over(order by storeName asc) rnum,");
-			sql.append("storeName,storePic,storeLoc,storeTel,openHour ");
+			sql.append("storeName,storePic,storeLoc,storeTel,openHour,storePla ");
 			sql.append("from store) S ");
 			sql.append("where rnum between ? and ?");
 			pstmt = con.prepareStatement(sql.toString());
@@ -441,7 +441,9 @@ public class StoreDAO {
 				vo.setStoreLoc(rs.getString("storeLoc"));
 				vo.setStoreTel(rs.getString("storeTel"));
 				vo.setOpenHour(rs.getString("openHour"));
+				vo.setStorePla(rs.getString("storePla"));
 				list.add(vo);
+				System.out.println("리스트>>>>>>"+list);
 			}
 			
 		} finally {
@@ -522,7 +524,7 @@ public class StoreDAO {
 	      }
 	}
 
-	public int insertStore(String name, String loc, String tel, String time, String saveName) throws SQLException {
+	public int insertStore(String name, String loc, String tel, String time, String saveName, String storeName) throws SQLException {
 		Connection con = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -532,14 +534,17 @@ public class StoreDAO {
 		
 		try {
 			con = getConnection();
-			String sql = "insert into store(storeName,storeLoc,storeTel,openHour,storePic) values(?,?,?,?,?)";
+			String sql = "insert into store(storeName,storeLoc,storeTel,openHour,storePic,storePla) values(?,?,?,?,?,?)";
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, name);
 			psmt.setString(2, loc);
 			psmt.setString(3, tel);
 			psmt.setString(4, time);
 			psmt.setString(5, saveName);
+			psmt.setString(6, storeName);
 			result= psmt.executeUpdate();
+			
+			System.out.println("storeName"+storeName);
 			
 			System.out.println("result"+result);
 			
