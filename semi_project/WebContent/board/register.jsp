@@ -43,7 +43,7 @@ function openNewWindow(){
 					data:{"id":id},
 					success:function(flag){
 						if(flag == "ok"){
-							$('#idCheckResult').html("사용가능한 아이디입니다!");
+							$('#idCheckResult').html("사용가능한 아이디입니다!").css('color','blue');
 						}
 						else{
 							$('#idCheckResult').html(id+"는 사용불가능한 아이디입니다!").css('color', 'red');
