@@ -98,7 +98,6 @@
 									</td>
 									<td><input type="submit" value="수정" class="modifyBtn"
 										onclick="editItem()"></td>
-									<td><input type="button" value="삭제" class="deleteBtn" ></td>
 								</tr>
 							</tbody>
 						</table>
