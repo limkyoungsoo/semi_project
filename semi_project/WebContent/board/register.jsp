@@ -47,6 +47,7 @@ function openNewWindow(){
 						}
 						else{
 							$('#idCheckResult').html(id+"는 사용불가능한 아이디입니다!").css('color', 'red');
+							$("#userId").val("").focus();
 						}
 					}
 				});
@@ -57,20 +58,19 @@ function openNewWindow(){
 	  $('#InputPassword2').keyup(function(){
 		   if($('#InputPassword1').val()!=$('#InputPassword2').val()){
 		    $('font[name=check]').text('');
-		    $('.help-block').html("암호틀림");
+		    $('.message-block').html("암호가 일치하지 않습니다").css('color', 'red');
 		   }else{
 		    $('font[name=check]').text('');
-		    $('.help-block').html("암호맞음");
+		    $('.message-block').html("암호가 일치합니다").css('color', 'blue');
 		   }
 		  }); //#chpass.keyup
 		  
 		  $("#registerBtn").click(function () {
-			var id = 	$("#userId").val();		  
+			var id = $("#userId").val();
 			var pass1 = 	$("#InputPassword1").val();		  
 			var pass2 = 	$("#InputPassword2").val();		  
 			var nick = 	$("#username").val();		  
 			var chkAgree = $('#agree').is(":checked");	
-			alert(chkAgree);
 			
 			  if(! chkAgree){
 				  alert('회원약관에 동의해주세요. check 필수');
@@ -78,6 +78,10 @@ function openNewWindow(){
 			  }
 			  if(id == ""){
 				  alert('아이디를 입력해주세요');
+				  return false;
+			  }
+			  if(id.length < 4 || id.length > 10){
+				  alert("아이디 글자수가 맞지않습니다");
 				  return false;
 			  }
 			  if(pass1 == ""){
@@ -92,7 +96,10 @@ function openNewWindow(){
 				  alert('닉네임을 입력해주세요');
 				  return false;
 			  }
-
+			  if(pass1 != pass2){
+				  alert("암호가 일치하지 않습니다");
+				  return false;
+			  }
 			  
 			  $('#idForm').submit();
 		})
