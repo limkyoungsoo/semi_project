@@ -23,7 +23,7 @@ public class AdminStoreInsertController implements Controller {
 		// String savePath =
 		// request.getSession().getServletContext().getRealPath("/upload"); //
 		// 파일이 업로드될 실제 tomcat 폴더의 WebContent 기준
-		String savePath ="C:\\Users\\KOSTA\\git\\semi_project\\semi_project\\WebContent\\storeImg";
+		String savePath ="D:\\WAS\\project-tomcat\\webapps\\semi_project\\storeImg";
 		//String savePath = "D:\\WAS\\project-tomcat\\webapps\\semi_project\\storeImg";
 		//C:\Users\KOSTA\git\semi_project\semi_project\WebContent\storeImg
 		// C:\java-kosta\semi-workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0

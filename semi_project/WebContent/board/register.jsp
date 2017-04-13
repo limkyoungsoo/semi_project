@@ -20,6 +20,7 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript">
 var newWindow;
+var idFlag=false;
 
 function openNewWindow(){
     newWindow = window.open("agreement.jsp", "newWindow", "height=650, width=750, resizable=yes");        
@@ -44,10 +45,11 @@ function openNewWindow(){
 					success:function(flag){
 						if(flag == "ok"){
 							$('#idCheckResult').html("사용가능한 아이디입니다!").css('color','blue');
+							idFlag=true;
 						}
 						else{
 							$('#idCheckResult').html(id+"는 사용불가능한 아이디입니다!").css('color', 'red');
-							$("#userId").val("").focus();
+							/* $("#userId").val("").focus(); */
 						}
 					}
 				});
@@ -76,8 +78,9 @@ function openNewWindow(){
 				  alert('회원약관에 동의해주세요. check 필수');
 				  return false;
 			  }
-			  if(id == ""){
-				  alert('아이디를 입력해주세요');
+			  if(id == "" || idFlag == false){
+				  alert('아이디를 입력하세요');
+				  $("#userId").val("").focus();
 				  return false;
 			  }
 			  if(id.length < 4 || id.length > 10){

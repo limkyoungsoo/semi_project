@@ -64,8 +64,6 @@
 															}
 															//href = detailController / storeName 
 															$("#sel1 option:selected").text("");
-															location.reload();
-															
 															 $(".reviewInfo").empty();								
 															$(".reviewInfo")
 																	.html(renew);

@@ -23,7 +23,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#idForm").submit(function() {
-			alert("회원정보 수정 페이지로 이동합니다");
+			alert("수정 완료 \n 메인 페이지로 이동합니다");
 		});//submit
 		$("#cancelBtn").click(function() {
 			alert("메인페이지로 돌아갑니다");
