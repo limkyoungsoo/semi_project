@@ -18,7 +18,7 @@ $(document).ready(function(){
          url:"DispatcherServlet",
          data:"command=adminStoredelete&storeName="+$(this).next().val(),
          success:function(){
-            alert("찜 목록에서 삭제되었습니다");
+            alert("삭제되었습니다");
             tr.remove();
          }
       });//ajax
