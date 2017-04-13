@@ -11,6 +11,5 @@
 <h2>가게 정보 수정</h2>
 
 ${requestScope.msg }
-
 </body>
 </html>

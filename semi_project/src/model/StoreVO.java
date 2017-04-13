@@ -10,6 +10,19 @@ public class StoreVO {
 	private MenuVO menuVO;
 	private int rnum;
 
+	public StoreVO(String storeName, String storeLoc, String storeTel, String storePic, String openHour,
+			String storePla, MenuVO menuVO, int rnum) {
+		super();
+		this.storeName = storeName;
+		this.storeLoc = storeLoc;
+		this.storeTel = storeTel;
+		this.storePic = storePic;
+		this.openHour = openHour;
+		this.storePla = storePla;
+		this.menuVO = menuVO;
+		this.rnum = rnum;
+	}
+
 	public StoreVO() {
 		super();
 	}
@@ -31,10 +44,11 @@ public class StoreVO {
 		this.rnum = rnum;
 	}
 
-	public StoreVO(String storeName, String storeLoc, String storeTel, String storePic, String openHour,
-			MenuVO menuVO) {
+	public StoreVO(String storeName, String storePla, String storeLoc, String storeTel, String storePic,
+			String openHour, MenuVO menuVO) {
 		super();
 		this.storeName = storeName;
+		this.storePla = storePla;
 		this.storeLoc = storeLoc;
 		this.storeTel = storeTel;
 		this.storePic = storePic;
@@ -59,13 +73,22 @@ public class StoreVO {
 		this.openHour = openHour;
 	}
 
+	public StoreVO(String storeName, String storeLoc, String storeTel, String storePic, String openHour,
+			String storePla) {
+		this.storeName = storeName;
+		this.storeLoc = storeLoc;
+		this.storeTel = storeTel;
+		this.storePic = storePic;
+		this.openHour = openHour;
+		this.storePla = storePla;
+	}
+
 	public String getStoreName() {
 		return storeName;
 	}
 
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
-
 	}
 
 	public String getStoreLoc() {
@@ -130,5 +153,4 @@ public class StoreVO {
 				+ storePic + ", openHour=" + openHour + ", storePla=" + storePla + ", menuVO=" + menuVO + ", rnum="
 				+ rnum + "]";
 	}
-
 }

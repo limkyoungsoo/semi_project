@@ -17,7 +17,6 @@ public class LoginController implements Controller {
 		PrintWriter out = response.getWriter();
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
-
 		System.out.println("아이디 : " + id + "패스워드 : " + pass);
 		MemberVO member = MemberDAO.getInstance().checkIdAndPass(id, pass);
 

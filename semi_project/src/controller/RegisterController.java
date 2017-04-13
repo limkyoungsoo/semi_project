@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.MemberDAO;
-import model.MemberVO;
 
 public class RegisterController implements Controller {
 
@@ -18,9 +17,8 @@ public class RegisterController implements Controller {
 		System.out.println("패스워드"+pass);
 		System.out.println("닉네임"+nick);
 		
-		MemberVO vo = new MemberVO(MemberDAO.getInstance().register(id,pass,nick));
-		
-		String url = "board/register_ok.jsp?id="+vo.getmId();
+		MemberDAO.getInstance().register(id,pass,nick);
+		String url = "board/register_ok.jsp?id="+id;
 		
 		return url;
 	}

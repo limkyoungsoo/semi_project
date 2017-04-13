@@ -23,8 +23,15 @@
 
 						$("#write")
 								.click(
-										function() { // 리뷰 등록
-											alert($("#reviewForm").serialize());
+										function() { // 리뷰 등록											
+											if($("#starScore").text()==0){
+												alert("별점을 입력해 주세요");
+												return;
+											}
+											if($("#comment").val()==""){
+												alert("리뷰 내용을 입력해 주세요");
+												return;
+											}
 											$
 													.ajax({
 														type : "get",
@@ -33,8 +40,9 @@
 														data : $("#reviewForm").serialize(), // form은 serializable 로 처리하자
 														success : function(data) {
 															var renew = "";
+															 
 															for (var i = 0; i < data.list.length; i++) {
-																renew += "<tr>";
+																renew += "<tr height='100'>";
 																renew += "<td>"
 																		+ data.list[i].reviewNo
 																		+ "</td>";
@@ -44,7 +52,7 @@
 																renew += "<td>"
 																		+ data.list[i].grade
 																		+ "</td>";
-																		renew += "<td>"
+																		renew += "<td style='word-break:break-all'>"
 																			+ data.list[i].review
 																			+ "</td>";
 																renew += "<td>"
@@ -54,13 +62,18 @@
 																		+ "</td>";
 																renew += "</tr>";
 															}
-															  $(".reviewInfo").empty();
+															//href = detailController / storeName 
+															$("#sel1 option:selected").text("");
+															location.reload();
+															
+															 $(".reviewInfo").empty();								
 															$(".reviewInfo")
 																	.html(renew);
 															alert("리뷰가 등록되었습니다");
 															$("#comment").val("");
 															
-															$(".pageNom").empty();				
+														
+																
 															var pbtn ="";
 															
 															// 이전 페이지 존재 하면 ◀
@@ -89,17 +102,19 @@
 															$(".pageNom").html(pbtn);		
 															$("#review").hide();
 															$("#writeBtn").text("리뷰 작성창 열기");
-														
 														} // success
-													}); // ajax						
+													}); // ajax	
+											
+											document.location.reload();
+													
 										}); // click
 
 						////////////////////////////////////////////////////////////////
 
-						$("#menuOption").change(function() {
+						/* $("#menuOption").change(function() {
 							var menuOption = $(this).val();
 							alert(menuOption);
-						});
+						}); */
 
 						////////////////////////////////////////////////////////////////
 
@@ -140,7 +155,7 @@
 								.change(
 										function() {
 											selectMenuName=$(this).val();
-											alert(selectMenuName);
+											
 											if ($("#sel1").val() == ""
 													|| $("#sel1").val() == null) {
 												$("#avgStar").hide();
@@ -159,7 +174,7 @@
 															var info = "";
 															var info2 = "";
 															for (var i = 0; i < data["avgList"].list.length; i++) {
-																alert(data["avgList"].list[0].avgGrade);
+																
 																var grade = data["avgList"].list[i].avgGrade;
 																if (grade == "1") {
 																	info += '<i class="fa fa-star" style="font-size: 24px; color: red">'
@@ -181,7 +196,7 @@
 																					+ info);
 															//JSONObject 안에 담겨 있는 map의 key 값을 ["key"]  입력한다.
 															for (var i = 0; i < data["menuList"].list.length; i++) {
-																info2 += "<tr>";
+																info2 += "<tr height='100'>";
 																info2 += "<td>"
 																		+ data["menuList"].list[i].reviewNo
 																		+ "</td>";
@@ -191,7 +206,7 @@
 																info2 += "<td>"
 																		+ data["menuList"].list[i].grade
 																		+ "</td>";
-																info2 += "<td>"
+																info2 += "<td style='word-break:break-all'>"
 																		+ data["menuList"].list[i].review
 																		+ "</td>";
 																info2 += "<td>"
@@ -236,7 +251,7 @@
 										
 										//////////////////////////
 						 $(".paging").on("click",".pageNum",function(){
-							 //alert($(this).val());
+							 
 							 var nextPage="";
 							 if($(this).val()==""){
 								 nextPage=$(this).next().val();
@@ -244,7 +259,7 @@
 							 else{
 								 nextPage=$(this).val();
 							 }
-								alert(nextPage);
+								
 							 $.ajax({
 								type:"get",
 								url:"DispatcherServlet",
@@ -253,11 +268,11 @@
 								success:function(data){					
 									var plist ="";
 									for(var i=0; i<data["menuList"].list.length;i++){
-							 	 	plist+="<tr>";
+							 	 	plist+="<tr height='100'>";
 							 		plist+="<td>"+ data["menuList"].list[i].reviewNo +"</td>";
 							 		plist+="<td>"+ data["menuList"].list[i].menuName +"</td>"
 							 		plist+="<td>"+ data["menuList"].list[i].grade +"</td>";		
-							 		plist+="<td>"+ data["menuList"].list[i].review +"</td>";
+							 		plist+="<td style='word-break:break-all'>"+ data["menuList"].list[i].review +"</td>";
 							 		plist+="<td>"+ data["menuList"].list[i].mid +"/"+ data["menuList"].list[i].timePosted +"</td>";
 							 		plist+="</tr>";			
 									}
@@ -293,6 +308,16 @@
 								}
 							});
 						});
+						
+						/////// 리뷰 내용 글자수 체크 최대 300자
+						$("#comment").keyup(function(){
+							var comment=$("#comment").val();							
+							if(comment.length>300){
+								alert("리뷰내용은 300자를 초과할 수 없습니다");
+								$("#comment").val("");
+							}
+						});						
+						
 					});//ready
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -324,25 +349,25 @@
 
 			<span id="avgStar"></span>
 
-			<table class="table table-hover">
+			<table class="table table-hover" style="table-layout:fixed">
 				<thead>
 					<tr>
-						<th>번호</th>
-						<th>메뉴명</th>
-						<th>평점</th>
-						<th>리뷰</th>
-						<th>글쓴이/날짜</th>
+						<th width="30">번호</th>
+						<th width="75">메뉴명</th>
+						<th width="25" >평점</th>
+						<th width="300" style="text-align:center">리뷰</th>
+						<th width="60">글쓴이/날짜</th>
 					</tr>
 				</thead>
 				<tbody class="reviewInfo">
 					<!-- reviewList 시작 -->
 					<c:forEach items="${requestScope.rlistVO.list }" var="rl"
 						varStatus="order">
-						<tr>
+						<tr height="100">
 							<td>${rl.reviewNo}</td>
 							<td>${rl.menuName}</td>
 							<td>${rl.grade}</td>
-							<td>${rl.review}</td>
+							<td style="word-break:break-all">${rl.review}</td>
 							<td>${rl.mid}/ ${rl.timePosted }</td>
 						</tr>
 					</c:forEach>
@@ -417,12 +442,12 @@
 									type="radio" name="star-input" id="p8" value="4"><label
 									for="p8">4</label> <input type="radio" name="star-input"
 									id="p10" value="5"><label for="p10">5</label>
-							</span> <output for="star-input"> <b>0</b>점 </output>
+							</span> <output for="star-input"> <b id="starScore">0</b>점 </output>
 							</span>
 							<div class="col-sm-12">
 
 								<textarea class="form-control" rows="5" id="comment"
-									name="comment" placeholder="리뷰 내용을 입력해주세요"></textarea>
+									name="comment" placeholder="리뷰 내용을 입력해 주세요 (최대 300자)"></textarea>
 
 							</div>
 						</div>
