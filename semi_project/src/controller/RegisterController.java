@@ -9,6 +9,7 @@ public class RegisterController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("nameId");
 		String pass = request.getParameter("namePW");
 		String nick = request.getParameter("nameNick");

@@ -114,7 +114,6 @@ img.img-responsive.img-border-left{
 					      <tr>
 					      	<th>선택</th>
 					        <th>아이디</th>
-					        <th>패스워드</th>
 					        <th>닉네임</th>
 					        <th>등급</th>
 					        <th>삭제</th>
@@ -126,7 +125,6 @@ img.img-responsive.img-border-left{
 					      <tr>
 					      	<td><input type="checkbox" class="checkbox" value="${allMemberList.mId }"></td>
 					        <td>${allMemberList.mId }</td>
-					        <td>${allMemberList.mPass }</td>
 					        <td>${allMemberList.mNick }</td>
 					        <td>${allMemberList.mGrant }</td>
 					        <td>
@@ -143,8 +141,6 @@ img.img-responsive.img-border-left{
 					    </tbody>
 					  </table>
 					</div>
-				
-
 				<div class="clearfix"></div>
 			</div>
 		</div>
