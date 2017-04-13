@@ -107,7 +107,7 @@
 							name="storeHour" placeholder="영업시간">
 					</div>
 					<div class="form-group">
-						<label for="file">파일 업로드</label> <span
+						<label for="file">가게 사진 업로드</label> <span
 							class="glyphicons glyphicons-file-plus"></span><input type="file"
 							name="attachedFile" required="required">
 					</div>
